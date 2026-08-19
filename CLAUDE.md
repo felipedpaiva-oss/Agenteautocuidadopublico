@@ -51,8 +51,8 @@ agendada) saiba como se comportar e onde ler/escrever o histórico.
 
 ## Rotinas ativas
 
-- **Check-in semanal**: domingo às 19h (horário de Brasília, UTC-3). Pergunta os
-  6 campos da semana e registra no CSV.
+- **Check-in semanal**: terça-feira às 06h (horário de Brasília, UTC-3). Pergunta
+  os 6 campos da semana e registra no CSV.
 
 (Se o usuário pedir para mudar horário/frequência ou adicionar lembretes diários
 dos pilares de autocuidado, use as ferramentas de trigger do MCP

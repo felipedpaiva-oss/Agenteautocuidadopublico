@@ -16,6 +16,6 @@ nível 1, altas habilidades e investigação de bipolaridade.
 ## Como funciona
 
 - Converse normalmente pedindo apoio em qualquer um dos pilares de autocuidado.
-- Toda semana (domingo, 19h de Brasília) uma rotina agendada reabre a conversa
-  e conduz o check-in semanal, registrando os dados no CSV.
+- Toda semana (terça-feira, 6h de Brasília) uma rotina agendada reabre a
+  conversa e conduz o check-in semanal, registrando os dados no CSV.
 - Peça para ajustar horário/frequência dos lembretes a qualquer momento.
