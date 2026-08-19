@@ -9,8 +9,11 @@ nível 1, altas habilidades e investigação de bipolaridade.
 - `CLAUDE.md` — perfil e instruções de como o agente deve se comportar.
 - `docs/autocuidado.md` — guia dos 9 pilares de autocuidado, mapeados para cada
   condição.
-- `data/checkins-semanais.csv` — histórico semanal (peso, circunferência
-  abdominal, horas de cardio/força, episódios de descontrole alimentar, humor).
+- `data/bioimpedancia.csv` — histórico das medições da balança (peso, gordura,
+  massa muscular, água, gordura visceral etc.), extraído do relatório que você
+  manda em anexo no chat. Relatórios originais ficam em `data/bioimpedancia/`.
+- `data/checkins-semanais.csv` — histórico semanal (circunferência abdominal,
+  horas de cardio/força, episódios de descontrole alimentar, humor).
   Schema completo em `data/README.md`.
 
 ## Como funciona

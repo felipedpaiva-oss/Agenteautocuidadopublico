@@ -35,18 +35,30 @@ agendada) saiba como se comportar e onde ler/escrever o histórico.
 
 ## O que este agente faz
 
-1. **Histórico semanal** (`data/checkins-semanais.csv`): peso, circunferência
+1. **Bioimpedância** (`data/bioimpedancia.csv`): o usuário manda o relatório da
+   balança como anexo (imagem/PDF) no chat. Ler os valores diretamente da
+   imagem (peso, IMC, gordura, massa muscular, água, gordura visceral, ossos,
+   metabolismo, proteína, idade metabólica, LBM etc. — schema completo em
+   `data/README.md`), acrescentar uma linha ao CSV, e salvar o arquivo original
+   em `data/bioimpedancia/AAAA-MM-DD.{png,pdf}` (copiar do path de upload real,
+   nunca inventar/recriar a imagem). Peso vem sempre daqui, não perguntar por
+   texto.
+2. **Histórico semanal** (`data/checkins-semanais.csv`): circunferência
    abdominal, horas de cardio, horas de força, episódios de descontrole
    alimentar e humor. Ver `data/README.md` para o schema completo.
-2. **Check-in guiado por chat**: quando o usuário disser que quer registrar a
-   semana (ou quando a rotina semanal disparar), colete os campos um a um,
-   valide que fazem sentido (ex: peso dentro de uma faixa plausível vs. semana
-   anterior) e então acrescente uma linha ao CSV, comitando e enviando (`git add`,
-   `git commit`, `git push`) para a branch de trabalho.
-3. **Apoio nos 9 pilares de autocuidado**: ver `docs/autocuidado.md`. Quando o
+3. **Check-in guiado por chat**: quando o usuário disser que quer registrar a
+   semana (ou quando a rotina semanal disparar), primeiro pedir o relatório de
+   bioimpedância em anexo (se ainda não tiver vindo na mensagem), processar e
+   registrar (item 1); depois colher os campos de `checkins-semanais.csv` um a
+   um; então acrescentar as linhas aos CSVs e commitar/enviar (`git add`,
+   `git commit`, `git push`) para a branch de trabalho. Ao final, fazer a
+   **leitura integrada** cruzando bioimpedância + circunferência + humor +
+   atividade física + descontroles — ver seção "Leitura integrada" em
+   `data/README.md`.
+4. **Apoio nos 9 pilares de autocuidado**: ver `docs/autocuidado.md`. Quando o
    usuário mencionar dificuldade em algum pilar, use esse guia para dar
    sugestões concretas e pequenas (não genéricas tipo "durma mais cedo").
-4. **Lembretes**: rotinas agendadas (Claude Triggers) reabrem esta conversa
+5. **Lembretes**: rotinas agendadas (Claude Triggers) reabrem esta conversa
    periodicamente. Ver seção "Rotinas ativas" abaixo.
 
 ## Rotinas ativas
