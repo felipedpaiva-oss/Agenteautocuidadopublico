@@ -19,6 +19,8 @@
     --diverge-cool-soft: rgba(62,125,120,0.15);
     --cat-2: #7C6FA6;
     --cat-2-soft: rgba(124,111,166,0.14);
+    --cat-3: #B25B7A;
+    --cat-3-soft: rgba(178,91,122,0.13);
     --good: #3F8F5F;
     --warning: #C98A2E;
     --critical: #B5473A;
@@ -50,6 +52,8 @@
       --diverge-cool-soft: rgba(95,163,157,0.2);
       --cat-2: #A79AD1;
       --cat-2-soft: rgba(167,154,209,0.2);
+      --cat-3: #D080A0;
+      --cat-3-soft: rgba(208,128,160,0.2);
       --good: #5FB07F;
       --warning: #E0A857;
       --critical: #D8867A;
@@ -77,6 +81,8 @@
     --diverge-cool-soft: rgba(95,163,157,0.2);
     --cat-2: #A79AD1;
     --cat-2-soft: rgba(167,154,209,0.2);
+    --cat-3: #D080A0;
+    --cat-3-soft: rgba(208,128,160,0.2);
     --good: #5FB07F;
     --warning: #E0A857;
     --critical: #D8867A;
@@ -697,6 +703,7 @@ const cv = name => getComputedStyle(document.documentElement).getPropertyValue(n
 const COLOR = {
   accent: cv('--accent'), accentSoft: cv('--accent-soft'),
   cat2: cv('--cat-2'), cat2Soft: cv('--cat-2-soft'),
+  cat3: cv('--cat-3'), cat3Soft: cv('--cat-3-soft'),
   warning: cv('--warning'), warningSoft: cv('--warning-soft'),
   critical: cv('--critical'), criticalSoft: cv('--critical-soft'),
   divergeWarm: cv('--diverge-warm'), divergeWarmSoft: cv('--diverge-warm-soft'),
@@ -707,6 +714,11 @@ chartGrid.appendChild(drawSeriesChart({
   title: 'Peso (kg)',
   points: bio.map(r => ({ date: r.date, value: r.peso_kg })),
   color: COLOR.accent, softColor: COLOR.accentSoft, unit: 'kg', decimals: 1
+}));
+chartGrid.appendChild(drawSeriesChart({
+  title: 'Gordura corporal (%)',
+  points: bio.map(r => ({ date: r.date, value: r.gordura_pct })),
+  color: COLOR.cat3, softColor: COLOR.cat3Soft, unit: '%', decimals: 1
 }));
 chartGrid.appendChild(drawSeriesChart({
   title: 'Circunferência abdominal (cm)',
