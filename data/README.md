@@ -29,6 +29,14 @@ peso — não perguntar peso separadamente no check-in semanal.
 | `idade_real` | Idade real, como mostrada no relatório (referência, não muda). |
 | `altura_cm` | Altura (cm), como mostrada no relatório (referência, não muda). |
 
+**Importação de histórico via app**: se o usuário mandar uma planilha exportada
+do app da balança (`.xls`/`.xlsx`/`.csv`), mesclar com o CSV existente por
+`data`, sem duplicar. Esse export não traz `gordura_visceral` (só aparece no
+relatório em imagem) — deixar em branco nas linhas importadas assim, sem
+estimar. Guardar o arquivo original em `data/bioimpedancia/` para referência.
+Datas do export costumam vir sem ano (`MM-DD`); inferir o ano pelo intervalo
+declarado no cabeçalho da planilha.
+
 O relatório original (imagem/PDF) fica salvo em
 `data/bioimpedancia/AAAA-MM-DD.{png,pdf}` para consulta futura.
 

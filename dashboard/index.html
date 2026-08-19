@@ -429,6 +429,41 @@
 <script>
 // ---------- Dados (embutidos no build; regerados a cada check-in) ----------
 const bio = [
+  { date: '2026-06-10', peso_kg: 88.6, imc: 26.50, gordura_pct: 25.67, peso_gordura_kg: 22.7,
+    massa_muscular_esqueletica_pct: 38.30, massa_muscular_esqueletica_kg: 33.9,
+    massa_muscular_pct: 70.29, massa_muscular_kg: 62.3, agua_pct: 52.26, agua_kg: 46.3,
+    gordura_visceral: null, ossos_kg: 3.6, metabolismo_kcal: 1857.00, proteina_pct: 18.03,
+    obesidade_pct: 22.88, idade_metabolica: 45, lbm_kg: 65.9, idade_real: 37, altura_cm: 183 },
+  { date: '2026-06-12', peso_kg: 88.1, imc: 26.30, gordura_pct: 25.44, peso_gordura_kg: 22.4,
+    massa_muscular_esqueletica_pct: 38.50, massa_muscular_esqueletica_kg: 33.9,
+    massa_muscular_pct: 70.49, massa_muscular_kg: 62.1, agua_pct: 52.35, agua_kg: 46.1,
+    gordura_visceral: null, ossos_kg: 3.6, metabolismo_kcal: 1849.80, proteina_pct: 18.14,
+    obesidade_pct: 22.12, idade_metabolica: 44, lbm_kg: 65.7, idade_real: 37, altura_cm: 183 },
+  { date: '2026-06-17', peso_kg: 88.0, imc: 26.30, gordura_pct: 25.40, peso_gordura_kg: 22.3,
+    massa_muscular_esqueletica_pct: 38.50, massa_muscular_esqueletica_kg: 33.9,
+    massa_muscular_pct: 70.53, massa_muscular_kg: 62.0, agua_pct: 52.37, agua_kg: 46.1,
+    gordura_visceral: null, ossos_kg: 3.6, metabolismo_kcal: 1848.50, proteina_pct: 18.16,
+    obesidade_pct: 21.98, idade_metabolica: 44, lbm_kg: 65.6, idade_real: 37, altura_cm: 183 },
+  { date: '2026-07-19', peso_kg: 91.0, imc: 27.20, gordura_pct: 26.61, peso_gordura_kg: 24.2,
+    massa_muscular_esqueletica_pct: 37.80, massa_muscular_esqueletica_kg: 34.4,
+    massa_muscular_pct: 69.48, massa_muscular_kg: 63.2, agua_pct: 51.88, agua_kg: 47.2,
+    gordura_visceral: null, ossos_kg: 3.5, metabolismo_kcal: 1887.00, proteina_pct: 17.60,
+    obesidade_pct: 26.14, idade_metabolica: 47, lbm_kg: 66.8, idade_real: 37, altura_cm: 183 },
+  { date: '2026-07-23', peso_kg: 90.2, imc: 26.90, gordura_pct: 26.29, peso_gordura_kg: 23.7,
+    massa_muscular_esqueletica_pct: 38.00, massa_muscular_esqueletica_kg: 34.3,
+    massa_muscular_pct: 69.76, massa_muscular_kg: 62.9, agua_pct: 52.01, agua_kg: 46.9,
+    gordura_visceral: null, ossos_kg: 3.5, metabolismo_kcal: 1877.00, proteina_pct: 17.75,
+    obesidade_pct: 25.03, idade_metabolica: 46, lbm_kg: 66.5, idade_real: 37, altura_cm: 183 },
+  { date: '2026-08-06', peso_kg: 91.4, imc: 27.30, gordura_pct: 26.76, peso_gordura_kg: 24.4,
+    massa_muscular_esqueletica_pct: 37.70, massa_muscular_esqueletica_kg: 34.4,
+    massa_muscular_pct: 69.35, massa_muscular_kg: 63.4, agua_pct: 51.82, agua_kg: 47.3,
+    gordura_visceral: null, ossos_kg: 3.5, metabolismo_kcal: 1893.00, proteina_pct: 17.53,
+    obesidade_pct: 26.70, idade_metabolica: 47, lbm_kg: 66.9, idade_real: 37, altura_cm: 183 },
+  { date: '2026-08-12', peso_kg: 91.6, imc: 27.30, gordura_pct: 26.84, peso_gordura_kg: 24.6,
+    massa_muscular_esqueletica_pct: 37.70, massa_muscular_esqueletica_kg: 34.5,
+    massa_muscular_pct: 69.28, massa_muscular_kg: 63.4, agua_pct: 51.79, agua_kg: 47.4,
+    gordura_visceral: null, ossos_kg: 3.5, metabolismo_kcal: 1895.00, proteina_pct: 17.50,
+    obesidade_pct: 26.98, idade_metabolica: 47, lbm_kg: 67.0, idade_real: 37, altura_cm: 183 },
   { date: '2026-08-19', peso_kg: 90.45, imc: 27.0, gordura_pct: 26.4, peso_gordura_kg: 23.9,
     massa_muscular_esqueletica_pct: 37.9, massa_muscular_esqueletica_kg: 34.3,
     massa_muscular_pct: 69.7, massa_muscular_kg: 63.0, agua_pct: 52.0, agua_kg: 47.0,
@@ -600,10 +635,13 @@ function drawSeriesChart({ title, points, color, softColor, unit, decimals = 1, 
   wrap.innerHTML = svg;
   panel.appendChild(wrap);
 
-  if (singlePoint) {
+  const valuePts = points.filter(p => p.value != null).length;
+  if (valuePts <= 1) {
     const note = document.createElement('div');
     note.className = 'empty-note';
-    note.textContent = 'Único registro até agora — o gráfico ganha forma a cada check-in novo.';
+    note.textContent = valuePts === 0
+      ? 'Sem registros ainda para este indicador.'
+      : 'Único registro até agora — o gráfico ganha forma a cada check-in novo.';
     panel.appendChild(note);
   }
 
