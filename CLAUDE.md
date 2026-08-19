@@ -58,7 +58,16 @@ agendada) saiba como se comportar e onde ler/escrever o histórico.
 4. **Apoio nos 9 pilares de autocuidado**: ver `docs/autocuidado.md`. Quando o
    usuário mencionar dificuldade em algum pilar, use esse guia para dar
    sugestões concretas e pequenas (não genéricas tipo "durma mais cedo").
-5. **Lembretes**: rotinas agendadas (Claude Triggers) reabrem esta conversa
+5. **Dashboard visual**: `dashboard/index.html` é a fonte do Artifact publicado
+   em <https://claude.ai/code/artifact/82b9c2ca-7e8c-4953-8719-0ae7d93af6d5>
+   (link fixo — sempre republicar passando esse `url`, nunca criar um novo).
+   Depois de registrar os CSVs de um check-in, atualize os arrays `bio` e
+   `checkins` embutidos no `<script>` do arquivo com os novos registros,
+   reescreva as seções "Leitura integrada" e "Prioridades da semana" com base
+   na conversa (não são geradas automaticamente), republique o Artifact, e
+   faça commit/push do `dashboard/index.html` atualizado. Ver
+   `dashboard/README.md` para detalhes.
+6. **Lembretes**: rotinas agendadas (Claude Triggers) reabrem esta conversa
    periodicamente. Ver seção "Rotinas ativas" abaixo.
 
 ## Rotinas ativas

@@ -1,0 +1,783 @@
+<title>Bússola de Equilíbrio</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+  :root {
+    --bg: #F1F4F3;
+    --surface: #FFFFFF;
+    --surface-2: #E7ECEA;
+    --border: #DCE3E0;
+    --ink: #1B2422;
+    --ink-secondary: #52625E;
+    --ink-muted: #7C8B87;
+    --accent: #3E7D78;
+    --accent-strong: #2C5C58;
+    --accent-soft: rgba(62,125,120,0.12);
+    --diverge-warm: #C98A2E;
+    --diverge-cool: #3E7D78;
+    --diverge-warm-soft: rgba(201,138,46,0.15);
+    --diverge-cool-soft: rgba(62,125,120,0.15);
+    --cat-2: #7C6FA6;
+    --cat-2-soft: rgba(124,111,166,0.14);
+    --good: #3F8F5F;
+    --warning: #C98A2E;
+    --critical: #B5473A;
+    --good-soft: rgba(63,143,95,0.12);
+    --warning-soft: rgba(201,138,46,0.14);
+    --critical-soft: rgba(181,71,58,0.12);
+    --grid: #E1E7E5;
+    --shadow: 0 1px 2px rgba(27,36,34,0.04), 0 4px 16px rgba(27,36,34,0.05);
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101615;
+      --surface: #16201D;
+      --surface-2: #1C2724;
+      --border: #2A3733;
+      --ink: #EAF0EE;
+      --ink-secondary: #AEC0BB;
+      --ink-muted: #7E938D;
+      --accent: #5FA39D;
+      --accent-strong: #86CBC4;
+      --accent-soft: rgba(95,163,157,0.18);
+      --diverge-warm: #E0A857;
+      --diverge-cool: #5FA39D;
+      --diverge-warm-soft: rgba(224,168,87,0.2);
+      --diverge-cool-soft: rgba(95,163,157,0.2);
+      --cat-2: #A79AD1;
+      --cat-2-soft: rgba(167,154,209,0.2);
+      --good: #5FB07F;
+      --warning: #E0A857;
+      --critical: #D8867A;
+      --good-soft: rgba(95,176,127,0.18);
+      --warning-soft: rgba(224,168,87,0.18);
+      --critical-soft: rgba(216,134,122,0.18);
+      --grid: #253330;
+      --shadow: 0 1px 2px rgba(0,0,0,0.2), 0 4px 20px rgba(0,0,0,0.25);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #101615;
+    --surface: #16201D;
+    --surface-2: #1C2724;
+    --border: #2A3733;
+    --ink: #EAF0EE;
+    --ink-secondary: #AEC0BB;
+    --ink-muted: #7E938D;
+    --accent: #5FA39D;
+    --accent-strong: #86CBC4;
+    --accent-soft: rgba(95,163,157,0.18);
+    --diverge-warm: #E0A857;
+    --diverge-cool: #5FA39D;
+    --diverge-warm-soft: rgba(224,168,87,0.2);
+    --diverge-cool-soft: rgba(95,163,157,0.2);
+    --cat-2: #A79AD1;
+    --cat-2-soft: rgba(167,154,209,0.2);
+    --good: #5FB07F;
+    --warning: #E0A857;
+    --critical: #D8867A;
+    --good-soft: rgba(95,176,127,0.18);
+    --warning-soft: rgba(224,168,87,0.18);
+    --critical-soft: rgba(216,134,122,0.18);
+    --grid: #253330;
+    --shadow: 0 1px 2px rgba(0,0,0,0.2), 0 4px 20px rgba(0,0,0,0.25);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--accent-soft); }
+
+  .page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  header.hero {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: clamp(28px, 4vw, 38px);
+    margin: 0;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+  .hero-meta {
+    font-size: 13px;
+    color: var(--ink-muted);
+    font-family: var(--font-mono);
+  }
+
+  /* Stat tiles */
+  .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+  }
+  .stat-tile {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 18px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .stat-label {
+    font-size: 12.5px;
+    color: var(--ink-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+  .stat-value {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--ink);
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+  }
+  .stat-value .unit { font-size: 13px; color: var(--ink-muted); font-weight: 400; }
+  .stat-delta { font-size: 12.5px; font-family: var(--font-mono); }
+  .stat-delta.up { color: var(--warning); }
+  .stat-delta.down { color: var(--accent); }
+  .stat-delta.flat { color: var(--ink-muted); }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    letter-spacing: 0.02em;
+    padding: 2px 8px;
+    border-radius: 100px;
+    line-height: 1.6;
+  }
+  .chip.good { background: var(--good-soft); color: var(--good); }
+  .chip.warning { background: var(--warning-soft); color: var(--warning); }
+  .chip.critical { background: var(--critical-soft); color: var(--critical); }
+  .chip.neutral { background: var(--surface-2); color: var(--ink-secondary); }
+
+  /* Section headers */
+  section { display: flex; flex-direction: column; gap: 14px; }
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+  }
+  .section-sub { font-size: 13px; color: var(--ink-muted); }
+
+  /* Chart panels */
+  .chart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 14px;
+  }
+  .chart-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 18px 8px;
+    box-shadow: var(--shadow);
+    position: relative;
+  }
+  .chart-panel-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    gap: 10px;
+  }
+  .chart-title {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .chart-legend {
+    display: flex;
+    gap: 12px;
+    font-size: 11.5px;
+    color: var(--ink-secondary);
+    font-family: var(--font-mono);
+  }
+  .legend-dot {
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 2px;
+    margin-right: 4px;
+  }
+  .chart-svg-wrap { position: relative; }
+  svg.chart { display: block; width: 100%; height: auto; overflow: visible; }
+  .grid-line { stroke: var(--grid); stroke-width: 1; }
+  .axis-label { font-family: var(--font-mono); font-size: 10.5px; fill: var(--ink-muted); }
+  .zero-line { stroke: var(--ink-muted); stroke-width: 1; stroke-dasharray: 2 3; }
+  .empty-note {
+    font-size: 12px;
+    color: var(--ink-muted);
+    font-style: italic;
+    padding: 6px 0 10px;
+  }
+
+  .tooltip {
+    position: absolute;
+    pointer-events: none;
+    background: var(--ink);
+    color: var(--bg);
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    padding: 6px 9px;
+    border-radius: 6px;
+    line-height: 1.4;
+    white-space: nowrap;
+    transform: translate(-50%, calc(-100% - 10px));
+    opacity: 0;
+    transition: opacity 0.1s ease;
+    z-index: 5;
+  }
+  .tooltip.visible { opacity: 1; }
+
+  /* Prose cards */
+  .prose-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .prose-card.watch { border-left-color: var(--warning); }
+  .prose-card p { margin: 0; color: var(--ink-secondary); }
+  .prose-card p strong { color: var(--ink); font-weight: 600; }
+  .prose-card .card-label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  .priority-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .priority-item {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+    box-shadow: var(--shadow);
+  }
+  .priority-rank {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 6px;
+    width: 22px; height: 22px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .priority-body { display: flex; flex-direction: column; gap: 3px; }
+  .priority-body .title { font-weight: 600; font-size: 14px; }
+  .priority-body .desc { font-size: 13px; color: var(--ink-secondary); }
+  .pillar-tag {
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--ink-muted);
+  }
+
+  details.table-toggle { margin-top: 4px; }
+  details.table-toggle summary {
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    color: var(--accent);
+    padding: 4px 0;
+  }
+  .table-wrap { overflow-x: auto; margin-top: 10px; }
+  table.data-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+  table.data-table th, table.data-table td {
+    text-align: left;
+    padding: 6px 10px;
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  table.data-table th { color: var(--ink-muted); font-weight: 500; }
+
+  footer {
+    font-size: 12px;
+    color: var(--ink-muted);
+    border-top: 1px solid var(--border);
+    padding-top: 16px;
+  }
+
+  @media (max-width: 600px) {
+    .chart-grid { grid-template-columns: 1fr; }
+    .page { padding: 28px 16px 60px; }
+  }
+</style>
+
+<div class="page">
+
+  <header class="hero">
+    <span class="eyebrow">Autocuidado &amp; equilíbrio de vida</span>
+    <h1>Bússola de Equilíbrio</h1>
+    <span class="hero-meta" id="hero-meta"></span>
+  </header>
+
+  <section class="stat-grid" id="stat-grid"></section>
+
+  <section>
+    <div class="section-head">
+      <h2 class="section-title">Evolução dos indicadores</h2>
+      <span class="section-sub" id="chart-sub"></span>
+    </div>
+    <div class="chart-grid" id="chart-grid"></div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2 class="section-title">Leitura integrada</h2>
+    </div>
+    <div class="prose-card" id="reading-card"></div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2 class="section-title">Tendência de longo prazo</h2>
+      <span class="section-sub">Peso · circunferência abdominal · humor — janela de até 5 anos</span>
+    </div>
+    <div class="prose-card watch" id="trend-card"></div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2 class="section-title">Prioridades da semana</h2>
+    </div>
+    <ol class="priority-list" id="priority-list"></ol>
+  </section>
+
+  <section>
+    <details class="table-toggle">
+      <summary>Ver todos os registros em tabela</summary>
+      <div id="tables-container"></div>
+    </details>
+  </section>
+
+  <footer>
+    Dados de <code>data/bioimpedancia.csv</code> e <code>data/checkins-semanais.csv</code>.
+    Atualizado a cada check-in semanal. Leitura de padrões, não é diagnóstico nem
+    orientação médica — leve achados relevantes ao profissional que acompanha o caso.
+  </footer>
+
+</div>
+
+<div class="tooltip" id="tooltip"></div>
+
+<script>
+// ---------- Dados (embutidos no build; regerados a cada check-in) ----------
+const bio = [
+  { date: '2026-08-19', peso_kg: 90.45, imc: 27.0, gordura_pct: 26.4, peso_gordura_kg: 23.9,
+    massa_muscular_esqueletica_pct: 37.9, massa_muscular_esqueletica_kg: 34.3,
+    massa_muscular_pct: 69.7, massa_muscular_kg: 63.0, agua_pct: 52.0, agua_kg: 47.0,
+    gordura_visceral: 15.5, ossos_kg: 3.51, metabolismo_kcal: 1881, proteina_pct: 17.7,
+    obesidade_pct: 25.5, idade_metabolica: 46, lbm_kg: 66.56, idade_real: 37, altura_cm: 183 }
+];
+
+const checkins = [
+  { date: '2026-08-19', circunferencia_abdominal_cm: 96, horas_cardio: 1, horas_forca: 0,
+    episodios_descontrole_alimentar: 3, humor: 1,
+    observacoes: 'Virose com início dos sintomas na segunda-feira. Planejamento realizado apesar disso, satisfação por isso.' }
+];
+
+// ---------- Helpers ----------
+const fmt = (v, d = 1) => v === null || v === undefined || Number.isNaN(v)
+  ? '—' : v.toLocaleString('pt-BR', { minimumFractionDigits: d, maximumFractionDigits: d });
+const parseD = s => new Date(s + 'T00:00:00');
+const fmtDateShort = d => d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short' });
+const fmtDateFull = d => d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long', year: 'numeric' });
+const DAY = 86400000;
+
+function scale(domain, range) {
+  const [d0, d1] = domain, [r0, r1] = range;
+  return v => d1 === d0 ? (r0 + r1) / 2 : r0 + (v - d0) * (r1 - r0) / (d1 - d0);
+}
+
+function last(arr) { return arr.length ? arr[arr.length - 1] : null; }
+function prev(arr) { return arr.length > 1 ? arr[arr.length - 2] : null; }
+
+function deltaChip(curr, prevV, decimals, lowerIsBetter = true) {
+  if (curr == null || prevV == null) return { text: 'sem comparação anterior', cls: 'flat' };
+  const d = curr - prevV;
+  if (Math.abs(d) < Math.pow(10, -decimals) / 2) return { text: 'estável vs. última medição', cls: 'flat' };
+  const dir = d > 0 ? '▲' : '▼';
+  const better = (d < 0) === lowerIsBetter;
+  return { text: `${dir} ${fmt(Math.abs(d), decimals)} vs. última medição`, cls: better ? 'down' : 'up' };
+}
+
+// ---------- Stat tiles ----------
+const statGrid = document.getElementById('stat-grid');
+const b = last(bio), bp = prev(bio);
+const c = last(checkins), cp = prev(checkins);
+
+function statTile(label, value, unit, delta, chipHtml) {
+  const el = document.createElement('div');
+  el.className = 'stat-tile';
+  el.innerHTML = `
+    <div class="stat-label"><span>${label}</span>${chipHtml || ''}</div>
+    <div class="stat-value">${value}<span class="unit">${unit}</span></div>
+    <div class="stat-delta ${delta.cls}">${delta.text}</div>
+  `;
+  return el;
+}
+
+if (b) {
+  const visceralChip = b.gordura_visceral >= 15 ? '<span class="chip critical">visceral alta</span>'
+    : b.gordura_visceral >= 10 ? '<span class="chip warning">visceral atenção</span>'
+    : '<span class="chip good">visceral ok</span>';
+  statGrid.appendChild(statTile('Peso', fmt(b.peso_kg), 'kg', deltaChip(b.peso_kg, bp && bp.peso_kg, 1, true)));
+  statGrid.appendChild(statTile('Gordura visceral', fmt(b.gordura_visceral), '', deltaChip(b.gordura_visceral, bp && bp.gordura_visceral, 1, true), visceralChip));
+  statGrid.appendChild(statTile('IMC', fmt(b.imc), '', deltaChip(b.imc, bp && bp.imc, 1, true)));
+}
+if (c) {
+  const humorLabel = c.humor > 0 ? `+${c.humor}` : `${c.humor}`;
+  const humorChip = c.humor >= 2 ? '<span class="chip warning">bem para cima</span>'
+    : c.humor <= -2 ? '<span class="chip critical">bem para baixo</span>'
+    : '<span class="chip neutral">dentro da faixa</span>';
+  statGrid.appendChild(statTile('Circunferência abdominal', fmt(c.circunferencia_abdominal_cm, 0), 'cm', deltaChip(c.circunferencia_abdominal_cm, cp && cp.circunferencia_abdominal_cm, 0, true)));
+  statGrid.appendChild(statTile('Humor da semana', humorLabel, '/ ±3', deltaChip(c.humor, cp && cp.humor, 0, true), humorChip));
+}
+
+document.getElementById('hero-meta').textContent = b
+  ? `Último registro: ${fmtDateFull(parseD(b.date))}`
+  : 'Aguardando o primeiro registro';
+
+// ---------- Chart engine (SVG, sem libs externas) ----------
+const tooltipEl = document.getElementById('tooltip');
+
+function drawSeriesChart({ title, points, color, softColor, unit, decimals = 1, legend, secondary }) {
+  const W = 560, H = 190, M = { t: 10, r: 14, b: 22, l: 40 };
+  const plotW = W - M.l - M.r, plotH = H - M.t - M.b;
+
+  const panel = document.createElement('div');
+  panel.className = 'chart-panel';
+
+  const legendHtml = legend ? `<div class="chart-legend">${legend.map(l =>
+    `<span><span class="legend-dot" style="background:${l.color}"></span>${l.label}</span>`).join('')}</div>` : '';
+  panel.innerHTML = `<div class="chart-panel-head"><span class="chart-title">${title}</span>${legendHtml}</div>`;
+
+  if (!points.length) {
+    const p = document.createElement('div');
+    p.className = 'empty-note';
+    p.textContent = 'Sem registros ainda.';
+    panel.appendChild(p);
+    return panel;
+  }
+
+  const wrap = document.createElement('div');
+  wrap.className = 'chart-svg-wrap';
+
+  const dates = points.map(p => parseD(p.date).getTime());
+  const values = points.flatMap(p => secondary ? [p.value, p.value2] : [p.value]).filter(v => v != null);
+  let yMin = Math.min(...values), yMax = Math.max(...values);
+  if (yMin === yMax) { yMin -= 1; yMax += 1; }
+  const pad = (yMax - yMin) * 0.15;
+  yMin -= pad; yMax += pad;
+
+  const singlePoint = points.length === 1;
+  const xDomain = singlePoint ? [dates[0] - DAY * 3, dates[0] + DAY * 3] : [Math.min(...dates), Math.max(...dates)];
+  const x = scale(xDomain, [M.l, M.l + plotW]);
+  const y = scale([yMin, yMax], [M.t + plotH, M.t]);
+
+  const gridYs = [yMin + (yMax - yMin) * 0.25, yMin + (yMax - yMin) * 0.5, yMin + (yMax - yMin) * 0.75];
+  let svg = `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">`;
+  gridYs.forEach(gy => {
+    svg += `<line class="grid-line" x1="${M.l}" x2="${M.l + plotW}" y1="${y(gy)}" y2="${y(gy)}" />`;
+    svg += `<text class="axis-label" x="${M.l - 8}" y="${y(gy) + 3}" text-anchor="end">${fmt(gy, decimals)}</text>`;
+  });
+
+  function seriesPath(key, col, dashed) {
+    const pts = points.filter(p => p[key] != null);
+    if (!pts.length) return '';
+    let path = '';
+    if (pts.length === 1) {
+      const px = x(parseD(pts[0].date).getTime()), py = y(pts[0][key]);
+      return `<line class="zero-line" x1="${M.l}" x2="${M.l+plotW}" y1="${py}" y2="${py}" stroke="${col}" opacity="0.35" />`;
+    }
+    pts.forEach((p, i) => {
+      const px = x(parseD(p.date).getTime()), py = y(p[key]);
+      path += (i === 0 ? 'M' : 'L') + px + ',' + py + ' ';
+    });
+    return `<path d="${path}" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ${dashed ? 'stroke-dasharray="4 3"' : ''}/>`;
+  }
+
+  if (!secondary) {
+    const pts = points.filter(p => p.value != null);
+    if (pts.length > 1) {
+      let area = `M${x(parseD(pts[0].date).getTime())},${y(yMin)} `;
+      pts.forEach(p => area += `L${x(parseD(p.date).getTime())},${y(p.value)} `);
+      area += `L${x(parseD(pts[pts.length - 1].date).getTime())},${y(yMin)} Z`;
+      svg += `<path d="${area}" fill="${softColor}" stroke="none" />`;
+    }
+    svg += seriesPath('value', color, false);
+  } else {
+    svg += seriesPath('value', color, false);
+    svg += seriesPath('value2', secondary.color, false);
+  }
+
+  // markers
+  function markers(key, col) {
+    let out = '';
+    points.forEach((p, i) => {
+      if (p[key] == null) return;
+      const px = x(parseD(p.date).getTime()), py = y(p[key]);
+      const isLast = i === points.length - 1;
+      out += `<circle data-idx="${i}" data-key="${key}" cx="${px}" cy="${py}" r="${isLast ? 4.5 : 3}" fill="${col}" stroke="var(--surface)" stroke-width="1.5" class="pt" style="cursor:pointer" />`;
+    });
+    return out;
+  }
+  svg += markers('value', color);
+  if (secondary) svg += markers('value2', secondary.color);
+
+  // x-axis labels (first/last)
+  const firstP = points[0], lastP = points[points.length - 1];
+  svg += `<text class="axis-label" x="${x(parseD(firstP.date).getTime())}" y="${H - 4}" text-anchor="${singlePoint ? 'middle' : 'start'}">${fmtDateShort(parseD(firstP.date))}</text>`;
+  if (!singlePoint) svg += `<text class="axis-label" x="${x(parseD(lastP.date).getTime())}" y="${H - 4}" text-anchor="end">${fmtDateShort(parseD(lastP.date))}</text>`;
+
+  svg += `</svg>`;
+  wrap.innerHTML = svg;
+  panel.appendChild(wrap);
+
+  if (singlePoint) {
+    const note = document.createElement('div');
+    note.className = 'empty-note';
+    note.textContent = 'Único registro até agora — o gráfico ganha forma a cada check-in novo.';
+    panel.appendChild(note);
+  }
+
+  // hover tooltips
+  wrap.querySelectorAll('.pt').forEach(circle => {
+    circle.addEventListener('mouseenter', e => {
+      const idx = +circle.dataset.idx, key = circle.dataset.key;
+      const p = points[idx];
+      const label = key === 'value2' ? secondary.label : (legend ? legend[0].label : unit);
+      const val = p[key];
+      tooltipEl.innerHTML = `${fmtDateShort(parseD(p.date))} · ${label}: <strong>${fmt(val, decimals)}${unit ? ' ' + unit : ''}</strong>`;
+      tooltipEl.classList.add('visible');
+      positionTooltip(e);
+    });
+    circle.addEventListener('mousemove', positionTooltip);
+    circle.addEventListener('mouseleave', () => tooltipEl.classList.remove('visible'));
+  });
+
+  return panel;
+}
+
+function positionTooltip(e) {
+  tooltipEl.style.left = e.pageX + 'px';
+  tooltipEl.style.top = e.pageY + 'px';
+}
+
+const chartGrid = document.getElementById('chart-grid');
+
+// Resolve CSS custom properties to concrete color values up front — SVG fill/stroke
+// attributes written as plain strings don't reliably re-resolve var() in every engine,
+// so we bake in the computed value for the current theme at draw time.
+const cv = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+const COLOR = {
+  accent: cv('--accent'), accentSoft: cv('--accent-soft'),
+  cat2: cv('--cat-2'), cat2Soft: cv('--cat-2-soft'),
+  warning: cv('--warning'), warningSoft: cv('--warning-soft'),
+  critical: cv('--critical'), criticalSoft: cv('--critical-soft'),
+  divergeWarm: cv('--diverge-warm'), divergeWarmSoft: cv('--diverge-warm-soft'),
+  divergeCool: cv('--diverge-cool'), divergeCoolSoft: cv('--diverge-cool-soft')
+};
+
+chartGrid.appendChild(drawSeriesChart({
+  title: 'Peso (kg)',
+  points: bio.map(r => ({ date: r.date, value: r.peso_kg })),
+  color: COLOR.accent, softColor: COLOR.accentSoft, unit: 'kg', decimals: 1
+}));
+chartGrid.appendChild(drawSeriesChart({
+  title: 'Circunferência abdominal (cm)',
+  points: checkins.map(r => ({ date: r.date, value: r.circunferencia_abdominal_cm })),
+  color: COLOR.cat2, softColor: COLOR.cat2Soft, unit: 'cm', decimals: 0
+}));
+chartGrid.appendChild(drawSeriesChart({
+  title: 'Gordura visceral',
+  points: bio.map(r => ({ date: r.date, value: r.gordura_visceral })),
+  color: COLOR.warning, softColor: COLOR.warningSoft, unit: '', decimals: 1
+}));
+chartGrid.appendChild(drawSeriesChart({
+  title: 'Humor (-3 a +3)',
+  points: checkins.map(r => ({ date: r.date, value: r.humor })),
+  color: checkins[checkins.length-1].humor >= 0 ? COLOR.divergeWarm : COLOR.divergeCool,
+  softColor: checkins[checkins.length-1].humor >= 0 ? COLOR.divergeWarmSoft : COLOR.divergeCoolSoft,
+  unit: '', decimals: 0
+}));
+chartGrid.appendChild(drawSeriesChart({
+  title: 'Atividade física semanal (h)',
+  points: checkins.map(r => ({ date: r.date, value: r.horas_cardio, value2: r.horas_forca })),
+  color: COLOR.accent, softColor: COLOR.accentSoft, unit: 'h', decimals: 1,
+  secondary: { color: COLOR.cat2, label: 'Força' },
+  legend: [{ color: COLOR.accent, label: 'Cardio' }, { color: COLOR.cat2, label: 'Força' }]
+}));
+chartGrid.appendChild(drawSeriesChart({
+  title: 'Episódios de descontrole alimentar',
+  points: checkins.map(r => ({ date: r.date, value: r.episodios_descontrole_alimentar })),
+  color: COLOR.critical, softColor: COLOR.criticalSoft, unit: '', decimals: 0
+}));
+
+document.getElementById('chart-sub').textContent = `${bio.length} registro(s) de bioimpedância · ${checkins.length} check-in(s) semanal(is)`;
+
+// ---------- Leitura integrada (texto) ----------
+const readingCard = document.getElementById('reading-card');
+readingCard.innerHTML = `
+  <span class="card-label">Check-in de ${b ? fmtDateShort(parseD(b.date)) : '—'}</span>
+  <p><strong>Gordura visceral (15.5, faixa "obeso")</strong> chama mais atenção do que o peso isolado — a massa muscular
+  está boa (69.7%, "excelente"), então o alvo é gordura abdominal específica, não massa magra.</p>
+  <p>A semana teve <strong>virose desde segunda-feira</strong>: 1h de cardio e 0h de força é baixo, mas plausível dado o
+  quadro — não é sinal de queda de rotina. Os <strong>3 episódios de descontrole alimentar</strong> também podem estar
+  ligados ao mal-estar físico mais do que a um padrão a repetir; vale observar na próxima semana se seguem altos mesmo
+  já recuperado.</p>
+  <p>Humor <strong>+1</strong> apesar da semana difícil é um dado bom — sugere que o planejamento sustentado ajudou a
+  segurar o humor mesmo com o corpo fraco.</p>
+`;
+
+// ---------- Tendência de longo prazo ----------
+const trendCard = document.getElementById('trend-card');
+function trendText(series, label, unit, decimals) {
+  const pts = series.filter(p => p.value != null);
+  if (pts.length < 2) {
+    const first = pts[0] ? parseD(pts[0].date) : null;
+    const spanNote = first ? `desde ${fmtDateFull(first)}` : 'ainda sem registro';
+    return `<strong>${label}:</strong> só ${pts.length} registro ${spanNote} — não dá pra tendência ainda. A janela de
+    análise é de até 5 anos; a cada check-in este texto passa a comparar o ponto mais recente contra o histórico
+    acumulado.`;
+  }
+  const spanDays = (parseD(pts[pts.length - 1].date) - parseD(pts[0].date)) / DAY;
+  const years = spanDays / 365;
+  const delta = pts[pts.length - 1].value - pts[0].value;
+  const dir = delta > 0 ? 'subiu' : delta < 0 ? 'caiu' : 'ficou estável';
+  const coverage = Math.min(100, Math.round((years / 5) * 100));
+  return `<strong>${label}:</strong> ${dir} ${fmt(Math.abs(delta), decimals)}${unit} em ${years < 1 ? Math.round(spanDays) + ' dias' : fmt(years, 1) + ' anos'}
+  (cobre ${coverage}% da janela de 5 anos acompanhada).`;
+}
+trendCard.innerHTML = `
+  <span class="card-label">Macro-tendência acumulada</span>
+  <p>${trendText(bio.map(r => ({ date: r.date, value: r.peso_kg })), 'Peso', 'kg', 1)}</p>
+  <p>${trendText(checkins.map(r => ({ date: r.date, value: r.circunferencia_abdominal_cm })), 'Circunferência abdominal', 'cm', 0)}</p>
+  <p>${trendText(checkins.map(r => ({ date: r.date, value: r.humor })), 'Humor', ' pontos', 1)}</p>
+  <p style="font-size:12.5px;color:var(--ink-muted)">Referência de base (${b ? b.idade_real : '—'} anos, ${b ? b.altura_cm : '—'}cm):
+  idade metabólica ${b ? b.idade_metabolica : '—'} vs. idade real ${b ? b.idade_real : '—'} — vale acompanhar se essa
+  diferença fecha ao longo do tempo.</p>
+`;
+
+// ---------- Prioridades da semana ----------
+const priorities = [
+  {
+    title: 'Retomar atividade física de forma gradual',
+    desc: 'Semana zerou força e teve só 1h de cardio por causa da virose. Não é sobre compensar — é sobre voltar aos poucos assim que o corpo permitir, sem tentar recuperar volume perdido de uma vez.',
+    tag: 'Pilar: exercício físico'
+  },
+  {
+    title: 'Observar alimentação nos próximos dias',
+    desc: '3 episódios de descontrole essa semana. Se continuarem altos mesmo depois de recuperado da virose, é sinal de padrão (não de semana ruim isolada) — vale registrar o contexto de cada episódio.',
+    tag: 'Pilares: alimentação · açúcar'
+  },
+  {
+    title: 'Foco em gordura visceral, não só em peso',
+    desc: 'Massa muscular já está em faixa excelente. O que puxa o IMC/obesidade% pra cima é gordura abdominal — reduzir álcool/açúcar tem mais alavancagem aqui do que aumentar volume de treino.',
+    tag: 'Pilares: açúcar · álcool'
+  },
+  {
+    title: 'Manter o que sustentou o humor essa semana',
+    desc: 'Humor +1 numa semana de virose é bom sinal — o planejamento parece ter ajudado. Vale identificar o que especificamente segurou o humor pra repetir.',
+    tag: 'Observação, sem ação corretiva'
+  }
+];
+const priorityList = document.getElementById('priority-list');
+priorities.forEach((p, i) => {
+  const li = document.createElement('li');
+  li.className = 'priority-item';
+  li.innerHTML = `
+    <span class="priority-rank">${i + 1}</span>
+    <div class="priority-body">
+      <span class="title">${p.title}</span>
+      <span class="desc">${p.desc}</span>
+      <span class="pillar-tag">${p.tag}</span>
+    </div>
+  `;
+  priorityList.appendChild(li);
+});
+
+// ---------- Tabelas ----------
+function buildTable(rows, cols) {
+  if (!rows.length) return '<p class="empty-note">Sem registros.</p>';
+  let html = '<div class="table-wrap"><table class="data-table"><thead><tr>' +
+    cols.map(c => `<th>${c}</th>`).join('') + '</tr></thead><tbody>';
+  rows.forEach(r => {
+    html += '<tr>' + cols.map(c => `<td>${r[c] ?? ''}</td>`).join('') + '</tr>';
+  });
+  html += '</tbody></table></div>';
+  return html;
+}
+document.getElementById('tables-container').innerHTML = `
+  <p style="font-size:12px;color:var(--ink-muted);margin:12px 0 0">Bioimpedância</p>
+  ${buildTable(bio, ['date','peso_kg','imc','gordura_pct','massa_muscular_pct','gordura_visceral','idade_metabolica'])}
+  <p style="font-size:12px;color:var(--ink-muted);margin:14px 0 0">Check-ins semanais</p>
+  ${buildTable(checkins, ['date','circunferencia_abdominal_cm','horas_cardio','horas_forca','episodios_descontrole_alimentar','humor','observacoes'])}
+`;
+</script>
