@@ -474,7 +474,12 @@ const bio = [
     massa_muscular_esqueletica_pct: 37.9, massa_muscular_esqueletica_kg: 34.3,
     massa_muscular_pct: 69.7, massa_muscular_kg: 63.0, agua_pct: 52.0, agua_kg: 47.0,
     gordura_visceral: 15.5, ossos_kg: 3.51, metabolismo_kcal: 1881, proteina_pct: 17.7,
-    obesidade_pct: 25.5, idade_metabolica: 46, lbm_kg: 66.56, idade_real: 37, altura_cm: 183 }
+    obesidade_pct: 25.5, idade_metabolica: 46, lbm_kg: 66.56, idade_real: 37, altura_cm: 183 },
+  { date: '2026-08-25', peso_kg: 90.6, imc: 27.1, gordura_pct: 26.5, peso_gordura_kg: 24.0,
+    massa_muscular_esqueletica_pct: 37.9, massa_muscular_esqueletica_kg: 34.3,
+    massa_muscular_pct: 69.6, massa_muscular_kg: 63.1, agua_pct: 51.9, agua_kg: 47.1,
+    gordura_visceral: 15.5, ossos_kg: 3.56, metabolismo_kcal: 1883, proteina_pct: 17.7,
+    obesidade_pct: 25.7, idade_metabolica: 47, lbm_kg: 66.62, idade_real: 37, altura_cm: 183 }
 ];
 
 const checkins = [
@@ -500,7 +505,10 @@ const checkins = [
     episodios_descontrole_alimentar: null, humor: null, observacoes: null },
   { date: '2026-08-19', circunferencia_abdominal_cm: 96, horas_cardio: 1, horas_forca: 0,
     episodios_descontrole_alimentar: 3, humor: 1,
-    observacoes: 'Virose com início dos sintomas na segunda-feira. Planejamento realizado apesar disso, satisfação por isso.' }
+    observacoes: 'Virose com início dos sintomas na segunda-feira. Planejamento realizado apesar disso, satisfação por isso.' },
+  { date: '2026-08-25', circunferencia_abdominal_cm: 97.3, horas_cardio: 0, horas_forca: 0,
+    episodios_descontrole_alimentar: 2, humor: 0,
+    observacoes: 'Semana inteira de cama, doente. Melhorando mas ainda em recuperação.' }
 ];
 
 // ---------- Helpers ----------
@@ -756,14 +764,15 @@ document.getElementById('chart-sub').textContent = `${bio.length} registro(s) de
 const readingCard = document.getElementById('reading-card');
 readingCard.innerHTML = `
   <span class="card-label">Check-in de ${b ? fmtDateShort(parseD(b.date)) : '—'}</span>
-  <p><strong>Gordura visceral (15.5, faixa "obeso")</strong> chama mais atenção do que o peso isolado — a massa muscular
-  está boa (69.7%, "excelente"), então o alvo é gordura abdominal específica, não massa magra.</p>
-  <p>A semana teve <strong>virose desde segunda-feira</strong>: 1h de cardio e 0h de força é baixo, mas plausível dado o
-  quadro — não é sinal de queda de rotina. Os <strong>3 episódios de descontrole alimentar</strong> também podem estar
-  ligados ao mal-estar físico mais do que a um padrão a repetir; vale observar na próxima semana se seguem altos mesmo
-  já recuperado.</p>
-  <p>Humor <strong>+1</strong> apesar da semana difícil é um dado bom — sugere que o planejamento sustentado ajudou a
-  segurar o humor mesmo com o corpo fraco.</p>
+  <p><strong>Segunda semana seguida de cama, doente.</strong> Cardio e força zerados de novo, e isso explica bem a
+  circunferência subindo pra <strong>97.3cm (+1.3cm)</strong> e o peso quase parado (90.6kg, +0.15kg): repouso
+  prolongado e menos movimento tendem a reter mais água/inchaço, não é sinal de ganho de gordura numa semana só.
+  Gordura visceral se manteve em <strong>15.5</strong>, mesma faixa de 19/08 — nada mudou aí ainda.</p>
+  <p><strong>Descontroles alimentares caíram de 3 para 2</strong> mesmo estando doente — leve melhora, vale nota
+  positiva. Humor foi de +1 para <strong>0</strong>: ainda dentro do estável, sem sinal de alerta, mas é razoável
+  associar à segunda semana seguida isolado e fisicamente mal.</p>
+  <p>Prioridade real agora é fechar a recuperação — os números de atividade física só voltam a fazer sentido comparar
+  quando o corpo estiver de fato bem de novo.</p>
 `;
 
 // ---------- Tendência de longo prazo ----------
@@ -798,24 +807,24 @@ trendCard.innerHTML = `
 // ---------- Prioridades da semana ----------
 const priorities = [
   {
-    title: 'Retomar atividade física de forma gradual',
-    desc: 'Semana zerou força e teve só 1h de cardio por causa da virose. Não é sobre compensar — é sobre voltar aos poucos assim que o corpo permitir, sem tentar recuperar volume perdido de uma vez.',
-    tag: 'Pilar: exercício físico'
+    title: 'Terminar a recuperação antes de qualquer treino',
+    desc: 'Duas semanas seguidas doente, ainda em recuperação. Prioridade é fechar isso de verdade — voltar a treinar cedo demais tende a prolongar o quadro, não encurtar.',
+    tag: 'Pilar: sono / exercício físico'
   },
   {
-    title: 'Observar alimentação nos próximos dias',
-    desc: '3 episódios de descontrole essa semana. Se continuarem altos mesmo depois de recuperado da virose, é sinal de padrão (não de semana ruim isolada) — vale registrar o contexto de cada episódio.',
-    tag: 'Pilares: alimentação · açúcar'
-  },
-  {
-    title: 'Foco em gordura visceral, não só em peso',
-    desc: 'Massa muscular já está em faixa excelente. O que puxa o IMC/obesidade% pra cima é gordura abdominal — reduzir álcool/açúcar tem mais alavancagem aqui do que aumentar volume de treino.',
-    tag: 'Pilares: açúcar · álcool'
-  },
-  {
-    title: 'Manter o que sustentou o humor essa semana',
-    desc: 'Humor +1 numa semana de virose é bom sinal — o planejamento parece ter ajudado. Vale identificar o que especificamente segurou o humor pra repetir.',
+    title: 'Não reagir ao peso/cintura desta semana',
+    desc: 'Alta de 1.3cm na circunferência e peso quase parado combinam com repouso prolongado (retenção), não com mudança real de composição corporal. Sentido de comparar isso só depois que a atividade voltar ao normal.',
     tag: 'Observação, sem ação corretiva'
+  },
+  {
+    title: 'Ficar de olho na queda de humor (+1 → 0)',
+    desc: 'Ainda estável, mas é a segunda semana seguida de isolamento forçado por doença — vale atenção ao pilar de vida social assim que estiver bem, pra não deixar acumular.',
+    tag: 'Pilares: vida social · humor'
+  },
+  {
+    title: 'Retomar gordura visceral como foco assim que possível',
+    desc: 'Segue em 15.5 ("obeso") há duas medições. Sem mudança nessa semana é esperado — o ponto de atenção continua sendo alimentação/açúcar/álcool quando a rotina normalizar.',
+    tag: 'Pilares: açúcar · álcool'
   }
 ];
 const priorityList = document.getElementById('priority-list');
