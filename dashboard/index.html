@@ -479,7 +479,12 @@ const bio = [
     massa_muscular_esqueletica_pct: 37.9, massa_muscular_esqueletica_kg: 34.3,
     massa_muscular_pct: 69.6, massa_muscular_kg: 63.1, agua_pct: 51.9, agua_kg: 47.1,
     gordura_visceral: 15.5, ossos_kg: 3.56, metabolismo_kcal: 1883, proteina_pct: 17.7,
-    obesidade_pct: 25.7, idade_metabolica: 47, lbm_kg: 66.62, idade_real: 37, altura_cm: 183 }
+    obesidade_pct: 25.7, idade_metabolica: 47, lbm_kg: 66.62, idade_real: 37, altura_cm: 183 },
+  { date: '2026-09-01', peso_kg: 88.6, imc: 26.5, gordura_pct: 25.7, peso_gordura_kg: 22.7,
+    massa_muscular_esqueletica_pct: 38.3, massa_muscular_esqueletica_kg: 33.9,
+    massa_muscular_pct: 70.3, massa_muscular_kg: 62.3, agua_pct: 52.3, agua_kg: 46.3,
+    gordura_visceral: 15.0, ossos_kg: 3.58, metabolismo_kcal: 1857, proteina_pct: 18.0,
+    obesidade_pct: 22.9, idade_metabolica: 45, lbm_kg: 65.86, idade_real: 37, altura_cm: 183 }
 ];
 
 const checkins = [
@@ -508,7 +513,10 @@ const checkins = [
     observacoes: 'Virose com início dos sintomas na segunda-feira. Planejamento realizado apesar disso, satisfação por isso.' },
   { date: '2026-08-25', circunferencia_abdominal_cm: 97.3, horas_cardio: 0, horas_forca: 0,
     episodios_descontrole_alimentar: 2, humor: 0,
-    observacoes: 'Semana inteira de cama, doente. Melhorando mas ainda em recuperação.' }
+    observacoes: 'Semana inteira de cama, doente. Melhorando mas ainda em recuperação.' },
+  { date: '2026-09-01', circunferencia_abdominal_cm: 95, horas_cardio: 0, horas_forca: 0,
+    episodios_descontrole_alimentar: 3, humor: -2,
+    observacoes: 'Diarreia há 3 dias. Ansiedade por entrega de trabalho e por retorno financeiro atrasado (situação financeira precária). Esposa e filhas viajaram há 4 dias — quebra de rotina + saudade, padrão que costuma trazer humor depressivo. Muita dificuldade com doomscroll de YouTube Shorts.' }
 ];
 
 // ---------- Helpers ----------
@@ -764,15 +772,18 @@ document.getElementById('chart-sub').textContent = `${bio.length} registro(s) de
 const readingCard = document.getElementById('reading-card');
 readingCard.innerHTML = `
   <span class="card-label">Check-in de ${b ? fmtDateShort(parseD(b.date)) : '—'}</span>
-  <p><strong>Segunda semana seguida de cama, doente.</strong> Cardio e força zerados de novo, e isso explica bem a
-  circunferência subindo pra <strong>97.3cm (+1.3cm)</strong> e o peso quase parado (90.6kg, +0.15kg): repouso
-  prolongado e menos movimento tendem a reter mais água/inchaço, não é sinal de ganho de gordura numa semana só.
-  Gordura visceral se manteve em <strong>15.5</strong>, mesma faixa de 19/08 — nada mudou aí ainda.</p>
-  <p><strong>Descontroles alimentares caíram de 3 para 2</strong> mesmo estando doente — leve melhora, vale nota
-  positiva. Humor foi de +1 para <strong>0</strong>: ainda dentro do estável, sem sinal de alerta, mas é razoável
-  associar à segunda semana seguida isolado e fisicamente mal.</p>
-  <p>Prioridade real agora é fechar a recuperação — os números de atividade física só voltam a fazer sentido comparar
-  quando o corpo estiver de fato bem de novo.</p>
+  <p><strong>Peso e circunferência caíram bastante</strong> (88.6kg, -2.0kg; 95cm, -2.3cm) e gordura visceral também
+  recuou pra 15.0. Mas essa não é uma leitura de "melhora" simples: cardio e força seguem em zero, e há
+  <strong>diarreia há 3 dias</strong> — perda de peso/água nesse contexto é sintoma, não resultado de rotina. Não é pra
+  comemorar nem se preocupar com o número em si esta semana.</p>
+  <p><strong>Humor caiu pra -2</strong> — a queda mais acentuada registrada até agora (foi +1 → 0 → -2 nas últimas três
+  semanas). Você mesmo trouxe causas concretas: ansiedade por uma entrega de trabalho, aperto financeiro real (retorno
+  do que foi investido demorando mais que o esperado), e a família viajada há 4 dias — e você notou que quebra de
+  rotina "sempre" te deixa depressivo. Isso é exatamente o tipo de padrão que vale levar ao profissional que acompanha
+  a investigação de bipolaridade: não como alarme, mas como dado — sensibilidade forte a mudança de rotina, associada
+  a episódio depressivo, é informação clínica útil.</p>
+  <p>Os 3 descontroles alimentares e o doomscroll de YouTube Shorts nesta semana fazem sentido como respostas a esse
+  conjunto (ansiedade + solidão + estímulo fácil) — não são falha de disciplina, são sintoma do mesmo pacote.</p>
 `;
 
 // ---------- Tendência de longo prazo ----------
@@ -807,24 +818,24 @@ trendCard.innerHTML = `
 // ---------- Prioridades da semana ----------
 const priorities = [
   {
-    title: 'Terminar a recuperação antes de qualquer treino',
-    desc: 'Duas semanas seguidas doente, ainda em recuperação. Prioridade é fechar isso de verdade — voltar a treinar cedo demais tende a prolongar o quadro, não encurtar.',
-    tag: 'Pilar: sono / exercício físico'
+    title: 'Cuidar da diarreia primeiro',
+    desc: '3 dias já é tempo suficiente pra prestar atenção: hidratação é prioridade imediata, e se não melhorar nos próximos dias vale avaliação médica — não deixar acumular junto com o resto.',
+    tag: 'Prioridade física, não autocuidado psicológico'
   },
   {
-    title: 'Não reagir ao peso/cintura desta semana',
-    desc: 'Alta de 1.3cm na circunferência e peso quase parado combinam com repouso prolongado (retenção), não com mudança real de composição corporal. Sentido de comparar isso só depois que a atividade voltar ao normal.',
-    tag: 'Observação, sem ação corretiva'
+    title: 'Montar uma estrutura mínima enquanto a família está fora',
+    desc: 'Você mesmo identificou que quebra de rotina "sempre" derruba seu humor. Não precisa ser produtivo — só ter 2-3 âncoras fixas no dia (horário de dormir, uma refeição, uma saída de casa) tende a segurar mais do que tentar dar conta de tudo sozinho.',
+    tag: 'Pilar: sono · vida social'
   },
   {
-    title: 'Ficar de olho na queda de humor (+1 → 0)',
-    desc: 'Ainda estável, mas é a segunda semana seguida de isolamento forçado por doença — vale atenção ao pilar de vida social assim que estiver bem, pra não deixar acumular.',
-    tag: 'Pilares: vida social · humor'
+    title: 'Colocar fricção manual no YouTube Shorts',
+    desc: 'Já que não dá pra deletar o app: um limite de tempo diário no próprio celular (mesmo que dê pra ignorar, o alarme já quebra o piloto automático) ou deslogar do app pra forçar login toda vez ajuda mais do que força de vontade sozinha.',
+    tag: 'Pilar: evitar doomscroll'
   },
   {
-    title: 'Retomar gordura visceral como foco assim que possível',
-    desc: 'Segue em 15.5 ("obeso") há duas medições. Sem mudança nessa semana é esperado — o ponto de atenção continua sendo alimentação/açúcar/álcool quando a rotina normalizar.',
-    tag: 'Pilares: açúcar · álcool'
+    title: 'Levar o padrão "quebra de rotina → episódio depressivo" ao profissional',
+    desc: 'Não é ação desta semana — é um dado concreto (você mesmo notou a recorrência) que vale citar na próxima consulta da investigação de bipolaridade.',
+    tag: 'Registro para acompanhamento, sem diagnóstico'
   }
 ];
 const priorityList = document.getElementById('priority-list');
