@@ -516,7 +516,10 @@ const checkins = [
     observacoes: 'Semana inteira de cama, doente. Melhorando mas ainda em recuperação.' },
   { date: '2026-09-01', circunferencia_abdominal_cm: 95, horas_cardio: 0, horas_forca: 0,
     episodios_descontrole_alimentar: 3, humor: -2,
-    observacoes: 'Diarreia há 3 dias. Ansiedade por entrega de trabalho e por retorno financeiro atrasado (situação financeira precária). Esposa e filhas viajaram há 4 dias — quebra de rotina + saudade, padrão que costuma trazer humor depressivo. Muita dificuldade com doomscroll de YouTube Shorts.' }
+    observacoes: 'Diarreia há 3 dias. Ansiedade por entrega de trabalho e por retorno financeiro atrasado (situação financeira precária). Esposa e filhas viajaram há 4 dias — quebra de rotina + saudade, padrão que costuma trazer humor depressivo. Muita dificuldade com doomscroll de YouTube Shorts.' },
+  { date: '2026-09-07', circunferencia_abdominal_cm: 97, horas_cardio: 4, horas_forca: 0.5,
+    episodios_descontrole_alimentar: 2, humor: 0,
+    observacoes: 'Início de 5 semanas de viagens de trabalho (viagens de caminhada). Chegou à Itália após viagem longa, mas se equilibrou. Muita caminhada nos próximos dias — quer focar mais em força e equilíbrio. Sem balança disponível esta semana.' }
 ];
 
 // ---------- Helpers ----------
@@ -771,19 +774,15 @@ document.getElementById('chart-sub').textContent = `${bio.length} registro(s) de
 // ---------- Leitura integrada (texto) ----------
 const readingCard = document.getElementById('reading-card');
 readingCard.innerHTML = `
-  <span class="card-label">Check-in de ${b ? fmtDateShort(parseD(b.date)) : '—'}</span>
-  <p><strong>Peso e circunferência caíram bastante</strong> (88.6kg, -2.0kg; 95cm, -2.3cm) e gordura visceral também
-  recuou pra 15.0. Mas essa não é uma leitura de "melhora" simples: cardio e força seguem em zero, e há
-  <strong>diarreia há 3 dias</strong> — perda de peso/água nesse contexto é sintoma, não resultado de rotina. Não é pra
-  comemorar nem se preocupar com o número em si esta semana.</p>
-  <p><strong>Humor caiu pra -2</strong> — a queda mais acentuada registrada até agora (foi +1 → 0 → -2 nas últimas três
-  semanas). Você mesmo trouxe causas concretas: ansiedade por uma entrega de trabalho, aperto financeiro real (retorno
-  do que foi investido demorando mais que o esperado), e a família viajada há 4 dias — e você notou que quebra de
-  rotina "sempre" te deixa depressivo. Isso é exatamente o tipo de padrão que vale levar ao profissional que acompanha
-  a investigação de bipolaridade: não como alarme, mas como dado — sensibilidade forte a mudança de rotina, associada
-  a episódio depressivo, é informação clínica útil.</p>
-  <p>Os 3 descontroles alimentares e o doomscroll de YouTube Shorts nesta semana fazem sentido como respostas a esse
-  conjunto (ansiedade + solidão + estímulo fácil) — não são falha de disciplina, são sintoma do mesmo pacote.</p>
+  <span class="card-label">Check-in de 07/09 (sem bioimpedância esta semana — balança indisponível em viagem)</span>
+  <p><strong>Humor voltou pra 0</strong> depois do -2 da semana passada — bom sinal, especialmente porque veio junto com
+  uma quebra de rotina grande (início de 5 semanas de viagem de trabalho, voo longo até a Itália). Vale notar a
+  diferença: essa quebra de rotina é planejada e ligada ao trabalho, diferente da semana passada (família viajando,
+  saudade, incerteza financeira) — parece que o tipo de disrupção importa, não só o fato de a rotina mudar.</p>
+  <p><strong>Cardio subiu bastante</strong> (4h, puxado pela caminhada do trabalho) e força aparece de novo (0.5h,
+  ainda pouco). A <strong>circunferência foi de 95 para 97cm (+2cm)</strong> sem bioimpedância pra cruzar — combinação
+  plausível com inchaço/retenção de viagem (voo longo, mudança de dieta e hidratação), não necessariamente gordura;
+  sem o relatório da balança não dá pra confirmar. Descontroles alimentares seguem em patamar parecido (2).</p>
 `;
 
 // ---------- Tendência de longo prazo ----------
@@ -818,24 +817,24 @@ trendCard.innerHTML = `
 // ---------- Prioridades da semana ----------
 const priorities = [
   {
-    title: 'Cuidar da diarreia primeiro',
-    desc: '3 dias já é tempo suficiente pra prestar atenção: hidratação é prioridade imediata, e se não melhorar nos próximos dias vale avaliação médica — não deixar acumular junto com o resto.',
-    tag: 'Prioridade física, não autocuidado psicológico'
+    title: 'Encaixar força e equilíbrio entre as caminhadas',
+    desc: 'Você mesmo notou o desequilíbrio: muito cardio (caminhada de trabalho), pouca força. Não precisa de academia — exercícios de equilíbrio e força com peso do próprio corpo no quarto do hotel já ajudam, principalmente com volume alto de caminhada pela frente.',
+    tag: 'Pilar: exercício físico'
   },
   {
-    title: 'Montar uma estrutura mínima enquanto a família está fora',
-    desc: 'Você mesmo identificou que quebra de rotina "sempre" derruba seu humor. Não precisa ser produtivo — só ter 2-3 âncoras fixas no dia (horário de dormir, uma refeição, uma saída de casa) tende a segurar mais do que tentar dar conta de tudo sozinho.',
-    tag: 'Pilar: sono · vida social'
+    title: 'Identificar o que ajudou a segurar o humor dessa vez',
+    desc: 'Voo longo e início de rotina nova, e o humor se manteve estável — diferente da semana passada. Vale reparar o que foi diferente (ter um propósito profissional? saber a duração? algo específico da viagem) pra repetir nas próximas 4 semanas de viagem.',
+    tag: 'Observação, sem ação corretiva'
   },
   {
-    title: 'Colocar fricção manual no YouTube Shorts',
-    desc: 'Já que não dá pra deletar o app: um limite de tempo diário no próprio celular (mesmo que dê pra ignorar, o alarme já quebra o piloto automático) ou deslogar do app pra forçar login toda vez ajuda mais do que força de vontade sozinha.',
-    tag: 'Pilar: evitar doomscroll'
+    title: 'Confirmar a circunferência quando puder pesar de novo',
+    desc: 'Os +2cm sem bioimpedância podem ser só retenção de viagem. Assim que tiver acesso a uma balança (hotel, farmácia, academia), vale medir de novo pra separar inchaço passageiro de mudança real.',
+    tag: 'Pilar: acompanhamento de dados'
   },
   {
-    title: 'Levar o padrão "quebra de rotina → episódio depressivo" ao profissional',
-    desc: 'Não é ação desta semana — é um dado concreto (você mesmo notou a recorrência) que vale citar na próxima consulta da investigação de bipolaridade.',
-    tag: 'Registro para acompanhamento, sem diagnóstico'
+    title: 'Atenção a açúcar/álcool em contexto de viagem de trabalho',
+    desc: 'Refeições de trabalho e hotel facilitam os dois. Não precisa de regra rígida — só notar quando acontecer, já ajuda a não virar padrão ao longo das 5 semanas.',
+    tag: 'Pilares: açúcar · álcool'
   }
 ];
 const priorityList = document.getElementById('priority-list');
