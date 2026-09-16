@@ -519,7 +519,10 @@ const checkins = [
     observacoes: 'Diarreia há 3 dias. Ansiedade por entrega de trabalho e por retorno financeiro atrasado (situação financeira precária). Esposa e filhas viajaram há 4 dias — quebra de rotina + saudade, padrão que costuma trazer humor depressivo. Muita dificuldade com doomscroll de YouTube Shorts.' },
   { date: '2026-09-07', circunferencia_abdominal_cm: 97, horas_cardio: 4, horas_forca: 0.5,
     episodios_descontrole_alimentar: 2, humor: 0,
-    observacoes: 'Início de 5 semanas de viagens de trabalho (viagens de caminhada). Chegou à Itália após viagem longa, mas se equilibrou. Muita caminhada nos próximos dias — quer focar mais em força e equilíbrio. Sem balança disponível esta semana.' }
+    observacoes: 'Início de 5 semanas de viagens de trabalho (viagens de caminhada). Chegou à Itália após viagem longa, mas se equilibrou. Muita caminhada nos próximos dias — quer focar mais em força e equilíbrio. Sem balança disponível esta semana.' },
+  { date: '2026-09-16', circunferencia_abdominal_cm: 97, horas_cardio: 25, horas_forca: 0,
+    episodios_descontrole_alimentar: 1, humor: 0,
+    observacoes: 'Check-in com um dia de atraso. Terminou uma viagem de trabalho e começou outra de forma organizada. Se descreve pleno, calmo, se perdoando mais, menos cruel consigo mesmo. Mantendo os autocuidados. Progressos no relacionamento com a esposa. Ainda sem balança.' }
 ];
 
 // ---------- Helpers ----------
@@ -774,15 +777,15 @@ document.getElementById('chart-sub').textContent = `${bio.length} registro(s) de
 // ---------- Leitura integrada (texto) ----------
 const readingCard = document.getElementById('reading-card');
 readingCard.innerHTML = `
-  <span class="card-label">Check-in de 07/09 (sem bioimpedância esta semana — balança indisponível em viagem)</span>
-  <p><strong>Humor voltou pra 0</strong> depois do -2 da semana passada — bom sinal, especialmente porque veio junto com
-  uma quebra de rotina grande (início de 5 semanas de viagem de trabalho, voo longo até a Itália). Vale notar a
-  diferença: essa quebra de rotina é planejada e ligada ao trabalho, diferente da semana passada (família viajando,
-  saudade, incerteza financeira) — parece que o tipo de disrupção importa, não só o fato de a rotina mudar.</p>
-  <p><strong>Cardio subiu bastante</strong> (4h, puxado pela caminhada do trabalho) e força aparece de novo (0.5h,
-  ainda pouco). A <strong>circunferência foi de 95 para 97cm (+2cm)</strong> sem bioimpedância pra cruzar — combinação
-  plausível com inchaço/retenção de viagem (voo longo, mudança de dieta e hidratação), não necessariamente gordura;
-  sem o relatório da balança não dá pra confirmar. Descontroles alimentares seguem em patamar parecido (2).</p>
+  <span class="card-label">Check-in de 16/09 (com 1 dia de atraso — sem bioimpedância, ainda em viagem)</span>
+  <p><strong>Semana boa, mesmo com o humor numérico ficando em 0.</strong> O relato conta mais que o número: terminou
+  uma viagem de trabalho e começou outra de forma organizada, se descreve pleno, calmo, se perdoando mais, e com
+  progresso no relacionamento com a esposa. Vale registrar isso mesmo sem refletir na escala -3/+3 — a escala mede
+  intensidade/polaridade, não qualidade de vida percebida.</p>
+  <p><strong>Circunferência estável em 97cm</strong> (sem mudança), <strong>cardio em 25h</strong> (volume alto de
+  caminhada do trabalho) e força zerada de novo — esperado dado o ritmo de viagem. Descontroles caíram pra 1. Depois
+  do -2 de duas semanas atrás, esse é o segundo check-in seguido de recuperação — reforça que o gatilho não é "mudança
+  de rotina" isoladamente, e sim o contexto dela (planejada, com propósito, previsível vs. imposta e incerta).</p>
 `;
 
 // ---------- Tendência de longo prazo ----------
@@ -817,24 +820,24 @@ trendCard.innerHTML = `
 // ---------- Prioridades da semana ----------
 const priorities = [
   {
-    title: 'Encaixar força e equilíbrio entre as caminhadas',
-    desc: 'Você mesmo notou o desequilíbrio: muito cardio (caminhada de trabalho), pouca força. Não precisa de academia — exercícios de equilíbrio e força com peso do próprio corpo no quarto do hotel já ajudam, principalmente com volume alto de caminhada pela frente.',
-    tag: 'Pilar: exercício físico'
-  },
-  {
-    title: 'Identificar o que ajudou a segurar o humor dessa vez',
-    desc: 'Voo longo e início de rotina nova, e o humor se manteve estável — diferente da semana passada. Vale reparar o que foi diferente (ter um propósito profissional? saber a duração? algo específico da viagem) pra repetir nas próximas 4 semanas de viagem.',
+    title: 'Nomear o que está funcionando, pra não perder de vista',
+    desc: 'Autoperdão, organização entre as viagens, progresso no relacionamento — vale identificar especificamente o que mudou nessas duas últimas semanas pra conseguir sustentar quando a viagem ficar mais cansativa.',
     tag: 'Observação, sem ação corretiva'
   },
   {
-    title: 'Confirmar a circunferência quando puder pesar de novo',
-    desc: 'Os +2cm sem bioimpedância podem ser só retenção de viagem. Assim que tiver acesso a uma balança (hotel, farmácia, academia), vale medir de novo pra separar inchaço passageiro de mudança real.',
+    title: 'Força e equilíbrio seguem zerados',
+    desc: 'Terceira semana seguida sem força, apesar de você mesmo ter notado isso há 2 semanas. Não é cobrança — só um lembrete de que o objetivo continua de pé quando a rotina de viagem permitir um espaço pequeno pra isso.',
+    tag: 'Pilar: exercício físico'
+  },
+  {
+    title: 'Confirmar bioimpedância assim que possível',
+    desc: 'Três semanas sem balança. Quando tiver acesso, vale medir pra ver se a composição corporal acompanha a estabilidade que você tem sentido — sem isso, uma parte do quadro fica sem dado.',
     tag: 'Pilar: acompanhamento de dados'
   },
   {
-    title: 'Atenção a açúcar/álcool em contexto de viagem de trabalho',
-    desc: 'Refeições de trabalho e hotel facilitam os dois. Não precisa de regra rígida — só notar quando acontecer, já ajuda a não virar padrão ao longo das 5 semanas.',
-    tag: 'Pilares: açúcar · álcool'
+    title: 'Vida social com os amigos de altas habilidades',
+    desc: 'Num momento mais estável como este, pode ser um bom momento pra reativar contato com esse grupo específico, se fazia tempo.',
+    tag: 'Pilar: vida social (altas habilidades)'
   }
 ];
 const priorityList = document.getElementById('priority-list');
