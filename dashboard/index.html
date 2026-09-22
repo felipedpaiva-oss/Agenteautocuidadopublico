@@ -522,7 +522,10 @@ const checkins = [
     observacoes: 'Início de 5 semanas de viagens de trabalho (viagens de caminhada). Chegou à Itália após viagem longa, mas se equilibrou. Muita caminhada nos próximos dias — quer focar mais em força e equilíbrio. Sem balança disponível esta semana.' },
   { date: '2026-09-16', circunferencia_abdominal_cm: 97, horas_cardio: 25, horas_forca: 0,
     episodios_descontrole_alimentar: 1, humor: 0,
-    observacoes: 'Check-in com um dia de atraso. Terminou uma viagem de trabalho e começou outra de forma organizada. Se descreve pleno, calmo, se perdoando mais, menos cruel consigo mesmo. Mantendo os autocuidados. Progressos no relacionamento com a esposa. Ainda sem balança.' }
+    observacoes: 'Check-in com um dia de atraso. Terminou uma viagem de trabalho e começou outra de forma organizada. Se descreve pleno, calmo, se perdoando mais, menos cruel consigo mesmo. Mantendo os autocuidados. Progressos no relacionamento com a esposa. Ainda sem balança.' },
+  { date: '2026-09-22', circunferencia_abdominal_cm: 95.3, horas_cardio: 30, horas_forca: 0.25,
+    episodios_descontrole_alimentar: 3, humor: 0,
+    observacoes: 'Cansaço acumulado — bem organizado até anteontem, de ontem pra hoje mais cansado e com dificuldade. Grana no radar de estresse, projetos estagnados, desmotivação. Ainda sem balança.' }
 ];
 
 // ---------- Helpers ----------
@@ -777,15 +780,15 @@ document.getElementById('chart-sub').textContent = `${bio.length} registro(s) de
 // ---------- Leitura integrada (texto) ----------
 const readingCard = document.getElementById('reading-card');
 readingCard.innerHTML = `
-  <span class="card-label">Check-in de 16/09 (com 1 dia de atraso — sem bioimpedância, ainda em viagem)</span>
-  <p><strong>Semana boa, mesmo com o humor numérico ficando em 0.</strong> O relato conta mais que o número: terminou
-  uma viagem de trabalho e começou outra de forma organizada, se descreve pleno, calmo, se perdoando mais, e com
-  progresso no relacionamento com a esposa. Vale registrar isso mesmo sem refletir na escala -3/+3 — a escala mede
-  intensidade/polaridade, não qualidade de vida percebida.</p>
-  <p><strong>Circunferência estável em 97cm</strong> (sem mudança), <strong>cardio em 25h</strong> (volume alto de
-  caminhada do trabalho) e força zerada de novo — esperado dado o ritmo de viagem. Descontroles caíram pra 1. Depois
-  do -2 de duas semanas atrás, esse é o segundo check-in seguido de recuperação — reforça que o gatilho não é "mudança
-  de rotina" isoladamente, e sim o contexto dela (planejada, com propósito, previsível vs. imposta e incerta).</p>
+  <span class="card-label">Check-in de 22/09 (sem bioimpedância — ainda em viagem)</span>
+  <p><strong>Três semanas seguidas de volume altíssimo de caminhada</strong> (4h → 25h → 30h) — isso é carga de
+  trabalho, não treino de condicionamento, e o cansaço acumulado que você relata bate exatamente com esse padrão.
+  Circunferência caindo pra 95,3cm é coerente com esse gasto físico alto, mas não é "resultado de autocuidado" —
+  é desgaste. Força apareceu de novo (0,25h), pequeno passo positivo mesmo num período puxado.</p>
+  <p><strong>Humor ainda em 0</strong>, mas o relato mostra desgaste real: cansaço que veio de repente ("até anteontem
+  estava bem organizado"), estresse financeiro que já é recorrente nos últimos check-ins, e desmotivação com projetos
+  parados. Descontroles subiram de 1 pra 3 — combina com o pacote de cansaço físico + estresse mental, não é falta de
+  disciplina.</p>
 `;
 
 // ---------- Tendência de longo prazo ----------
@@ -820,24 +823,24 @@ trendCard.innerHTML = `
 // ---------- Prioridades da semana ----------
 const priorities = [
   {
-    title: 'Nomear o que está funcionando, pra não perder de vista',
-    desc: 'Autoperdão, organização entre as viagens, progresso no relacionamento — vale identificar especificamente o que mudou nessas duas últimas semanas pra conseguir sustentar quando a viagem ficar mais cansativa.',
+    title: 'Descanso ativo, não mais esforço',
+    desc: '30h de caminhada de trabalho em uma semana, terceira semana em escalada. O cansaço acumulado é resposta esperada do corpo — prioridade agora é recuperação (sono, pausas reais no dia), não tentar compensar com mais atividade.',
+    tag: 'Pilar: sono · exercício físico'
+  },
+  {
+    title: 'Um passo pequeno em vez do peso todo dos projetos parados',
+    desc: 'Desmotivação com projetos estagnados tende a virar paralisia (comum no TDAH quando a tarefa parece grande demais). Escolher uma ação mínima e concreta em um projeto só, sem tentar resolver tudo de uma vez, costuma destravar mais do que encarar o quadro geral.',
+    tag: 'Pilar: foco em metas pessoais'
+  },
+  {
+    title: 'Estresse financeiro segue recorrente nos check-ins',
+    desc: 'Já apareceu há 3 semanas. Não é algo que se resolve num check-in, mas vale considerar: existe alguém (contador, parceiro de negócio, a própria esposa) com quem dividir esse peso, mesmo que não mude o número agora?',
+    tag: 'Observação recorrente'
+  },
+  {
+    title: 'Descontroles alimentares subindo — sem julgamento',
+    desc: 'De 1 pra 3 no mesmo check-in do cansaço e do estresse. Esperado nesse contexto, não é retrocesso — só vale ficar de olho se continuar subindo mesmo depois do corpo descansar.',
     tag: 'Observação, sem ação corretiva'
-  },
-  {
-    title: 'Força e equilíbrio seguem zerados',
-    desc: 'Terceira semana seguida sem força, apesar de você mesmo ter notado isso há 2 semanas. Não é cobrança — só um lembrete de que o objetivo continua de pé quando a rotina de viagem permitir um espaço pequeno pra isso.',
-    tag: 'Pilar: exercício físico'
-  },
-  {
-    title: 'Confirmar bioimpedância assim que possível',
-    desc: 'Três semanas sem balança. Quando tiver acesso, vale medir pra ver se a composição corporal acompanha a estabilidade que você tem sentido — sem isso, uma parte do quadro fica sem dado.',
-    tag: 'Pilar: acompanhamento de dados'
-  },
-  {
-    title: 'Vida social com os amigos de altas habilidades',
-    desc: 'Num momento mais estável como este, pode ser um bom momento pra reativar contato com esse grupo específico, se fazia tempo.',
-    tag: 'Pilar: vida social (altas habilidades)'
   }
 ];
 const priorityList = document.getElementById('priority-list');
