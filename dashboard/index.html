@@ -528,7 +528,10 @@ const checkins = [
     observacoes: 'Cansaço acumulado — bem organizado até anteontem, de ontem pra hoje mais cansado e com dificuldade. Grana no radar de estresse, projetos estagnados, desmotivação. Ainda sem balança.' },
   { date: '2026-09-29', circunferencia_abdominal_cm: 94.7, horas_cardio: 30, horas_forca: 0,
     episodios_descontrole_alimentar: 4, humor: -1,
-    observacoes: 'Ansiedade por paquera consentida fora do casamento — expectativa/frustração, sentimentos de rejeição ligados a dor antiga e desajuste social em conquista. Carência sexual e afetiva forte; distância física e indisponibilidade emocional da esposa (em depressão). Positivo: reconectou com amigo de altas habilidades, álcool sob controle, açúcar moderado. Ainda sem balança.' }
+    observacoes: 'Ansiedade por paquera consentida fora do casamento — expectativa/frustração, sentimentos de rejeição ligados a dor antiga e desajuste social em conquista. Carência sexual e afetiva forte; distância física e indisponibilidade emocional da esposa (em depressão). Positivo: reconectou com amigo de altas habilidades, álcool sob controle, açúcar moderado. Ainda sem balança.' },
+  { date: '2026-10-06', circunferencia_abdominal_cm: 95.3, horas_cardio: 32, horas_forca: 0,
+    episodios_descontrole_alimentar: 3, humor: -2,
+    observacoes: 'Libido intensa; rejeição repetida (mulheres e acompanhantes, ambos ignorados). Esposa indisponível, tomada pelo cuidado das crianças. Sono muito ruim apesar dos cuidados mantidos — acorda a noite inteira, exausto ao levantar. Episódio de autoagressão (bateu no rosto ~10x) com sensação de alívio depois. Orientado a contatar o profissional de saúde mental esta semana. Ainda sem balança.' }
 ];
 
 // ---------- Helpers ----------
@@ -783,21 +786,20 @@ document.getElementById('chart-sub').textContent = `${bio.length} registro(s) de
 // ---------- Leitura integrada (texto) ----------
 const readingCard = document.getElementById('reading-card');
 readingCard.innerHTML = `
-  <span class="card-label">Check-in de 29/09 (sem bioimpedância — ainda em viagem)</span>
-  <p><strong>Circunferência segue caindo</strong> (94,7cm, quarta semana em queda desde 97) com cardio ainda em 30h —
-  quarto check-in seguido de volume altíssimo. Sem bioimpedância pra confirmar, mas essa sustentação de esforço físico
-  tão alto por um mês merece atenção própria (risco de desgaste/lesão), independente do que mais está acontecendo.</p>
-  <p><strong>Descontroles alimentares em alta clara: 1 → 3 → 4</strong> nas últimas três semanas — mais coerente com
-  acúmulo emocional do que com disciplina alimentar.</p>
-  <p><strong>Humor -1</strong>, com uma combinação pesada por trás: ansiedade sobre um relacionamento paralelo
-  consentido pela esposa, sentimentos de rejeição que reabriram dor antiga, e a sensação de "desajuste social" em
-  processos de conquista. Vale nomear com cuidado: essa reação intensa à rejeição é um padrão bem descrito em TDAH
-  (às vezes chamado de disforia sensível à rejeição) — não fecha diagnóstico, mas é uma lente que pode ajudar o
-  profissional a entender a intensidade do que você sentiu. Some a isso a carência física/afetiva forte e a
-  indisponibilidade emocional da esposa nesse momento (ela mesma em processo depressivo) — é uma sobrecarga real, não
-  fraqueza.</p>
-  <p>Mesmo assim: reconectou com o amigo de altas habilidades, manteve álcool sob controle e açúcar moderado. Os
-  pilares que dependem de escolha ativa continuam de pé mesmo com a carga emocional alta — isso importa.</p>
+  <span class="card-label">Check-in de 06/10 (sem bioimpedância — ainda em viagem)</span>
+  <p><strong>O ponto mais importante desta semana não é um número: foi um episódio de autoagressão</strong> (bateu no
+  próprio rosto repetidamente num momento de dor emocional fora de controle, com sensação de alívio depois). Isso já
+  foi nomeado diretamente na conversa, com orientação de contatar o profissional de saúde mental antes do próximo
+  check-in — registrando aqui para que fique no histórico, não para repetir o alerta.</p>
+  <p><strong>Sono muito ruim mesmo com os cuidados certos sendo feitos</strong> (sem tela, dormir cedo, melatonina) —
+  isso é um dado relevante por si só: quando a higiene do sono padrão não resolve, o problema pode não ser hábito, e
+  vale avaliação específica com o profissional, não mais ajustes de rotina por conta própria.</p>
+  <p><strong>Rejeição se repetiu</strong> (abordagens e contatos ignorados) na semana seguinte à rejeição relatada
+  antes — e o humor caiu de -1 pra <strong>-2</strong>, segunda semana seguida piorando. Isso reforça o padrão já
+  observado de reação intensa à rejeição. A esposa seguiu indisponível, desta vez por estar tomada pelo cuidado das
+  crianças — ou seja, duas semanas seguidas sem essa rede de apoio específica, por motivos diferentes.</p>
+  <p>Cardio seguiu altíssimo (32h, quinta semana em volume muito alto) e circunferência subiu levemente (95,3cm) —
+  secundário diante do resto desta semana.</p>
 `;
 
 // ---------- Tendência de longo prazo ----------
@@ -824,6 +826,9 @@ trendCard.innerHTML = `
   <p>${trendText(bio.map(r => ({ date: r.date, value: r.peso_kg })), 'Peso', 'kg', 1)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.circunferencia_abdominal_cm })), 'Circunferência abdominal', 'cm', 0)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.humor })), 'Humor', ' pontos', 1)}</p>
+  <p style="color:var(--critical)"><strong>Atenção de curto prazo:</strong> últimas duas semanas o humor caiu de forma
+  seguida (0 → -1 → -2), com episódio de autoagressão relatado em 06/10. Já orientado a buscar o profissional de
+  saúde mental esta semana — este texto registra o padrão, não substitui esse contato.</p>
   <p style="font-size:12.5px;color:var(--ink-muted)">Referência de base (${b ? b.idade_real : '—'} anos, ${b ? b.altura_cm : '—'}cm):
   idade metabólica ${b ? b.idade_metabolica : '—'} vs. idade real ${b ? b.idade_real : '—'} — vale acompanhar se essa
   diferença fecha ao longo do tempo.</p>
@@ -832,24 +837,24 @@ trendCard.innerHTML = `
 // ---------- Prioridades da semana ----------
 const priorities = [
   {
-    title: 'Levar o padrão de reação à rejeição ao profissional',
-    desc: 'A intensidade dessa semana — rejeição reabrindo dor antiga, sensação de desajuste social — combina com disforia sensível à rejeição, um padrão comum em TDAH. Vale citar como dado concreto na próxima consulta, não como conclusão fechada.',
+    title: 'Contatar o profissional de saúde mental esta semana',
+    desc: 'O episódio de autoagressão não espera a próxima consulta agendada. Isso vem antes de qualquer outra prioridade desta lista.',
+    tag: 'Prioridade de segurança — não é opcional'
+  },
+  {
+    title: 'Sono: pedir avaliação específica, não mais ajustes sozinho',
+    desc: 'Você já está fazendo o que é recomendado (sem tela, dormir cedo, melatonina) e ainda assim dorme mal. Isso é informação clínica — vale levar exatamente assim ao profissional, como um sintoma que não respondeu ao manejo padrão.',
+    tag: 'Pilar: sono'
+  },
+  {
+    title: 'Reconhecer o padrão de rejeição se repetindo',
+    desc: 'Duas semanas seguidas com rejeição e queda de humor. Não é pra evitar se aproximar de pessoas — é mais um dado concreto pro profissional sobre a intensidade dessa reação.',
     tag: 'Registro para acompanhamento, sem diagnóstico'
   },
   {
-    title: 'Não deixar o apoio emocional depender de uma fonte só',
-    desc: 'A esposa está indisponível emocionalmente agora por conta do próprio processo dela — isso não é rejeição a você, é ela lidando com o que é dela. O amigo de altas habilidades que você reconectou pode ser um canal a mais; vale considerar também apoio terapêutico próprio se ainda não tiver.',
+    title: 'Buscar apoio que não dependa só da esposa neste momento',
+    desc: 'Duas semanas seguidas ela indisponível, por motivos diferentes e legítimos dela. Não é sobre cobrar dela — é sobre ter mais de uma pessoa ou canal pra se apoiar enquanto isso.',
     tag: 'Pilar: vida social · saúde emocional'
-  },
-  {
-    title: 'Observar os descontroles como termômetro, não como alvo',
-    desc: 'Terceira semana seguida em alta (1→3→4). Faz mais sentido tratar como sinal do acúmulo emocional do que tentar corrigir a alimentação diretamente agora.',
-    tag: 'Observação, sem ação corretiva'
-  },
-  {
-    title: 'Reconhecer o que se sustentou mesmo nessa semana pesada',
-    desc: 'Álcool controlado, açúcar moderado, reconexão social — os pilares que dependem de escolha ativa continuaram de pé sob bastante carga emocional. Vale notar isso, não só o que doeu.',
-    tag: 'Reconhecimento, sem ação corretiva'
   }
 ];
 const priorityList = document.getElementById('priority-list');
