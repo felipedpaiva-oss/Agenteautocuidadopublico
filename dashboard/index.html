@@ -539,7 +539,7 @@ const checkins = [
     observacoes: 'Libido intensa; rejeição repetida (mulheres e acompanhantes, ambos ignorados). Esposa indisponível, tomada pelo cuidado das crianças. Sono muito ruim apesar dos cuidados mantidos — acorda a noite inteira, exausto ao levantar. Episódio de autoagressão (bateu no rosto ~10x) com sensação de alívio depois. Orientado a contatar o profissional de saúde mental esta semana. Ainda sem balança.' },
   { date: '2026-10-14', circunferencia_abdominal_cm: 95, horas_cardio: 20, horas_forca: 0,
     episodios_descontrole_alimentar: 7, humor: -1,
-    observacoes: 'Última viagem da temporada. Dois casos médicos com clientes, um grave (fratura, hospital, retorno antecipado). Cansaço acumulado, sono não-revigorante mesmo com cuidados corretos. Ansiedade de voltar pra casa: sem dinheiro nem trabalho por 5 meses até a próxima temporada, mais prova da esposa que decidirá onde vão morar (possível volta à Itália). Bioimpedância de volta após 6 semanas.' }
+    observacoes: 'Última viagem da temporada. Dois casos médicos com clientes, um grave (fratura, hospital, retorno antecipado). Cansaço acumulado, sono não-revigorante mesmo com cuidados corretos. Ansiedade de voltar pra casa: sem dinheiro nem trabalho por 5 meses até a próxima temporada, mais prova da esposa que decidirá onde vão morar (possível volta à Itália). Bioimpedância de volta após 6 semanas. [Follow-up] Falou do episódio de autoagressão com a psicóloga. Psiquiatra já tinha pedido polissonografia — está sendo agendada.' }
 ];
 
 // ---------- Helpers ----------
@@ -835,10 +835,10 @@ trendCard.innerHTML = `
   <p>${trendText(bio.map(r => ({ date: r.date, value: r.peso_kg })), 'Peso', 'kg', 1)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.circunferencia_abdominal_cm })), 'Circunferência abdominal', 'cm', 0)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.humor })), 'Humor', ' pontos', 1)}</p>
-  <p style="color:var(--warning)"><strong>Acompanhamento em curso:</strong> humor em território negativo há três
-  semanas seguidas (-1 → -2 → -1), incluindo o episódio de autoagressão relatado em 06/10. Leve melhora nesta semana,
-  mas ainda não voltou a estável — segue valendo o contato com o profissional de saúde mental se ainda não tiver
-  acontecido.</p>
+  <p style="color:var(--good)"><strong>Acompanhamento em curso:</strong> humor em território negativo há três
+  semanas seguidas (-1 → -2 → -1), incluindo o episódio de autoagressão relatado em 06/10. Já foi levado à psicóloga
+  e a polissonografia pedida pela psiquiatra (investigando o sono não-revigorante) está sendo agendada — os dois
+  pontos seguem com acompanhamento profissional ativo.</p>
   <p style="font-size:12.5px;color:var(--ink-muted)">Referência de base (${b ? b.idade_real : '—'} anos, ${b ? b.altura_cm : '—'}cm):
   idade metabólica ${b ? b.idade_metabolica : '—'} vs. idade real ${b ? b.idade_real : '—'} — vale acompanhar se essa
   diferença fecha ao longo do tempo.</p>
@@ -847,9 +847,9 @@ trendCard.innerHTML = `
 // ---------- Prioridades da semana ----------
 const priorities = [
   {
-    title: 'Sono: segunda semana seguida não-revigorante mesmo com cuidados certos',
-    desc: 'Já era pra ter sido levado ao profissional na semana passada. Se ainda não foi, isso continua sendo prioridade — dois registros seguidos do mesmo padrão é mais força de dado clínico, não menos.',
-    tag: 'Pilar: sono — acompanhamento pendente'
+    title: 'Sono: polissonografia a caminho',
+    desc: 'Já pedida pela psiquiatra e sendo agendada — é exatamente a avaliação específica que fazia sentido depois de duas semanas seguidas de sono não-revigorante. Só falta concluir o agendamento.',
+    tag: 'Pilar: sono — em andamento'
   },
   {
     title: 'Nomear o fim de temporada como estresse estrutural, não só desta semana',
