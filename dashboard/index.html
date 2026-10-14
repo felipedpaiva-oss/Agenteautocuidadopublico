@@ -484,7 +484,12 @@ const bio = [
     massa_muscular_esqueletica_pct: 38.3, massa_muscular_esqueletica_kg: 33.9,
     massa_muscular_pct: 70.3, massa_muscular_kg: 62.3, agua_pct: 52.3, agua_kg: 46.3,
     gordura_visceral: 15.0, ossos_kg: 3.58, metabolismo_kcal: 1857, proteina_pct: 18.0,
-    obesidade_pct: 22.9, idade_metabolica: 45, lbm_kg: 65.86, idade_real: 37, altura_cm: 183 }
+    obesidade_pct: 22.9, idade_metabolica: 45, lbm_kg: 65.86, idade_real: 37, altura_cm: 183 },
+  { date: '2026-10-14', peso_kg: 89.1, imc: 26.6, gordura_pct: 25.9, peso_gordura_kg: 23.1,
+    massa_muscular_esqueletica_pct: 38.2, massa_muscular_esqueletica_kg: 34.0,
+    massa_muscular_pct: 70.1, massa_muscular_kg: 62.5, agua_pct: 52.2, agua_kg: 46.5,
+    gordura_visceral: 15.0, ossos_kg: 3.57, metabolismo_kcal: 1863, proteina_pct: 17.9,
+    obesidade_pct: 23.6, idade_metabolica: 45, lbm_kg: 66.05, idade_real: 37, altura_cm: 183 }
 ];
 
 const checkins = [
@@ -531,7 +536,10 @@ const checkins = [
     observacoes: 'Ansiedade por paquera consentida fora do casamento — expectativa/frustração, sentimentos de rejeição ligados a dor antiga e desajuste social em conquista. Carência sexual e afetiva forte; distância física e indisponibilidade emocional da esposa (em depressão). Positivo: reconectou com amigo de altas habilidades, álcool sob controle, açúcar moderado. Ainda sem balança.' },
   { date: '2026-10-06', circunferencia_abdominal_cm: 95.3, horas_cardio: 32, horas_forca: 0,
     episodios_descontrole_alimentar: 3, humor: -2,
-    observacoes: 'Libido intensa; rejeição repetida (mulheres e acompanhantes, ambos ignorados). Esposa indisponível, tomada pelo cuidado das crianças. Sono muito ruim apesar dos cuidados mantidos — acorda a noite inteira, exausto ao levantar. Episódio de autoagressão (bateu no rosto ~10x) com sensação de alívio depois. Orientado a contatar o profissional de saúde mental esta semana. Ainda sem balança.' }
+    observacoes: 'Libido intensa; rejeição repetida (mulheres e acompanhantes, ambos ignorados). Esposa indisponível, tomada pelo cuidado das crianças. Sono muito ruim apesar dos cuidados mantidos — acorda a noite inteira, exausto ao levantar. Episódio de autoagressão (bateu no rosto ~10x) com sensação de alívio depois. Orientado a contatar o profissional de saúde mental esta semana. Ainda sem balança.' },
+  { date: '2026-10-14', circunferencia_abdominal_cm: 95, horas_cardio: 20, horas_forca: 0,
+    episodios_descontrole_alimentar: 7, humor: -1,
+    observacoes: 'Última viagem da temporada. Dois casos médicos com clientes, um grave (fratura, hospital, retorno antecipado). Cansaço acumulado, sono não-revigorante mesmo com cuidados corretos. Ansiedade de voltar pra casa: sem dinheiro nem trabalho por 5 meses até a próxima temporada, mais prova da esposa que decidirá onde vão morar (possível volta à Itália). Bioimpedância de volta após 6 semanas.' }
 ];
 
 // ---------- Helpers ----------
@@ -786,20 +794,21 @@ document.getElementById('chart-sub').textContent = `${bio.length} registro(s) de
 // ---------- Leitura integrada (texto) ----------
 const readingCard = document.getElementById('reading-card');
 readingCard.innerHTML = `
-  <span class="card-label">Check-in de 06/10 (sem bioimpedância — ainda em viagem)</span>
-  <p><strong>O ponto mais importante desta semana não é um número: foi um episódio de autoagressão</strong> (bateu no
-  próprio rosto repetidamente num momento de dor emocional fora de controle, com sensação de alívio depois). Isso já
-  foi nomeado diretamente na conversa, com orientação de contatar o profissional de saúde mental antes do próximo
-  check-in — registrando aqui para que fique no histórico, não para repetir o alerta.</p>
-  <p><strong>Sono muito ruim mesmo com os cuidados certos sendo feitos</strong> (sem tela, dormir cedo, melatonina) —
-  isso é um dado relevante por si só: quando a higiene do sono padrão não resolve, o problema pode não ser hábito, e
-  vale avaliação específica com o profissional, não mais ajustes de rotina por conta própria.</p>
-  <p><strong>Rejeição se repetiu</strong> (abordagens e contatos ignorados) na semana seguinte à rejeição relatada
-  antes — e o humor caiu de -1 pra <strong>-2</strong>, segunda semana seguida piorando. Isso reforça o padrão já
-  observado de reação intensa à rejeição. A esposa seguiu indisponível, desta vez por estar tomada pelo cuidado das
-  crianças — ou seja, duas semanas seguidas sem essa rede de apoio específica, por motivos diferentes.</p>
-  <p>Cardio seguiu altíssimo (32h, quinta semana em volume muito alto) e circunferência subiu levemente (95,3cm) —
-  secundário diante do resto desta semana.</p>
+  <span class="card-label">Check-in de 14/10 — bioimpedância de volta após 6 semanas</span>
+  <p><strong>Peso 89,1kg e gordura visceral em 15,0</strong> — essencialmente estável desde 19/08 e 01/09 (variando
+  entre 15,0 e 15,5 há dois meses, sem mudar de faixa). Circunferência também estável (95cm, igual à semana passada).
+  Cardio caiu pra 20h com o fim da temporada de viagem — ainda alto, mas primeira queda depois de 5 semanas em 25-32h.</p>
+  <p><strong>Descontroles alimentares saltaram pra 7</strong> — o maior número já registrado, bem acima dos 3-4 das
+  últimas semanas. Faz sentido: nesta semana convergiram uma emergência médica grave com um cliente (fratura, hospital
+  — isso também pesa emocionalmente em quem presencia, não só em quem se machucou), o fim abrupto da temporada de
+  trabalho, e a ansiedade de voltar pra uma realidade financeira apertada sem renda prevista por 5 meses. Não é sobre
+  disciplina alimentar, é volume de estresse acumulado batendo de uma vez.</p>
+  <p><strong>Sono não-revigorante aparece de novo</strong>, mesmo mês passado já tendo sido registrado apesar dos
+  cuidados corretos — duas semanas seguidas com o mesmo relato reforça que vale uma avaliação específica com o
+  profissional, não mais ajuste de rotina.</p>
+  <p>Humor -1: ainda negativo, mas melhor que o -2 da semana passada. Terceira semana seguida em território negativo
+  (-1, -2, -1) — não é um pico isolado, é uma fase que já dura um tempo, com causas bem concretas por trás (trabalho,
+  dinheiro, moradia incerta incluindo possível mudança de país).</p>
 `;
 
 // ---------- Tendência de longo prazo ----------
@@ -826,9 +835,10 @@ trendCard.innerHTML = `
   <p>${trendText(bio.map(r => ({ date: r.date, value: r.peso_kg })), 'Peso', 'kg', 1)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.circunferencia_abdominal_cm })), 'Circunferência abdominal', 'cm', 0)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.humor })), 'Humor', ' pontos', 1)}</p>
-  <p style="color:var(--critical)"><strong>Atenção de curto prazo:</strong> últimas duas semanas o humor caiu de forma
-  seguida (0 → -1 → -2), com episódio de autoagressão relatado em 06/10. Já orientado a buscar o profissional de
-  saúde mental esta semana — este texto registra o padrão, não substitui esse contato.</p>
+  <p style="color:var(--warning)"><strong>Acompanhamento em curso:</strong> humor em território negativo há três
+  semanas seguidas (-1 → -2 → -1), incluindo o episódio de autoagressão relatado em 06/10. Leve melhora nesta semana,
+  mas ainda não voltou a estável — segue valendo o contato com o profissional de saúde mental se ainda não tiver
+  acontecido.</p>
   <p style="font-size:12.5px;color:var(--ink-muted)">Referência de base (${b ? b.idade_real : '—'} anos, ${b ? b.altura_cm : '—'}cm):
   idade metabólica ${b ? b.idade_metabolica : '—'} vs. idade real ${b ? b.idade_real : '—'} — vale acompanhar se essa
   diferença fecha ao longo do tempo.</p>
@@ -837,24 +847,24 @@ trendCard.innerHTML = `
 // ---------- Prioridades da semana ----------
 const priorities = [
   {
-    title: 'Contatar o profissional de saúde mental esta semana',
-    desc: 'O episódio de autoagressão não espera a próxima consulta agendada. Isso vem antes de qualquer outra prioridade desta lista.',
-    tag: 'Prioridade de segurança — não é opcional'
+    title: 'Sono: segunda semana seguida não-revigorante mesmo com cuidados certos',
+    desc: 'Já era pra ter sido levado ao profissional na semana passada. Se ainda não foi, isso continua sendo prioridade — dois registros seguidos do mesmo padrão é mais força de dado clínico, não menos.',
+    tag: 'Pilar: sono — acompanhamento pendente'
   },
   {
-    title: 'Sono: pedir avaliação específica, não mais ajustes sozinho',
-    desc: 'Você já está fazendo o que é recomendado (sem tela, dormir cedo, melatonina) e ainda assim dorme mal. Isso é informação clínica — vale levar exatamente assim ao profissional, como um sintoma que não respondeu ao manejo padrão.',
-    tag: 'Pilar: sono'
+    title: 'Nomear o fim de temporada como estresse estrutural, não só desta semana',
+    desc: '5 meses sem renda prevista é um padrão que provavelmente se repete todo ano nesse ritmo de trabalho sazonal. Vale começar a pensar nisso como ciclo previsível (o que ajuda a planejar) e não só como crise pontual.',
+    tag: 'Pilar: foco em metas pessoais'
   },
   {
-    title: 'Reconhecer o padrão de rejeição se repetindo',
-    desc: 'Duas semanas seguidas com rejeição e queda de humor. Não é pra evitar se aproximar de pessoas — é mais um dado concreto pro profissional sobre a intensidade dessa reação.',
-    tag: 'Registro para acompanhamento, sem diagnóstico'
+    title: 'Descontroles alimentares: pico isolado, não novo patamar',
+    desc: '7 nesta semana é bem acima do normal recente, mas com uma emergência médica grave presenciada, fim de temporada e ansiedade financeira tudo junto, é esperado. Vale comparar com a próxima semana antes de tratar como tendência.',
+    tag: 'Observação, sem ação corretiva'
   },
   {
-    title: 'Buscar apoio que não dependa só da esposa neste momento',
-    desc: 'Duas semanas seguidas ela indisponível, por motivos diferentes e legítimos dela. Não é sobre cobrar dela — é sobre ter mais de uma pessoa ou canal pra se apoiar enquanto isso.',
-    tag: 'Pilar: vida social · saúde emocional'
+    title: 'Dar espaço pro impacto de ter presenciado a emergência médica',
+    desc: 'Ver um cliente se machucar gravemente (fratura, hospital) também deixa marca em quem estava perto, mesmo sem ser o machucado. Vale notar isso como evento próprio, não só como "mais uma coisa que aconteceu no trabalho".',
+    tag: 'Observação, sem ação corretiva'
   }
 ];
 const priorityList = document.getElementById('priority-list');
