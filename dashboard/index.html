@@ -489,7 +489,12 @@ const bio = [
     massa_muscular_esqueletica_pct: 38.2, massa_muscular_esqueletica_kg: 34.0,
     massa_muscular_pct: 70.1, massa_muscular_kg: 62.5, agua_pct: 52.2, agua_kg: 46.5,
     gordura_visceral: 15.0, ossos_kg: 3.57, metabolismo_kcal: 1863, proteina_pct: 17.9,
-    obesidade_pct: 23.6, idade_metabolica: 45, lbm_kg: 66.05, idade_real: 37, altura_cm: 183 }
+    obesidade_pct: 23.6, idade_metabolica: 45, lbm_kg: 66.05, idade_real: 37, altura_cm: 183 },
+  { date: '2026-10-20', peso_kg: 89.2, imc: 26.6, gordura_pct: 25.9, peso_gordura_kg: 23.1,
+    massa_muscular_esqueletica_pct: 38.2, massa_muscular_esqueletica_kg: 34.1,
+    massa_muscular_pct: 70.1, massa_muscular_kg: 62.5, agua_pct: 52.2, agua_kg: 46.5,
+    gordura_visceral: 15.0, ossos_kg: 3.57, metabolismo_kcal: 1864, proteina_pct: 17.9,
+    obesidade_pct: 23.7, idade_metabolica: 45, lbm_kg: 66.09, idade_real: 37, altura_cm: 183 }
 ];
 
 const checkins = [
@@ -556,6 +561,31 @@ const DAY = 86400000;
 function scale(domain, range) {
   const [d0, d1] = domain, [r0, r1] = range;
   return v => d1 === d0 ? (r0 + r1) / 2 : r0 + (v - d0) * (r1 - r0) / (d1 - d0);
+}
+
+// "Nice" round-number ticks (classic Heckbert algorithm) so gridlines land
+// exactly on the value their label shows, instead of on an arbitrary fraction
+// of the padded range.
+function niceNum(range, round) {
+  const exponent = Math.floor(Math.log10(range));
+  const fraction = range / Math.pow(10, exponent);
+  let niceFraction;
+  if (round) {
+    niceFraction = fraction < 1.5 ? 1 : fraction < 3 ? 2 : fraction < 7 ? 5 : 10;
+  } else {
+    niceFraction = fraction <= 1 ? 1 : fraction <= 2 ? 2 : fraction <= 5 ? 5 : 10;
+  }
+  return niceFraction * Math.pow(10, exponent);
+}
+function niceTicks(min, max, maxTicks) {
+  if (min === max) { min -= 1; max += 1; }
+  const range = niceNum(max - min, false);
+  const step = niceNum(range / (maxTicks - 1), true);
+  const niceMin = Math.floor(min / step) * step;
+  const niceMax = Math.ceil(max / step) * step;
+  const ticks = [];
+  for (let v = niceMin; v <= niceMax + step / 2; v += step) ticks.push(+v.toFixed(6));
+  return { min: niceMin, max: niceMax, ticks };
 }
 
 function last(arr) { return arr.length ? arr[arr.length - 1] : null; }
@@ -634,20 +664,18 @@ function drawSeriesChart({ title, points, color, softColor, unit, decimals = 1, 
 
   const dates = points.map(p => parseD(p.date).getTime());
   const values = points.flatMap(p => secondary ? [p.value, p.value2] : [p.value]).filter(v => v != null);
-  let yMin = Math.min(...values), yMax = Math.max(...values);
-  if (yMin === yMax) { yMin -= 1; yMax += 1; }
-  const pad = (yMax - yMin) * 0.15;
-  yMin -= pad; yMax += pad;
+  const rawMin = Math.min(...values), rawMax = Math.max(...values);
+  const { min: yMin, max: yMax, ticks: gridYs } = niceTicks(rawMin, rawMax, 4);
 
   const singlePoint = points.length === 1;
   const xDomain = singlePoint ? [dates[0] - DAY * 3, dates[0] + DAY * 3] : [Math.min(...dates), Math.max(...dates)];
   const x = scale(xDomain, [M.l, M.l + plotW]);
   const y = scale([yMin, yMax], [M.t + plotH, M.t]);
 
-  const gridYs = [yMin + (yMax - yMin) * 0.25, yMin + (yMax - yMin) * 0.5, yMin + (yMax - yMin) * 0.75];
   let svg = `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">`;
   gridYs.forEach(gy => {
-    svg += `<line class="grid-line" x1="${M.l}" x2="${M.l + plotW}" y1="${y(gy)}" y2="${y(gy)}" />`;
+    const isEdge = gy <= yMin + 1e-9 || gy >= yMax - 1e-9;
+    if (!isEdge) svg += `<line class="grid-line" x1="${M.l}" x2="${M.l + plotW}" y1="${y(gy)}" y2="${y(gy)}" />`;
     svg += `<text class="axis-label" x="${M.l - 8}" y="${y(gy) + 3}" text-anchor="end">${fmt(gy, decimals)}</text>`;
   });
 
