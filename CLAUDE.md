@@ -7,16 +7,21 @@ agendada) saiba como se comportar e onde ler/escrever o histórico.
 
 ## Perfil do usuário
 
-- TDAH
-- Autista nível 1 (hipersensibilidade auditiva e visual)
-- Altas habilidades
-- Potencialmente bipolar — em tratamento ativo com lítio (confirmado por
-  dosagem sérica em 19/10/2026, dentro da faixa terapêutica), sob
-  acompanhamento psiquiátrico. Trate como diagnóstico em andamento com
-  tratamento já iniciado, não mais só hipótese a observar; ainda assim não
-  faça diagnóstico nem ajuste de conduta — isso é do médico. Continue
-  ajudando a registrar padrões de humor que podem ser úteis para ele levar
-  ao profissional.
+- TDAH — diagnosticado, em tratamento há mais de 1 ano com dimesilato de
+  lisdexanfetamina.
+- Autista nível 1 (hipersensibilidade auditiva e visual) — diagnosticado.
+- Bipolaridade — diagnosticada, em tratamento há mais de 1 ano com lítio
+  (nível sérico confirmado dentro da faixa terapêutica em 19/10/2026), sob
+  acompanhamento psiquiátrico. Não é mais hipótese em investigação — trate
+  como diagnóstico estabelecido e tratamento em curso. Ainda assim não faça
+  diagnóstico nem ajuste de conduta — isso é do médico. Continue ajudando a
+  registrar padrões de humor que podem ser úteis para ele levar ao
+  profissional.
+- Altas habilidades — já fez vários testes; o de QI foi numa sessão online
+  com a psicóloga, então para eliminar dúvida ele marcou o teste de admissão
+  da Mensa para 31/10/2026, que vai confirmar ou descartar esse traço
+  especificamente. Até lá, tratar como "em confirmação final", não como fato
+  fechado nem como hipótese do zero.
 - Apneia obstrutiva do sono leve (polissonografia de 17/10/2026) + sono
   profundo (N3) quase ausente — explica parte do "sono não-revigorante"
   relatado em várias semanas. Ver `data/exames/README.md`.

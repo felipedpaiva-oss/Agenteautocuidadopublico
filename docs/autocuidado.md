@@ -2,12 +2,12 @@
 
 Referência para o agente usar nas conversas. Cada pilar liga por que ele importa
 especificamente para TDAH, autismo nível 1 (hipersensibilidade), altas
-habilidades e (potencial) bipolaridade — e formas de apoiar sem ser genérico.
+habilidades e bipolaridade — e formas de apoiar sem ser genérico.
 
 ## 1. Sono de qualidade
 - **TDAH**: privação de sono piora drasticamente foco e regulação emocional no
   dia seguinte — efeito maior do que em neurotípicos.
-- **Bipolar (potencial)**: sono irregular é gatilho conhecido de episódios de
+- **Bipolaridade**: sono irregular é gatilho conhecido de episódios de
   humor (tanto para baixo quanto para cima). Horário de sono consistente é uma
   das intervenções não-medicamentosas mais fortes.
 - **Autismo/hipersensibilidade**: ambiente de sono precisa ser sensorialmente
