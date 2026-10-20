@@ -539,7 +539,10 @@ const checkins = [
     observacoes: 'Libido intensa; rejeição repetida (mulheres e acompanhantes, ambos ignorados). Esposa indisponível, tomada pelo cuidado das crianças. Sono muito ruim apesar dos cuidados mantidos — acorda a noite inteira, exausto ao levantar. Episódio de autoagressão (bateu no rosto ~10x) com sensação de alívio depois. Orientado a contatar o profissional de saúde mental esta semana. Ainda sem balança.' },
   { date: '2026-10-14', circunferencia_abdominal_cm: 95, horas_cardio: 20, horas_forca: 0,
     episodios_descontrole_alimentar: 7, humor: -1,
-    observacoes: 'Última viagem da temporada. Dois casos médicos com clientes, um grave (fratura, hospital, retorno antecipado). Cansaço acumulado, sono não-revigorante mesmo com cuidados corretos. Ansiedade de voltar pra casa: sem dinheiro nem trabalho por 5 meses até a próxima temporada, mais prova da esposa que decidirá onde vão morar (possível volta à Itália). Bioimpedância de volta após 6 semanas. [Follow-up] Falou do episódio de autoagressão com a psicóloga. Psiquiatra já tinha pedido polissonografia — está sendo agendada.' }
+    observacoes: 'Última viagem da temporada. Dois casos médicos com clientes, um grave (fratura, hospital, retorno antecipado). Cansaço acumulado, sono não-revigorante mesmo com cuidados corretos. Ansiedade de voltar pra casa: sem dinheiro nem trabalho por 5 meses até a próxima temporada, mais prova da esposa que decidirá onde vão morar (possível volta à Itália). Bioimpedância de volta após 6 semanas. [Follow-up] Falou do episódio de autoagressão com a psicóloga. Psiquiatra já tinha pedido polissonografia — está sendo agendada.' },
+  { date: '2026-10-20', circunferencia_abdominal_cm: 95.8, horas_cardio: 1, horas_forca: 0,
+    episodios_descontrole_alimentar: 3, humor: -2,
+    observacoes: 'Fim da temporada de viagem. Depressão, pouca força pra sair da cama, fazendo o mínimo. Dúvida sobre ficar no Brasil ou mudar pra Itália; sem dinheiro e sem trabalho. Positivo: reconectou com esposa e filhas. Exames da psiquiatra: polissonografia mostrou apneia leve + sono profundo quase ausente; sangue normal (hemograma, tireoide, B12, vit. D, renal); lítio na faixa terapêutica — confirma tratamento medicamentoso em curso. Consulta semana que vem para discutir.' }
 ];
 
 // ---------- Helpers ----------
@@ -794,21 +797,19 @@ document.getElementById('chart-sub').textContent = `${bio.length} registro(s) de
 // ---------- Leitura integrada (texto) ----------
 const readingCard = document.getElementById('reading-card');
 readingCard.innerHTML = `
-  <span class="card-label">Check-in de 14/10 — bioimpedância de volta após 6 semanas</span>
-  <p><strong>Peso 89,1kg e gordura visceral em 15,0</strong> — essencialmente estável desde 19/08 e 01/09 (variando
-  entre 15,0 e 15,5 há dois meses, sem mudar de faixa). Circunferência também estável (95cm, igual à semana passada).
-  Cardio caiu pra 20h com o fim da temporada de viagem — ainda alto, mas primeira queda depois de 5 semanas em 25-32h.</p>
-  <p><strong>Descontroles alimentares saltaram pra 7</strong> — o maior número já registrado, bem acima dos 3-4 das
-  últimas semanas. Faz sentido: nesta semana convergiram uma emergência médica grave com um cliente (fratura, hospital
-  — isso também pesa emocionalmente em quem presencia, não só em quem se machucou), o fim abrupto da temporada de
-  trabalho, e a ansiedade de voltar pra uma realidade financeira apertada sem renda prevista por 5 meses. Não é sobre
-  disciplina alimentar, é volume de estresse acumulado batendo de uma vez.</p>
-  <p><strong>Sono não-revigorante aparece de novo</strong>, mesmo mês passado já tendo sido registrado apesar dos
-  cuidados corretos — duas semanas seguidas com o mesmo relato reforça que vale uma avaliação específica com o
-  profissional, não mais ajuste de rotina.</p>
-  <p>Humor -1: ainda negativo, mas melhor que o -2 da semana passada. Terceira semana seguida em território negativo
-  (-1, -2, -1) — não é um pico isolado, é uma fase que já dura um tempo, com causas bem concretas por trás (trabalho,
-  dinheiro, moradia incerta incluindo possível mudança de país).</p>
+  <span class="card-label">Check-in de 20/10 — exames da psiquiatra chegaram</span>
+  <p><strong>Peso e gordura visceral seguem estáveis</strong> (89,2kg, visceral 15,0). Cardio caiu de 20h pra 1h —
+  esperado, a temporada de viagem acabou. Descontroles voltaram ao patamar normal (7 → 3).</p>
+  <p><strong>Os exames trazem clareza real.</strong> Sangue completo (hemograma, tireoide, B12, vitamina D, função
+  renal) veio normal — descarta as causas físicas mais comuns de fadiga crônica. A polissonografia mostrou
+  <strong>apneia obstrutiva leve</strong> e <strong>sono profundo quase ausente</strong>, o que explica bem o "sono
+  que não recupera" relatado em várias semanas. O próprio laudo aponta o peso como o fator mais modificável — o que
+  conecta diretamente com o acompanhamento de bioimpedância que já fazemos aqui. E a dosagem de <strong>lítio dentro
+  da faixa terapêutica confirma tratamento medicamentoso já em curso</strong>: a partir de agora os dados de humor
+  devem ser lidos como alguém em tratamento ativo, não mais em fase de só observar.</p>
+  <p><strong>Humor -2</strong>, com causas diretas e concretas: fim abrupto da temporada de trabalho, pouca energia
+  pra sair da cama, incerteza grande sobre o futuro (país, trabalho, dinheiro). Ao mesmo tempo, reconectar com a
+  esposa e as filhas foi um ponto real de conforto nessa semana difícil.</p>
 `;
 
 // ---------- Tendência de longo prazo ----------
@@ -835,10 +836,11 @@ trendCard.innerHTML = `
   <p>${trendText(bio.map(r => ({ date: r.date, value: r.peso_kg })), 'Peso', 'kg', 1)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.circunferencia_abdominal_cm })), 'Circunferência abdominal', 'cm', 0)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.humor })), 'Humor', ' pontos', 1)}</p>
-  <p style="color:var(--good)"><strong>Acompanhamento em curso:</strong> humor em território negativo há três
-  semanas seguidas (-1 → -2 → -1), incluindo o episódio de autoagressão relatado em 06/10. Já foi levado à psicóloga
-  e a polissonografia pedida pela psiquiatra (investigando o sono não-revigorante) está sendo agendada — os dois
-  pontos seguem com acompanhamento profissional ativo.</p>
+  <p style="color:var(--good)"><strong>Acompanhamento em curso:</strong> humor em território negativo há quatro
+  semanas (-1 → -2 → -1 → -2), incluindo o episódio de autoagressão de 06/10. Exames pedidos pela psiquiatra
+  descartaram causas físicas comuns de fadiga e confirmaram apneia leve + tratamento com lítio já ativo (faixa
+  terapêutica). Consulta com a psiquiatra agendada para a semana que vem, com os exames em mãos — bom momento para
+  discutir diretamente esse padrão de humor.</p>
   <p style="font-size:12.5px;color:var(--ink-muted)">Referência de base (${b ? b.idade_real : '—'} anos, ${b ? b.altura_cm : '—'}cm):
   idade metabólica ${b ? b.idade_metabolica : '—'} vs. idade real ${b ? b.idade_real : '—'} — vale acompanhar se essa
   diferença fecha ao longo do tempo.</p>
@@ -847,24 +849,24 @@ trendCard.innerHTML = `
 // ---------- Prioridades da semana ----------
 const priorities = [
   {
-    title: 'Sono: polissonografia a caminho',
-    desc: 'Já pedida pela psiquiatra e sendo agendada — é exatamente a avaliação específica que fazia sentido depois de duas semanas seguidas de sono não-revigorante. Só falta concluir o agendamento.',
-    tag: 'Pilar: sono — em andamento'
+    title: 'Levar o humor -2 e o contexto atual pra consulta já agendada',
+    desc: 'A psiquiatra vai revisar os exames na semana que vem — ótimo momento pra também falar abertamente do humor baixo e da falta de energia desta semana, não só dos números do laudo.',
+    tag: 'Consulta já marcada — só aproveitar'
   },
   {
-    title: 'Nomear o fim de temporada como estresse estrutural, não só desta semana',
-    desc: '5 meses sem renda prevista é um padrão que provavelmente se repete todo ano nesse ritmo de trabalho sazonal. Vale começar a pensar nisso como ciclo previsível (o que ajuda a planejar) e não só como crise pontual.',
+    title: 'Peso como alavanca real pro sono, não só estética',
+    desc: 'O próprio laudo da polissonografia aponta o peso como o fator mais modificável pra apneia leve. Isso dá um motivo concreto a mais pro acompanhamento de bioimpedância que já existe — não precisa virar pressão extra, só reforça o porquê.',
+    tag: 'Pilar: sono · exercício físico'
+  },
+  {
+    title: 'Não decidir o futuro (país, trabalho) num momento de pouca energia',
+    desc: 'Dúvida sobre Brasil ou Itália é uma decisão grande de verdade — mas tomar ela estando sem força pra sair da cama tende a sair pior. Vale segurar a decisão maior até ter mais estabilidade, e tratar o dinheiro/trabalho como problema a resolver em passos pequenos, não de uma vez.',
     tag: 'Pilar: foco em metas pessoais'
   },
   {
-    title: 'Descontroles alimentares: pico isolado, não novo patamar',
-    desc: '7 nesta semana é bem acima do normal recente, mas com uma emergência médica grave presenciada, fim de temporada e ansiedade financeira tudo junto, é esperado. Vale comparar com a próxima semana antes de tratar como tendência.',
-    tag: 'Observação, sem ação corretiva'
-  },
-  {
-    title: 'Dar espaço pro impacto de ter presenciado a emergência médica',
-    desc: 'Ver um cliente se machucar gravemente (fratura, hospital) também deixa marca em quem estava perto, mesmo sem ser o machucado. Vale notar isso como evento próprio, não só como "mais uma coisa que aconteceu no trabalho".',
-    tag: 'Observação, sem ação corretiva'
+    title: 'Reconhecer a reconexão com a família',
+    desc: 'Numa semana descrita como depressiva, matar a saudade da esposa e brincar com as filhas foi real e importa — vale notar isso como âncora, não só o que doeu.',
+    tag: 'Reconhecimento, sem ação corretiva'
   }
 ];
 const priorityList = document.getElementById('priority-list');

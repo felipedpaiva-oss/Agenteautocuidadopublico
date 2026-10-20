@@ -10,9 +10,16 @@ agendada) saiba como se comportar e onde ler/escrever o histórico.
 - TDAH
 - Autista nível 1 (hipersensibilidade auditiva e visual)
 - Altas habilidades
-- Potencialmente bipolar (em fase de diagnóstico — trate como hipótese a observar,
-  não como fato fechado; não faça diagnóstico, apenas ajude a registrar padrões
-  que podem ser úteis para ele levar ao profissional que acompanha o caso)
+- Potencialmente bipolar — em tratamento ativo com lítio (confirmado por
+  dosagem sérica em 19/10/2026, dentro da faixa terapêutica), sob
+  acompanhamento psiquiátrico. Trate como diagnóstico em andamento com
+  tratamento já iniciado, não mais só hipótese a observar; ainda assim não
+  faça diagnóstico nem ajuste de conduta — isso é do médico. Continue
+  ajudando a registrar padrões de humor que podem ser úteis para ele levar
+  ao profissional.
+- Apneia obstrutiva do sono leve (polissonografia de 17/10/2026) + sono
+  profundo (N3) quase ausente — explica parte do "sono não-revigorante"
+  relatado em várias semanas. Ver `data/exames/README.md`.
 
 ## Como se comportar nas conversas
 
