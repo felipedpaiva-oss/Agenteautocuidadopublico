@@ -494,7 +494,12 @@ const bio = [
     massa_muscular_esqueletica_pct: 38.2, massa_muscular_esqueletica_kg: 34.1,
     massa_muscular_pct: 70.1, massa_muscular_kg: 62.5, agua_pct: 52.2, agua_kg: 46.5,
     gordura_visceral: 15.0, ossos_kg: 3.57, metabolismo_kcal: 1864, proteina_pct: 17.9,
-    obesidade_pct: 23.7, idade_metabolica: 45, lbm_kg: 66.09, idade_real: 37, altura_cm: 183 }
+    obesidade_pct: 23.7, idade_metabolica: 45, lbm_kg: 66.09, idade_real: 37, altura_cm: 183 },
+  { date: '2026-10-27', peso_kg: 89.55, imc: 26.7, gordura_pct: 26.1, peso_gordura_kg: 23.3,
+    massa_muscular_esqueletica_pct: 38.1, massa_muscular_esqueletica_kg: 34.1,
+    massa_muscular_pct: 70.0, massa_muscular_kg: 62.7, agua_pct: 52.1, agua_kg: 46.7,
+    gordura_visceral: 15.0, ossos_kg: 3.52, metabolismo_kcal: 1869, proteina_pct: 17.9,
+    obesidade_pct: 24.2, idade_metabolica: 46, lbm_kg: 66.22, idade_real: 37, altura_cm: 183 }
 ];
 
 const checkins = [
@@ -547,7 +552,10 @@ const checkins = [
     observacoes: 'Última viagem da temporada. Dois casos médicos com clientes, um grave (fratura, hospital, retorno antecipado). Cansaço acumulado, sono não-revigorante mesmo com cuidados corretos. Ansiedade de voltar pra casa: sem dinheiro nem trabalho por 5 meses até a próxima temporada, mais prova da esposa que decidirá onde vão morar (possível volta à Itália). Bioimpedância de volta após 6 semanas. [Follow-up] Falou do episódio de autoagressão com a psicóloga. Psiquiatra já tinha pedido polissonografia — está sendo agendada.' },
   { date: '2026-10-20', circunferencia_abdominal_cm: 95.8, horas_cardio: 1, horas_forca: 0,
     episodios_descontrole_alimentar: 3, humor: -2,
-    observacoes: 'Fim da temporada de viagem. Depressão, pouca força pra sair da cama, fazendo o mínimo. Dúvida sobre ficar no Brasil ou mudar pra Itália; sem dinheiro e sem trabalho. Positivo: reconectou com esposa e filhas. Exames da psiquiatra: polissonografia mostrou apneia leve + sono profundo quase ausente; sangue normal (hemograma, tireoide, B12, vit. D, renal); lítio na faixa terapêutica — confirma tratamento medicamentoso em curso. Consulta semana que vem para discutir.' }
+    observacoes: 'Fim da temporada de viagem. Depressão, pouca força pra sair da cama, fazendo o mínimo. Dúvida sobre ficar no Brasil ou mudar pra Itália; sem dinheiro e sem trabalho. Positivo: reconectou com esposa e filhas. Exames da psiquiatra: polissonografia mostrou apneia leve + sono profundo quase ausente; sangue normal (hemograma, tireoide, B12, vit. D, renal); lítio na faixa terapêutica — confirma tratamento medicamentoso em curso. Consulta semana que vem para discutir.' },
+  { date: '2026-10-27', circunferencia_abdominal_cm: 95, horas_cardio: 2, horas_forca: 0.5,
+    episodios_descontrole_alimentar: 3, humor: -1.5,
+    observacoes: 'Humor variou na semana: -2 na maior parte, subiu pra perto de -1/quase zero de ontem pra hoje, média -1.5. Consulta com a psiquiatra aconteceu: além do lítio e lisdexanfetamina já em uso, ela acrescentou aripiprazol, vitamina B12 e ácido fólico. Já começou a tomar tudo.' }
 ];
 
 // ---------- Helpers ----------
@@ -825,19 +833,17 @@ document.getElementById('chart-sub').textContent = `${bio.length} registro(s) de
 // ---------- Leitura integrada (texto) ----------
 const readingCard = document.getElementById('reading-card');
 readingCard.innerHTML = `
-  <span class="card-label">Check-in de 20/10 — exames da psiquiatra chegaram</span>
-  <p><strong>Peso e gordura visceral seguem estáveis</strong> (89,2kg, visceral 15,0). Cardio caiu de 20h pra 1h —
-  esperado, a temporada de viagem acabou. Descontroles voltaram ao patamar normal (7 → 3).</p>
-  <p><strong>Os exames trazem clareza real.</strong> Sangue completo (hemograma, tireoide, B12, vitamina D, função
-  renal) veio normal — descarta as causas físicas mais comuns de fadiga crônica. A polissonografia mostrou
-  <strong>apneia obstrutiva leve</strong> e <strong>sono profundo quase ausente</strong>, o que explica bem o "sono
-  que não recupera" relatado em várias semanas. O próprio laudo aponta o peso como o fator mais modificável — o que
-  conecta diretamente com o acompanhamento de bioimpedância que já fazemos aqui. E a dosagem de <strong>lítio dentro
-  da faixa terapêutica confirma tratamento medicamentoso já em curso</strong>: a partir de agora os dados de humor
-  devem ser lidos como alguém em tratamento ativo, não mais em fase de só observar.</p>
-  <p><strong>Humor -2</strong>, com causas diretas e concretas: fim abrupto da temporada de trabalho, pouca energia
-  pra sair da cama, incerteza grande sobre o futuro (país, trabalho, dinheiro). Ao mesmo tempo, reconectar com a
-  esposa e as filhas foi um ponto real de conforto nessa semana difícil.</p>
+  <span class="card-label">Check-in de 27/10 — ajuste de medicação após a consulta</span>
+  <p><strong>Peso e gordura visceral seguem estáveis</strong> (89,55kg, visceral 15,0). Circunferência em 95cm.
+  Cardio baixo (2h) mas força apareceu de novo (0,5h) — segunda semana seguida com algum treino, depois de meses
+  praticamente zerado. Descontroles em 3, patamar normal.</p>
+  <p><strong>A consulta com a psiquiatra aconteceu.</strong> Além do lítio e da lisdexanfetamina já em uso há mais de
+  um ano, ela acrescentou <strong>aripiprazol</strong>, vitamina B12 e ácido fólico. É um ajuste de tratamento, não um
+  recomeço — mas início de medicação nova pode trazer flutuação de humor ou efeitos colaterais nas próximas semanas,
+  então vale observar isso nos próximos check-ins sem assumir que é só "a vida acontecendo" de novo.</p>
+  <p><strong>Humor -1,5</strong>: a semana foi majoritariamente -2, com melhora pra perto de -1/quase zero no dia do
+  check-in. Direção é positiva (quarta semana seguida negativa, mas essa é a menos negativa desde o início do
+  período), ainda que não tenha voltado a estável.</p>
 `;
 
 // ---------- Tendência de longo prazo ----------
@@ -864,11 +870,11 @@ trendCard.innerHTML = `
   <p>${trendText(bio.map(r => ({ date: r.date, value: r.peso_kg })), 'Peso', 'kg', 1)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.circunferencia_abdominal_cm })), 'Circunferência abdominal', 'cm', 0)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.humor })), 'Humor', ' pontos', 1)}</p>
-  <p style="color:var(--good)"><strong>Acompanhamento em curso:</strong> humor em território negativo há quatro
-  semanas (-1 → -2 → -1 → -2), incluindo o episódio de autoagressão de 06/10. Exames pedidos pela psiquiatra
-  descartaram causas físicas comuns de fadiga e confirmaram apneia leve + tratamento com lítio já ativo (faixa
-  terapêutica). Consulta com a psiquiatra agendada para a semana que vem, com os exames em mãos — bom momento para
-  discutir diretamente esse padrão de humor.</p>
+  <p style="color:var(--good)"><strong>Acompanhamento em curso:</strong> humor em território negativo há cinco
+  semanas (-1 → -2 → -1 → -2 → -1,5), incluindo o episódio de autoagressão de 06/10, mas com leve melhora na
+  última semana. Consulta com a psiquiatra aconteceu em 27/10: ela acrescentou aripiprazol, B12 e ácido fólico ao
+  lítio e lisdexanfetamina já em uso. Início de medicação nova pode causar flutuação nas próximas semanas — vale
+  observar com mais atenção, sem assumir que qualquer oscilação é só contexto de vida.</p>
   <p style="font-size:12.5px;color:var(--ink-muted)">Referência de base (${b ? b.idade_real : '—'} anos, ${b ? b.altura_cm : '—'}cm):
   idade metabólica ${b ? b.idade_metabolica : '—'} vs. idade real ${b ? b.idade_real : '—'} — vale acompanhar se essa
   diferença fecha ao longo do tempo.</p>
@@ -877,24 +883,24 @@ trendCard.innerHTML = `
 // ---------- Prioridades da semana ----------
 const priorities = [
   {
-    title: 'Levar o humor -2 e o contexto atual pra consulta já agendada',
-    desc: 'A psiquiatra vai revisar os exames na semana que vem — ótimo momento pra também falar abertamente do humor baixo e da falta de energia desta semana, não só dos números do laudo.',
-    tag: 'Consulta já marcada — só aproveitar'
+    title: 'Observar efeitos do aripiprazol nas próximas semanas',
+    desc: 'Medicação nova pode trazer efeitos colaterais ou flutuação de humor no início. Vale registrar qualquer coisa incomum (sonolência, inquietação, mudança de apetite) nos próximos check-ins para levar à psiquiatra se precisar.',
+    tag: 'Pilar: acompanhamento médico'
   },
   {
-    title: 'Peso como alavanca real pro sono, não só estética',
-    desc: 'O próprio laudo da polissonografia aponta o peso como o fator mais modificável pra apneia leve. Isso dá um motivo concreto a mais pro acompanhamento de bioimpedância que já existe — não precisa virar pressão extra, só reforça o porquê.',
+    title: 'Manter o retorno da força — segunda semana seguida',
+    desc: '0,5h não é muito, mas é a segunda semana com algum treino depois de meses zerado. Vale proteger esse pequeno recomeço, não aumentar de uma vez.',
+    tag: 'Pilar: exercício físico'
+  },
+  {
+    title: 'Peso como alavanca real pro sono',
+    desc: 'O laudo da polissonografia aponta o peso como o fator mais modificável pra apneia leve — motivo concreto a mais pro acompanhamento que já existe.',
     tag: 'Pilar: sono · exercício físico'
   },
   {
-    title: 'Não decidir o futuro (país, trabalho) num momento de pouca energia',
-    desc: 'Dúvida sobre Brasil ou Itália é uma decisão grande de verdade — mas tomar ela estando sem força pra sair da cama tende a sair pior. Vale segurar a decisão maior até ter mais estabilidade, e tratar o dinheiro/trabalho como problema a resolver em passos pequenos, não de uma vez.',
+    title: 'Ainda não é hora de decidir Brasil ou Itália',
+    desc: 'Com ajuste de medicação em curso e humor ainda não estável, grandes decisões de vida tendem a sair melhor com mais estabilidade. Pode esperar.',
     tag: 'Pilar: foco em metas pessoais'
-  },
-  {
-    title: 'Reconhecer a reconexão com a família',
-    desc: 'Numa semana descrita como depressiva, matar a saudade da esposa e brincar com as filhas foi real e importa — vale notar isso como âncora, não só o que doeu.',
-    tag: 'Reconhecimento, sem ação corretiva'
   }
 ];
 const priorityList = document.getElementById('priority-list');

@@ -12,8 +12,12 @@ agendada) saiba como se comportar e onde ler/escrever o histórico.
 - Autista nível 1 (hipersensibilidade auditiva e visual) — diagnosticado.
 - Bipolaridade — diagnosticada, em tratamento há mais de 1 ano com lítio
   (nível sérico confirmado dentro da faixa terapêutica em 19/10/2026), sob
-  acompanhamento psiquiátrico. Não é mais hipótese em investigação — trate
-  como diagnóstico estabelecido e tratamento em curso. Ainda assim não faça
+  acompanhamento psiquiátrico. Em 27/10/2026 a psiquiatra acrescentou
+  aripiprazol ao tratamento (além de vitamina B12 e ácido fólico). Não é mais
+  hipótese em investigação — trate como diagnóstico estabelecido e tratamento
+  em curso, agora com ajuste de medicação recente (vale considerar isso ao
+  ler oscilações de humor nas próximas semanas, já que início/ajuste de
+  medicação pode causar flutuação temporária). Ainda assim não faça
   diagnóstico nem ajuste de conduta — isso é do médico. Continue ajudando a
   registrar padrões de humor que podem ser úteis para ele levar ao
   profissional.
