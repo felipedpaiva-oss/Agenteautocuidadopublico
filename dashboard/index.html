@@ -499,7 +499,12 @@ const bio = [
     massa_muscular_esqueletica_pct: 38.1, massa_muscular_esqueletica_kg: 34.1,
     massa_muscular_pct: 70.0, massa_muscular_kg: 62.7, agua_pct: 52.1, agua_kg: 46.7,
     gordura_visceral: 15.0, ossos_kg: 3.52, metabolismo_kcal: 1869, proteina_pct: 17.9,
-    obesidade_pct: 24.2, idade_metabolica: 46, lbm_kg: 66.22, idade_real: 37, altura_cm: 183 }
+    obesidade_pct: 24.2, idade_metabolica: 46, lbm_kg: 66.22, idade_real: 37, altura_cm: 183 },
+  { date: '2026-11-03', peso_kg: 90.2, imc: 26.9, gordura_pct: 26.3, peso_gordura_kg: 23.7,
+    massa_muscular_esqueletica_pct: 38.0, massa_muscular_esqueletica_kg: 34.3,
+    massa_muscular_pct: 69.7, massa_muscular_kg: 62.9, agua_pct: 52.0, agua_kg: 46.9,
+    gordura_visceral: 15.5, ossos_kg: 3.56, metabolismo_kcal: 1878, proteina_pct: 17.7,
+    obesidade_pct: 25.1, idade_metabolica: 46, lbm_kg: 66.47, idade_real: 37, altura_cm: 183 }
 ];
 
 const checkins = [
@@ -555,7 +560,10 @@ const checkins = [
     observacoes: 'Fim da temporada de viagem. Depressão, pouca força pra sair da cama, fazendo o mínimo. Dúvida sobre ficar no Brasil ou mudar pra Itália; sem dinheiro e sem trabalho. Positivo: reconectou com esposa e filhas. Exames da psiquiatra: polissonografia mostrou apneia leve + sono profundo quase ausente; sangue normal (hemograma, tireoide, B12, vit. D, renal); lítio na faixa terapêutica — confirma tratamento medicamentoso em curso. Consulta semana que vem para discutir.' },
   { date: '2026-10-27', circunferencia_abdominal_cm: 95, horas_cardio: 2, horas_forca: 0.5,
     episodios_descontrole_alimentar: 3, humor: -1.5,
-    observacoes: 'Humor variou na semana: -2 na maior parte, subiu pra perto de -1/quase zero de ontem pra hoje, média -1.5. Consulta com a psiquiatra aconteceu: além do lítio e lisdexanfetamina já em uso, ela acrescentou aripiprazol, vitamina B12 e ácido fólico. Já começou a tomar tudo.' }
+    observacoes: 'Humor variou na semana: -2 na maior parte, subiu pra perto de -1/quase zero de ontem pra hoje, média -1.5. Consulta com a psiquiatra aconteceu: além do lítio e lisdexanfetamina já em uso, ela acrescentou aripiprazol, vitamina B12 e ácido fólico. Já começou a tomar tudo.' },
+  { date: '2026-11-03', circunferencia_abdominal_cm: 96.8, horas_cardio: 6, horas_forca: 0.5,
+    episodios_descontrole_alimentar: 2, humor: 1,
+    observacoes: 'Saiu da depressão, mas notou sinais de possível hipomania (confiança excessiva). Grande decisão de vida: mudança para a Itália, com empréstimo dos pais aliviando a pressão financeira. Irritabilidade bem maior — grita com as filhas por gatilhos pequenos (5 a 10 episódios num dia, segundo a esposa), repara depois explicando que tem um "dodói" que está tratando. Dose de aripiprazol subiu de 1/4 para 1/2 comprimido na noite anterior — correlação a observar. Orientado a contatar a psiquiatra proativamente, sem esperar a próxima consulta.' }
 ];
 
 // ---------- Helpers ----------
@@ -833,17 +841,19 @@ document.getElementById('chart-sub').textContent = `${bio.length} registro(s) de
 // ---------- Leitura integrada (texto) ----------
 const readingCard = document.getElementById('reading-card');
 readingCard.innerHTML = `
-  <span class="card-label">Check-in de 27/10 — ajuste de medicação após a consulta</span>
-  <p><strong>Peso e gordura visceral seguem estáveis</strong> (89,55kg, visceral 15,0). Circunferência em 95cm.
-  Cardio baixo (2h) mas força apareceu de novo (0,5h) — segunda semana seguida com algum treino, depois de meses
-  praticamente zerado. Descontroles em 3, patamar normal.</p>
-  <p><strong>A consulta com a psiquiatra aconteceu.</strong> Além do lítio e da lisdexanfetamina já em uso há mais de
-  um ano, ela acrescentou <strong>aripiprazol</strong>, vitamina B12 e ácido fólico. É um ajuste de tratamento, não um
-  recomeço — mas início de medicação nova pode trazer flutuação de humor ou efeitos colaterais nas próximas semanas,
-  então vale observar isso nos próximos check-ins sem assumir que é só "a vida acontecendo" de novo.</p>
-  <p><strong>Humor -1,5</strong>: a semana foi majoritariamente -2, com melhora pra perto de -1/quase zero no dia do
-  check-in. Direção é positiva (quarta semana seguida negativa, mas essa é a menos negativa desde o início do
-  período), ainda que não tenha voltado a estável.</p>
+  <span class="card-label">Check-in de 03/11 — possíveis sinais de hipomania</span>
+  <p><strong>Humor +1</strong>, revisado de 0 pra 1 na própria conversa — mas o que mais importa aqui não é o número,
+  é o que vem junto: confiança excessiva notada pelo próprio usuário, uma decisão de vida grande tomada na semana
+  (mudança para a Itália, viabilizada por empréstimo dos pais) e <strong>irritabilidade bem maior com as filhas</strong>
+  — gritos por gatilhos pequenos, 5 a 10 episódios num único dia segundo a esposa, com reparação depois ("papai tem
+  um dodói que está tratando"). Esse conjunto — humor elevado, confiança aumentada, decisão grande tomada rápido,
+  irritabilidade — é exatamente o padrão que a investigação de bipolaridade monitora.</p>
+  <p><strong>Timing relevante:</strong> a dose de aripiprazol subiu de 1/4 pra 1/2 comprimido na noite anterior a este
+  relato. Pode ser coincidência, pode não ser — não dá pra saber sem a psiquiatra, e por isso vale contatar ela antes
+  da próxima consulta agendada, não esperar.</p>
+  <p>Fisicamente a semana foi boa: circunferência 96,8cm, cardio 6h, força 0,5h (terceira semana seguida com algum
+  treino), descontroles em 2. Peso e gordura visceral com leve alta (90,2kg, visceral 15,5), dentro da variação
+  normal já observada.</p>
 `;
 
 // ---------- Tendência de longo prazo ----------
@@ -870,11 +880,12 @@ trendCard.innerHTML = `
   <p>${trendText(bio.map(r => ({ date: r.date, value: r.peso_kg })), 'Peso', 'kg', 1)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.circunferencia_abdominal_cm })), 'Circunferência abdominal', 'cm', 0)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.humor })), 'Humor', ' pontos', 1)}</p>
-  <p style="color:var(--good)"><strong>Acompanhamento em curso:</strong> humor em território negativo há cinco
-  semanas (-1 → -2 → -1 → -2 → -1,5), incluindo o episódio de autoagressão de 06/10, mas com leve melhora na
-  última semana. Consulta com a psiquiatra aconteceu em 27/10: ela acrescentou aripiprazol, B12 e ácido fólico ao
-  lítio e lisdexanfetamina já em uso. Início de medicação nova pode causar flutuação nas próximas semanas — vale
-  observar com mais atenção, sem assumir que qualquer oscilação é só contexto de vida.</p>
+  <p style="color:var(--critical)"><strong>Acompanhamento em curso:</strong> depois de cinco semanas em território
+  negativo (incluindo o episódio de autoagressão de 06/10), o humor virou pra +1 — mas com sinais que pedem atenção:
+  confiança excessiva auto-percebida, irritabilidade forte com as filhas (gritos repetidos), e uma decisão de vida
+  grande (mudança para a Itália) tomada na mesma semana. Isso veio um dia depois da dose de aripiprazol subir de 1/4
+  pra 1/2 comprimido. Contato proativo com a psiquiatra foi recomendado nesta conversa, sem esperar a próxima
+  consulta agendada.</p>
   <p style="font-size:12.5px;color:var(--ink-muted)">Referência de base (${b ? b.idade_real : '—'} anos, ${b ? b.altura_cm : '—'}cm):
   idade metabólica ${b ? b.idade_metabolica : '—'} vs. idade real ${b ? b.idade_real : '—'} — vale acompanhar se essa
   diferença fecha ao longo do tempo.</p>
@@ -883,24 +894,24 @@ trendCard.innerHTML = `
 // ---------- Prioridades da semana ----------
 const priorities = [
   {
-    title: 'Observar efeitos do aripiprazol nas próximas semanas',
-    desc: 'Medicação nova pode trazer efeitos colaterais ou flutuação de humor no início. Vale registrar qualquer coisa incomum (sonolência, inquietação, mudança de apetite) nos próximos check-ins para levar à psiquiatra se precisar.',
-    tag: 'Pilar: acompanhamento médico'
+    title: 'Contatar a psiquiatra proativamente, sem esperar a próxima consulta',
+    desc: 'A combinação de aumento de dose + possível hipomania + irritabilidade forte com as filhas é informação que ela precisa agora, não só no próximo retorno agendado.',
+    tag: 'Prioridade de saúde — não é opcional'
   },
   {
-    title: 'Manter o retorno da força — segunda semana seguida',
-    desc: '0,5h não é muito, mas é a segunda semana com algum treino depois de meses zerado. Vale proteger esse pequeno recomeço, não aumentar de uma vez.',
-    tag: 'Pilar: exercício físico'
+    title: 'Reconhecer a reatividade com as filhas sem se punir por isso',
+    desc: 'Você já está fazendo a parte difícil — reparando depois de cada episódio, explicando pra elas que é um "dodói" que está tratando. Isso importa muito. Mas a frequência (5 a 10 num dia) é alta o suficiente pra merecer a atenção médica do primeiro item, não só manejo em casa.',
+    tag: 'Observação, sem ação corretiva'
   },
   {
-    title: 'Peso como alavanca real pro sono',
-    desc: 'O laudo da polissonografia aponta o peso como o fator mais modificável pra apneia leve — motivo concreto a mais pro acompanhamento que já existe.',
-    tag: 'Pilar: sono · exercício físico'
-  },
-  {
-    title: 'Ainda não é hora de decidir Brasil ou Itália',
-    desc: 'Com ajuste de medicação em curso e humor ainda não estável, grandes decisões de vida tendem a sair melhor com mais estabilidade. Pode esperar.',
+    title: 'Revisitar a decisão da Itália com a cabeça mais estável',
+    desc: 'Não significa que a decisão esteja errada — mas foi tomada numa semana com sinais de humor elevado. Vale conversar com a esposa de novo quando o quadro estiver mais claro, só pra confirmar que ainda faz sentido do mesmo jeito.',
     tag: 'Pilar: foco em metas pessoais'
+  },
+  {
+    title: 'Manter o retorno físico que já está funcionando',
+    desc: 'Terceira semana seguida com algum treino de força, cardio em alta — isso não precisa de ajuste agora, só reconhecimento.',
+    tag: 'Reconhecimento, sem ação corretiva'
   }
 ];
 const priorityList = document.getElementById('priority-list');
