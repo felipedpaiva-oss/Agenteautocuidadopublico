@@ -504,7 +504,12 @@ const bio = [
     massa_muscular_esqueletica_pct: 38.0, massa_muscular_esqueletica_kg: 34.3,
     massa_muscular_pct: 69.7, massa_muscular_kg: 62.9, agua_pct: 52.0, agua_kg: 46.9,
     gordura_visceral: 15.5, ossos_kg: 3.56, metabolismo_kcal: 1878, proteina_pct: 17.7,
-    obesidade_pct: 25.1, idade_metabolica: 46, lbm_kg: 66.47, idade_real: 37, altura_cm: 183 }
+    obesidade_pct: 25.1, idade_metabolica: 46, lbm_kg: 66.47, idade_real: 37, altura_cm: 183 },
+  { date: '2026-11-10', peso_kg: 87.9, imc: 26.2, gordura_pct: 25.4, peso_gordura_kg: 22.3,
+    massa_muscular_esqueletica_pct: 38.5, massa_muscular_esqueletica_kg: 33.8,
+    massa_muscular_pct: 70.5, massa_muscular_kg: 62.0, agua_pct: 52.4, agua_kg: 46.0,
+    gordura_visceral: 14.5, ossos_kg: 3.59, metabolismo_kcal: 1847, proteina_pct: 18.2,
+    obesidade_pct: 21.9, idade_metabolica: 44, lbm_kg: 65.59, idade_real: 37, altura_cm: 183 }
 ];
 
 const checkins = [
@@ -563,7 +568,10 @@ const checkins = [
     observacoes: 'Humor variou na semana: -2 na maior parte, subiu pra perto de -1/quase zero de ontem pra hoje, média -1.5. Consulta com a psiquiatra aconteceu: além do lítio e lisdexanfetamina já em uso, ela acrescentou aripiprazol, vitamina B12 e ácido fólico. Já começou a tomar tudo.' },
   { date: '2026-11-03', circunferencia_abdominal_cm: 96.8, horas_cardio: 6, horas_forca: 0.5,
     episodios_descontrole_alimentar: 2, humor: 1,
-    observacoes: 'Saiu da depressão, mas notou sinais de possível hipomania (confiança excessiva). Grande decisão de vida: mudança para a Itália, com empréstimo dos pais aliviando a pressão financeira. Irritabilidade bem maior — grita com as filhas por gatilhos pequenos (5 a 10 episódios num dia, segundo a esposa), repara depois explicando que tem um "dodói" que está tratando. Dose de aripiprazol subiu de 1/4 para 1/2 comprimido na noite anterior — correlação a observar. Orientado a contatar a psiquiatra proativamente, sem esperar a próxima consulta.' }
+    observacoes: 'Saiu da depressão, mas notou sinais de possível hipomania (confiança excessiva). Grande decisão de vida: mudança para a Itália, com empréstimo dos pais aliviando a pressão financeira. Irritabilidade bem maior — grita com as filhas por gatilhos pequenos (5 a 10 episódios num dia, segundo a esposa), repara depois explicando que tem um "dodói" que está tratando. Dose de aripiprazol subiu de 1/4 para 1/2 comprimido na noite anterior — correlação a observar. Orientado a contatar a psiquiatra proativamente, sem esperar a próxima consulta.' },
+  { date: '2026-11-10', circunferencia_abdominal_cm: 96, horas_cardio: 3.5, horas_forca: 0.75,
+    episodios_descontrole_alimentar: 1, humor: 1,
+    observacoes: 'Falou com a psiquiatra: ela manteve o tratamento como estava. Entrou com a dose final do aripiprazol. Se sentindo "simplesmente bem", avançando nos projetos apesar da incerteza financeira. Orgulhoso de ter quebrado o ciclo de várias semanas ganhando peso. Episódios de grito/irritabilidade com as filhas diminuíram bastante; mais conversas com a esposa, que entende melhor e está ajudando mais.' }
 ];
 
 // ---------- Helpers ----------
@@ -841,19 +849,19 @@ document.getElementById('chart-sub').textContent = `${bio.length} registro(s) de
 // ---------- Leitura integrada (texto) ----------
 const readingCard = document.getElementById('reading-card');
 readingCard.innerHTML = `
-  <span class="card-label">Check-in de 03/11 — possíveis sinais de hipomania</span>
-  <p><strong>Humor +1</strong>, revisado de 0 pra 1 na própria conversa — mas o que mais importa aqui não é o número,
-  é o que vem junto: confiança excessiva notada pelo próprio usuário, uma decisão de vida grande tomada na semana
-  (mudança para a Itália, viabilizada por empréstimo dos pais) e <strong>irritabilidade bem maior com as filhas</strong>
-  — gritos por gatilhos pequenos, 5 a 10 episódios num único dia segundo a esposa, com reparação depois ("papai tem
-  um dodói que está tratando"). Esse conjunto — humor elevado, confiança aumentada, decisão grande tomada rápido,
-  irritabilidade — é exatamente o padrão que a investigação de bipolaridade monitora.</p>
-  <p><strong>Timing relevante:</strong> a dose de aripiprazol subiu de 1/4 pra 1/2 comprimido na noite anterior a este
-  relato. Pode ser coincidência, pode não ser — não dá pra saber sem a psiquiatra, e por isso vale contatar ela antes
-  da próxima consulta agendada, não esperar.</p>
-  <p>Fisicamente a semana foi boa: circunferência 96,8cm, cardio 6h, força 0,5h (terceira semana seguida com algum
-  treino), descontroles em 2. Peso e gordura visceral com leve alta (90,2kg, visceral 15,5), dentro da variação
-  normal já observada.</p>
+  <span class="card-label">Check-in de 10/11 — sinal de alerta da semana passada endereçado</span>
+  <p><strong>Boa notícia no acompanhamento.</strong> Ele contatou a psiquiatra proativamente sobre os sinais da semana
+  passada (confiança excessiva, irritabilidade, decisão grande tomada rápido) — ela avaliou e <strong>manteve o
+  tratamento como estava</strong>, sem sinal de alarme da parte dela. Entrou com a dose final do aripiprazol esta
+  semana. Relata se sentir "simplesmente bem", sem repetir os sinais de hipomania desta vez.</p>
+  <p><strong>Os episódios de grito com as filhas diminuíram bastante</strong>, e mais conversas com a esposa
+  ajudaram — ela entende melhor a situação agora e está apoiando mais. É uma resolução real do ponto mais concreto
+  que preocupava na semana passada.</p>
+  <p><strong>Físico também veio bem:</strong> peso caiu pra 87,9kg (-2,3kg) e gordura visceral foi a 14,5 — primeira
+  vez abaixo de 15 desde que o acompanhamento começou em agosto. Ele mesmo notou e se orgulhou de ter quebrado o
+  ciclo de semanas ganhando peso. Cardio e força seguem presentes (3,5h e 45min). Humor +1, sem os sinais de alerta
+  da semana anterior — mas ainda vale manter a atenção nos próximos check-ins, um ponto de melhora não fecha o
+  quadro.</p>
 `;
 
 // ---------- Tendência de longo prazo ----------
@@ -880,12 +888,11 @@ trendCard.innerHTML = `
   <p>${trendText(bio.map(r => ({ date: r.date, value: r.peso_kg })), 'Peso', 'kg', 1)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.circunferencia_abdominal_cm })), 'Circunferência abdominal', 'cm', 0)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.humor })), 'Humor', ' pontos', 1)}</p>
-  <p style="color:var(--critical)"><strong>Acompanhamento em curso:</strong> depois de cinco semanas em território
-  negativo (incluindo o episódio de autoagressão de 06/10), o humor virou pra +1 — mas com sinais que pedem atenção:
-  confiança excessiva auto-percebida, irritabilidade forte com as filhas (gritos repetidos), e uma decisão de vida
-  grande (mudança para a Itália) tomada na mesma semana. Isso veio um dia depois da dose de aripiprazol subir de 1/4
-  pra 1/2 comprimido. Contato proativo com a psiquiatra foi recomendado nesta conversa, sem esperar a próxima
-  consulta agendada.</p>
+  <p style="color:var(--good)"><strong>Acompanhamento em curso:</strong> o sinal de alerta de 03/11 (possível
+  hipomania, irritabilidade com as filhas) foi levado proativamente à psiquiatra, que manteve o tratamento —
+  sem alarme da parte dela. Dose final de aripiprazol alcançada, episódios com as filhas diminuíram, esposa mais
+  presente. Humor +1 sem repetir os sinais da semana anterior. Resolução real, mas segue valendo observar nos
+  próximos check-ins — é um bom momento, não necessariamente o fim do acompanhamento mais atento.</p>
   <p style="font-size:12.5px;color:var(--ink-muted)">Referência de base (${b ? b.idade_real : '—'} anos, ${b ? b.altura_cm : '—'}cm):
   idade metabólica ${b ? b.idade_metabolica : '—'} vs. idade real ${b ? b.idade_real : '—'} — vale acompanhar se essa
   diferença fecha ao longo do tempo.</p>
@@ -894,24 +901,24 @@ trendCard.innerHTML = `
 // ---------- Prioridades da semana ----------
 const priorities = [
   {
-    title: 'Contatar a psiquiatra proativamente, sem esperar a próxima consulta',
-    desc: 'A combinação de aumento de dose + possível hipomania + irritabilidade forte com as filhas é informação que ela precisa agora, não só no próximo retorno agendado.',
-    tag: 'Prioridade de saúde — não é opcional'
+    title: 'Continuar observando, com menos alarme',
+    desc: 'O sinal de 03/11 foi levado ao profissional certo e respondido. Não precisa de vigilância tensa agora — só manter o hábito de notar como o humor e a paciência estão nos próximos check-ins.',
+    tag: 'Pilar: acompanhamento médico'
   },
   {
-    title: 'Reconhecer a reatividade com as filhas sem se punir por isso',
-    desc: 'Você já está fazendo a parte difícil — reparando depois de cada episódio, explicando pra elas que é um "dodói" que está tratando. Isso importa muito. Mas a frequência (5 a 10 num dia) é alta o suficiente pra merecer a atenção médica do primeiro item, não só manejo em casa.',
-    tag: 'Observação, sem ação corretiva'
-  },
-  {
-    title: 'Revisitar a decisão da Itália com a cabeça mais estável',
-    desc: 'Não significa que a decisão esteja errada — mas foi tomada numa semana com sinais de humor elevado. Vale conversar com a esposa de novo quando o quadro estiver mais claro, só pra confirmar que ainda faz sentido do mesmo jeito.',
-    tag: 'Pilar: foco em metas pessoais'
-  },
-  {
-    title: 'Manter o retorno físico que já está funcionando',
-    desc: 'Terceira semana seguida com algum treino de força, cardio em alta — isso não precisa de ajuste agora, só reconhecimento.',
+    title: 'Reconhecer a melhora com as filhas e com a esposa',
+    desc: 'Os episódios diminuíram, e as conversas com a esposa ajudaram ela a entender e apoiar mais. Isso veio de esforço real seu — vale notar como algo que funcionou, não só como problema resolvido.',
     tag: 'Reconhecimento, sem ação corretiva'
+  },
+  {
+    title: 'Celebrar a quebra do ciclo de peso — com cautela',
+    desc: 'Gordura visceral abaixo de 15 pela primeira vez é uma conquista real. Vale aproveitar o momento sem transformar isso em pressão por mais resultado rápido.',
+    tag: 'Pilar: exercício físico · alimentação'
+  },
+  {
+    title: 'Itália: decisão pode ser revisitada com calma, não às pressas',
+    desc: 'Com o quadro mais estável agora, dá pra conversar de novo com a esposa sem urgência — só pra confirmar que ainda faz sentido do mesmo jeito, sem precisar desfazer nada.',
+    tag: 'Pilar: foco em metas pessoais'
   }
 ];
 const priorityList = document.getElementById('priority-list');
