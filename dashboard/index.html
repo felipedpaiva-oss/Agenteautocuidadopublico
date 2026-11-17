@@ -383,6 +383,8 @@
     <span class="hero-meta" id="hero-meta"></span>
   </header>
 
+  <section id="imc-card-section" style="display:flex;"></section>
+
   <section>
     <div class="section-head">
       <h2 class="section-title">Evolução dos indicadores</h2>
@@ -638,6 +640,22 @@ document.getElementById('hero-meta').textContent = b
   ? `Último registro: ${fmtDateFull(parseD(b.date))}`
   : 'Aguardando o primeiro registro';
 
+// ---------- Cartão de IMC ----------
+const imcSection = document.getElementById('imc-card-section');
+if (b && b.imc != null) {
+  const imcVal = b.imc;
+  const imcBand = imcVal < 25 ? { cls: 'good', label: 'normal' }
+    : imcVal <= 29.9 ? { cls: 'warning', label: 'sobrepeso' }
+    : { cls: 'critical', label: 'obesidade' };
+  const card = document.createElement('div');
+  card.className = 'stat-tile';
+  card.innerHTML = `
+    <div class="stat-label"><span>IMC</span><span class="chip ${imcBand.cls}">${imcBand.label}</span></div>
+    <div class="stat-value" style="color:var(--${imcBand.cls})">${fmt(imcVal, 1)}</div>
+  `;
+  imcSection.appendChild(card);
+}
+
 // ---------- Chart engine (SVG, sem libs externas) ----------
 const tooltipEl = document.getElementById('tooltip');
 
@@ -822,16 +840,6 @@ chartGrid.appendChild(drawSeriesChart({
     { min: -Infinity, max: 83, color: COLOR.goodSoft },
     { min: 83, max: 100, color: COLOR.warningSoft },
     { min: 100, max: Infinity, color: COLOR.criticalSoft }
-  ]
-}));
-chartGrid.appendChild(drawSeriesChart({
-  title: 'IMC',
-  points: bio.map(r => ({ date: r.date, value: r.imc })),
-  color: COLOR.accent, softColor: COLOR.accentSoft, unit: '', decimals: 1,
-  bands: [
-    { min: -Infinity, max: 25, color: COLOR.goodSoft },
-    { min: 25, max: 29.9, color: COLOR.warningSoft },
-    { min: 29.9, max: Infinity, color: COLOR.criticalSoft }
   ]
 }));
 chartGrid.appendChild(drawSeriesChart({
