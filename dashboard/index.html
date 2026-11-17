@@ -509,7 +509,12 @@ const bio = [
     massa_muscular_esqueletica_pct: 38.5, massa_muscular_esqueletica_kg: 33.8,
     massa_muscular_pct: 70.5, massa_muscular_kg: 62.0, agua_pct: 52.4, agua_kg: 46.0,
     gordura_visceral: 14.5, ossos_kg: 3.59, metabolismo_kcal: 1847, proteina_pct: 18.2,
-    obesidade_pct: 21.9, idade_metabolica: 44, lbm_kg: 65.59, idade_real: 37, altura_cm: 183 }
+    obesidade_pct: 21.9, idade_metabolica: 44, lbm_kg: 65.59, idade_real: 37, altura_cm: 183 },
+  { date: '2026-11-17', peso_kg: 89.8, imc: 26.8, gordura_pct: 26.2, peso_gordura_kg: 23.5,
+    massa_muscular_esqueletica_pct: 38.1, massa_muscular_esqueletica_kg: 34.2,
+    massa_muscular_pct: 69.9, massa_muscular_kg: 62.7, agua_pct: 52.1, agua_kg: 46.8,
+    gordura_visceral: 15.5, ossos_kg: 3.57, metabolismo_kcal: 1872, proteina_pct: 17.8,
+    obesidade_pct: 24.6, idade_metabolica: 46, lbm_kg: 66.31, idade_real: 37, altura_cm: 183 }
 ];
 
 const checkins = [
@@ -571,7 +576,10 @@ const checkins = [
     observacoes: 'Saiu da depressão, mas notou sinais de possível hipomania (confiança excessiva). Grande decisão de vida: mudança para a Itália, com empréstimo dos pais aliviando a pressão financeira. Irritabilidade bem maior — grita com as filhas por gatilhos pequenos (5 a 10 episódios num dia, segundo a esposa), repara depois explicando que tem um "dodói" que está tratando. Dose de aripiprazol subiu de 1/4 para 1/2 comprimido na noite anterior — correlação a observar. Orientado a contatar a psiquiatra proativamente, sem esperar a próxima consulta.' },
   { date: '2026-11-10', circunferencia_abdominal_cm: 96, horas_cardio: 3.5, horas_forca: 0.75,
     episodios_descontrole_alimentar: 1, humor: 1,
-    observacoes: 'Falou com a psiquiatra: ela manteve o tratamento como estava. Entrou com a dose final do aripiprazol. Se sentindo "simplesmente bem", avançando nos projetos apesar da incerteza financeira. Orgulhoso de ter quebrado o ciclo de várias semanas ganhando peso. Episódios de grito/irritabilidade com as filhas diminuíram bastante; mais conversas com a esposa, que entende melhor e está ajudando mais.' }
+    observacoes: 'Falou com a psiquiatra: ela manteve o tratamento como estava. Entrou com a dose final do aripiprazol. Se sentindo "simplesmente bem", avançando nos projetos apesar da incerteza financeira. Orgulhoso de ter quebrado o ciclo de várias semanas ganhando peso. Episódios de grito/irritabilidade com as filhas diminuíram bastante; mais conversas com a esposa, que entende melhor e está ajudando mais.' },
+  { date: '2026-11-17', circunferencia_abdominal_cm: 96, horas_cardio: 3.5, horas_forca: 1,
+    episodios_descontrole_alimentar: 3, humor: 0,
+    observacoes: 'Mudança de medicação: saiu o aripiprazol (identificado como fonte da inquietação/ansiedade relatada na véspera) e entrou a lamotrigina. Ansiedade financeira e profissional seguem presentes (aguardando resposta de agências sobre 2027), mas sendo administradas. Ansiedade de espera: mudança pra Itália já definida mas sem data, resultado da prova da esposa só em 23/12. Cabeça ainda muito ativa e criativa. Orgulhoso da constância no exercício físico mesmo bem abaixo do volume da temporada.' }
 ];
 
 // ---------- Helpers ----------
@@ -849,19 +857,19 @@ document.getElementById('chart-sub').textContent = `${bio.length} registro(s) de
 // ---------- Leitura integrada (texto) ----------
 const readingCard = document.getElementById('reading-card');
 readingCard.innerHTML = `
-  <span class="card-label">Check-in de 10/11 — sinal de alerta da semana passada endereçado</span>
-  <p><strong>Boa notícia no acompanhamento.</strong> Ele contatou a psiquiatra proativamente sobre os sinais da semana
-  passada (confiança excessiva, irritabilidade, decisão grande tomada rápido) — ela avaliou e <strong>manteve o
-  tratamento como estava</strong>, sem sinal de alarme da parte dela. Entrou com a dose final do aripiprazol esta
-  semana. Relata se sentir "simplesmente bem", sem repetir os sinais de hipomania desta vez.</p>
-  <p><strong>Os episódios de grito com as filhas diminuíram bastante</strong>, e mais conversas com a esposa
-  ajudaram — ela entende melhor a situação agora e está apoiando mais. É uma resolução real do ponto mais concreto
-  que preocupava na semana passada.</p>
-  <p><strong>Físico também veio bem:</strong> peso caiu pra 87,9kg (-2,3kg) e gordura visceral foi a 14,5 — primeira
-  vez abaixo de 15 desde que o acompanhamento começou em agosto. Ele mesmo notou e se orgulhou de ter quebrado o
-  ciclo de semanas ganhando peso. Cardio e força seguem presentes (3,5h e 45min). Humor +1, sem os sinais de alerta
-  da semana anterior — mas ainda vale manter a atenção nos próximos check-ins, um ponto de melhora não fecha o
-  quadro.</p>
+  <span class="card-label">Check-in de 17/11 — troca de medicação</span>
+  <p><strong>O aripiprazol saiu do tratamento.</strong> O relato de inquietação/ansiedade da véspera se confirmou
+  como efeito da medicação, e a psiquiatra trocou por <strong>lamotrigina</strong>. Medicação atual: lítio +
+  lamotrigina (humor), lisdexanfetamina (TDAH), B12 e ácido fólico. Início de medicação nova pede o mesmo cuidado de
+  observação que já foi útil antes — sem alarme, só atenção nos próximos check-ins.</p>
+  <p><strong>Humor 0, estável.</strong> Bastante coisa em espera ao mesmo tempo: resposta de agências sobre o ano de
+  trabalho em 2027, data da mudança pra Itália (já decidida, falta só definir quando) e o resultado da prova da
+  esposa (23/12) que também depende dessa mudança. "Cabeça ainda muito ativa e criativa" é a frase dele — vale notar
+  sem alarme, mas sem deixar de observar, dado o histórico recente.</p>
+  <p><strong>Peso subiu pra 89,8kg (+1,9kg)</strong> e gordura visceral voltou a 15,5 — depois da queda bonita da
+  semana passada, isso é flutuação normal, não motivo de preocupação. O que importa mais: <strong>quarta semana
+  seguida de treino de força (1h, a maior desde que voltou)</strong>, e ele mesmo nomeou isso como vitória — "esforço
+  danado se organizar e sair pra fazer exercício" mesmo com volume bem menor que na temporada de trabalho.</p>
 `;
 
 // ---------- Tendência de longo prazo ----------
@@ -888,11 +896,10 @@ trendCard.innerHTML = `
   <p>${trendText(bio.map(r => ({ date: r.date, value: r.peso_kg })), 'Peso', 'kg', 1)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.circunferencia_abdominal_cm })), 'Circunferência abdominal', 'cm', 0)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.humor })), 'Humor', ' pontos', 1)}</p>
-  <p style="color:var(--good)"><strong>Acompanhamento em curso:</strong> o sinal de alerta de 03/11 (possível
-  hipomania, irritabilidade com as filhas) foi levado proativamente à psiquiatra, que manteve o tratamento —
-  sem alarme da parte dela. Dose final de aripiprazol alcançada, episódios com as filhas diminuíram, esposa mais
-  presente. Humor +1 sem repetir os sinais da semana anterior. Resolução real, mas segue valendo observar nos
-  próximos check-ins — é um bom momento, não necessariamente o fim do acompanhamento mais atento.</p>
+  <p style="color:var(--good)"><strong>Acompanhamento em curso:</strong> o sinal de 03/11 foi resolvido, e agora o
+  aripiprazol — identificado como fonte da ansiedade/inquietação — saiu do tratamento, entrando lamotrigina no lugar.
+  Humor voltou a estável (0) nesta semana. Vale observar os próximos check-ins com a troca de medicação em mente,
+  mas sem alarme — é ajuste terapêutico normal, acompanhado de perto pela psiquiatra.</p>
   <p style="font-size:12.5px;color:var(--ink-muted)">Referência de base (${b ? b.idade_real : '—'} anos, ${b ? b.altura_cm : '—'}cm):
   idade metabólica ${b ? b.idade_metabolica : '—'} vs. idade real ${b ? b.idade_real : '—'} — vale acompanhar se essa
   diferença fecha ao longo do tempo.</p>
@@ -901,23 +908,23 @@ trendCard.innerHTML = `
 // ---------- Prioridades da semana ----------
 const priorities = [
   {
-    title: 'Continuar observando, com menos alarme',
-    desc: 'O sinal de 03/11 foi levado ao profissional certo e respondido. Não precisa de vigilância tensa agora — só manter o hábito de notar como o humor e a paciência estão nos próximos check-ins.',
+    title: 'Observar a lamotrigina nas próximas semanas',
+    desc: 'Início de medicação nova — vale notar qualquer coisa incomum (humor, sono, pele, energia) nos próximos check-ins, do mesmo jeito que ajudou a identificar o problema com o aripiprazol.',
     tag: 'Pilar: acompanhamento médico'
   },
   {
-    title: 'Reconhecer a melhora com as filhas e com a esposa',
-    desc: 'Os episódios diminuíram, e as conversas com a esposa ajudaram ela a entender e apoiar mais. Isso veio de esforço real seu — vale notar como algo que funcionou, não só como problema resolvido.',
-    tag: 'Reconhecimento, sem ação corretiva'
+    title: 'Celebrar a quarta semana seguida de força',
+    desc: '1h é a maior desde que voltou a treinar, mesmo bem abaixo do volume da temporada. Ele mesmo nomeou isso como esforço e vitória — vale manter esse reconhecimento.',
+    tag: 'Pilar: exercício físico'
   },
   {
-    title: 'Celebrar a quebra do ciclo de peso — com cautela',
-    desc: 'Gordura visceral abaixo de 15 pela primeira vez é uma conquista real. Vale aproveitar o momento sem transformar isso em pressão por mais resultado rápido.',
-    tag: 'Pilar: exercício físico · alimentação'
+    title: 'Não reagir à alta de peso desta semana',
+    desc: 'Depois da queda bonita da semana passada, 89,8kg e visceral 15,5 é flutuação normal, não reversão. Comparar de novo daqui a 2-3 semanas antes de tirar conclusão.',
+    tag: 'Observação, sem ação corretiva'
   },
   {
-    title: 'Itália: decisão pode ser revisitada com calma, não às pressas',
-    desc: 'Com o quadro mais estável agora, dá pra conversar de novo com a esposa sem urgência — só pra confirmar que ainda faz sentido do mesmo jeito, sem precisar desfazer nada.',
+    title: 'Esperas múltiplas ao mesmo tempo (agências, Itália, prova da esposa)',
+    desc: 'Três decisões grandes em espera simultânea é bastante carga mental, mesmo com humor estável agora. Vale nomear isso como peso real, não só como ansiedade a mais.',
     tag: 'Pilar: foco em metas pessoais'
   }
 ];

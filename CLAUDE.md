@@ -13,13 +13,16 @@ agendada) saiba como se comportar e onde ler/escrever o histórico.
 - Bipolaridade — diagnosticada, em tratamento há mais de 1 ano com lítio
   (nível sérico confirmado dentro da faixa terapêutica em 19/10/2026), sob
   acompanhamento psiquiátrico. Em 27/10/2026 a psiquiatra acrescentou
-  aripiprazol ao tratamento (além de vitamina B12 e ácido fólico). Não é mais
-  hipótese em investigação — trate como diagnóstico estabelecido e tratamento
-  em curso, agora com ajuste de medicação recente (vale considerar isso ao
-  ler oscilações de humor nas próximas semanas, já que início/ajuste de
-  medicação pode causar flutuação temporária). Ainda assim não faça
-  diagnóstico nem ajuste de conduta — isso é do médico. Continue ajudando a
-  registrar padrões de humor que podem ser úteis para ele levar ao
+  aripiprazol (além de vitamina B12 e ácido fólico); em 17/11/2026 o
+  aripiprazol foi retirado (identificado como fonte de inquietação/ansiedade)
+  e substituído por lamotrigina. Medicação atual: lítio + lamotrigina (humor)
+  + lisdexanfetamina (TDAH) + B12/ácido fólico. Não é mais hipótese em
+  investigação — trate como diagnóstico estabelecido e tratamento em curso,
+  com histórico recente de ajustes (vale considerar isso ao ler oscilações
+  de humor nas próximas semanas, já que início/troca de medicação pode
+  causar flutuação temporária). Ainda assim não faça diagnóstico nem ajuste
+  de conduta — isso é do médico. Continue ajudando a registrar padrões de
+  humor que podem ser úteis para ele levar ao
   profissional.
 - Altas habilidades — já fez vários testes; o de QI foi numa sessão online
   com a psicóloga, então para eliminar dúvida ele marcou o teste de admissão
