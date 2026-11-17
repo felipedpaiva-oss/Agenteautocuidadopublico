@@ -641,7 +641,7 @@ document.getElementById('hero-meta').textContent = b
 // ---------- Chart engine (SVG, sem libs externas) ----------
 const tooltipEl = document.getElementById('tooltip');
 
-function drawSeriesChart({ title, points, color, softColor, unit, decimals = 1, legend, secondary }) {
+function drawSeriesChart({ title, points, color, softColor, unit, decimals = 1, legend, secondary, bands }) {
   const dualAxis = !!(secondary && secondary.dualAxis);
   const M = { t: 10, r: dualAxis ? 36 : 14, b: 22, l: 40 };
   const W = 560, H = 190;
@@ -687,6 +687,15 @@ function drawSeriesChart({ title, points, color, softColor, unit, decimals = 1, 
   if (dualAxis && yMin2 != null) y2 = scale([yMin2, yMax2], [M.t + plotH, M.t]);
 
   let svg = `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">`;
+
+  if (bands && bands.length) {
+    bands.forEach(bnd => {
+      const lo = Math.max(bnd.min, yMin), hi = Math.min(bnd.max, yMax);
+      if (lo >= hi) return;
+      const yTop = y(hi), yBottom = y(lo);
+      svg += `<rect x="${M.l}" y="${yTop}" width="${plotW}" height="${yBottom - yTop}" fill="${bnd.color}" />`;
+    });
+  }
   gridYs.forEach(gy => {
     const isEdge = gy <= yMin + 1e-9 || gy >= yMax - 1e-9;
     if (!isEdge) svg += `<line class="grid-line" x1="${M.l}" x2="${M.l + plotW}" y1="${y(gy)}" y2="${y(gy)}" />`;
@@ -798,6 +807,7 @@ const COLOR = {
   accent: cv('--accent'), accentSoft: cv('--accent-soft'),
   cat2: cv('--cat-2'), cat2Soft: cv('--cat-2-soft'),
   cat3: cv('--cat-3'), cat3Soft: cv('--cat-3-soft'),
+  good: cv('--good'), goodSoft: cv('--good-soft'),
   warning: cv('--warning'), warningSoft: cv('--warning-soft'),
   critical: cv('--critical'), criticalSoft: cv('--critical-soft'),
   divergeWarm: cv('--diverge-warm'), divergeWarmSoft: cv('--diverge-warm-soft'),
@@ -807,7 +817,22 @@ const COLOR = {
 chartGrid.appendChild(drawSeriesChart({
   title: 'Peso (kg)',
   points: bio.map(r => ({ date: r.date, value: r.peso_kg })),
-  color: COLOR.accent, softColor: COLOR.accentSoft, unit: 'kg', decimals: 1
+  color: COLOR.accent, softColor: COLOR.accentSoft, unit: 'kg', decimals: 1,
+  bands: [
+    { min: -Infinity, max: 83, color: COLOR.goodSoft },
+    { min: 83, max: 100, color: COLOR.warningSoft },
+    { min: 100, max: Infinity, color: COLOR.criticalSoft }
+  ]
+}));
+chartGrid.appendChild(drawSeriesChart({
+  title: 'IMC',
+  points: bio.map(r => ({ date: r.date, value: r.imc })),
+  color: COLOR.accent, softColor: COLOR.accentSoft, unit: '', decimals: 1,
+  bands: [
+    { min: -Infinity, max: 25, color: COLOR.goodSoft },
+    { min: 25, max: 29.9, color: COLOR.warningSoft },
+    { min: 29.9, max: Infinity, color: COLOR.criticalSoft }
+  ]
 }));
 chartGrid.appendChild(drawSeriesChart({
   title: 'Gordura corporal (%)',
