@@ -820,9 +820,9 @@ chartGrid.appendChild(drawSeriesChart({
   color: COLOR.cat2, softColor: COLOR.cat2Soft, unit: 'cm', decimals: 0
 }));
 chartGrid.appendChild(drawSeriesChart({
-  title: 'Gordura visceral',
-  points: bio.map(r => ({ date: r.date, value: r.gordura_visceral })),
-  color: COLOR.warning, softColor: COLOR.warningSoft, unit: '', decimals: 1
+  title: 'Registro de massa muscular (%)',
+  points: bio.map(r => ({ date: r.date, value: r.massa_muscular_pct })),
+  color: COLOR.warning, softColor: COLOR.warningSoft, unit: '%', decimals: 1
 }));
 chartGrid.appendChild(drawSeriesChart({
   title: 'Humor (-3 a +3)',

@@ -70,17 +70,18 @@ Campos sem dado na semana devem ficar em branco — nunca estimados.
 Depois de registrar os dois CSVs (bioimpedância + check-in semanal), fechar o
 check-in com uma leitura integrada curta, cruzando:
 
-- Tendência de peso/gordura/massa muscular/gordura visceral (`bioimpedancia.csv`,
-  comparando com a medição anterior).
+- Tendência de peso/gordura corporal/registro de massa muscular (`bioimpedancia.csv`,
+  comparando com a medição anterior). Gordura visceral não é mais acompanhada
+  por pedido do usuário (17/11/2026) — ainda é lida e guardada no CSV se
+  aparecer no relatório, só não entra na análise nem no dashboard.
 - Circunferência abdominal (`checkins-semanais.csv`) — confirma ou destoa da
-  tendência de gordura visceral?
+  tendência de peso/gordura?
 - Cardio/força da semana — hipótese plausível para a tendência observada?
 - Descontroles alimentares e humor — algum dos dois ajuda a explicar variação
   de peso/água/gordura? (ex: mais descontroles + humor baixo numa semana com
   peso subindo é diferente de peso subindo com tudo estável — pode ser
   retenção de água, ganho de massa muscular, etc.)
-- Ligar com `docs/autocuidado.md` quando fizer sentido (ex: gordura visceral
-  alta + sono ruim relatado na conversa).
+- Ligar com `docs/autocuidado.md` quando fizer sentido.
 
 Regra: é leitura de padrão, não diagnóstico nem prescrição médica. 2-4 frases,
 direto ao ponto (ver `CLAUDE.md` sobre tom). Se não houver dado suficiente pra
