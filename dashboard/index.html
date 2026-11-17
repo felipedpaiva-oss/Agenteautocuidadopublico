@@ -865,6 +865,16 @@ chartGrid.appendChild(drawSeriesChart({
   unit: '', decimals: 0
 }));
 chartGrid.appendChild(drawSeriesChart({
+  title: 'Qualidade do sono (0-10)',
+  points: checkins.map(r => ({ date: r.date, value: r.sono_qualidade })),
+  color: COLOR.cat3, softColor: COLOR.cat3Soft, unit: '', decimals: 0,
+  bands: [
+    { min: -Infinity, max: 4, color: COLOR.criticalSoft },
+    { min: 4, max: 7, color: COLOR.warningSoft },
+    { min: 7, max: Infinity, color: COLOR.goodSoft }
+  ]
+}));
+chartGrid.appendChild(drawSeriesChart({
   title: 'Atividade física semanal',
   points: checkins.map(r => ({ date: r.date, value: r.horas_cardio, value2: r.horas_forca })),
   color: COLOR.accent, softColor: COLOR.accentSoft, unit: 'h', decimals: 1,
@@ -990,6 +1000,6 @@ document.getElementById('tables-container').innerHTML = `
   <p style="font-size:12px;color:var(--ink-muted);margin:12px 0 0">Bioimpedância</p>
   ${buildTable(bio, ['date','peso_kg','imc','gordura_pct','massa_muscular_pct','gordura_visceral','idade_metabolica'])}
   <p style="font-size:12px;color:var(--ink-muted);margin:14px 0 0">Check-ins semanais</p>
-  ${buildTable(checkins, ['date','circunferencia_abdominal_cm','horas_cardio','horas_forca','episodios_descontrole_alimentar','alcool_doses_sociais','alcool_doses_sozinho','humor','observacoes'])}
+  ${buildTable(checkins, ['date','circunferencia_abdominal_cm','horas_cardio','horas_forca','episodios_descontrole_alimentar','alcool_doses_sociais','alcool_doses_sozinho','sono_qualidade','humor','observacoes'])}
 `;
 </script>

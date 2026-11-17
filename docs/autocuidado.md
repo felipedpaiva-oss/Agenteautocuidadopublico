@@ -14,6 +14,10 @@ habilidades e bipolaridade — e formas de apoiar sem ser genérico.
   controlado (luz, som) — não é só "dormir 8h", é dormir num ambiente regulado.
 - Apoio: perguntar sobre horário de dormir/acordar, não só duração. Notar
   variações grandes de horário como sinal de alerta, junto com o campo `humor`.
+- Dado: `sono_qualidade` em `checkins-semanais.csv` (0-10, autorrelato semanal).
+  Complementa o achado da polissonografia de 17/10/2026 (apneia leve + sono
+  profundo quase ausente — ver `data/exames/README.md`): aquele exame é um
+  retrato de uma noite, este campo é a tendência semana a semana.
 
 ## 2. Exercício físico com frequência
 - Base de dados já cobre isso (`horas_cardio`, `horas_forca`). Cardio ajuda
