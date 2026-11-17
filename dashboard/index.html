@@ -642,7 +642,9 @@ document.getElementById('hero-meta').textContent = b
 const tooltipEl = document.getElementById('tooltip');
 
 function drawSeriesChart({ title, points, color, softColor, unit, decimals = 1, legend, secondary }) {
-  const W = 560, H = 190, M = { t: 10, r: 14, b: 22, l: 40 };
+  const dualAxis = !!(secondary && secondary.dualAxis);
+  const M = { t: 10, r: dualAxis ? 36 : 14, b: 22, l: 40 };
+  const W = 560, H = 190;
   const plotW = W - M.l - M.r, plotH = H - M.t - M.b;
 
   const panel = document.createElement('div');
@@ -664,32 +666,50 @@ function drawSeriesChart({ title, points, color, softColor, unit, decimals = 1, 
   wrap.className = 'chart-svg-wrap';
 
   const dates = points.map(p => parseD(p.date).getTime());
-  const values = points.flatMap(p => secondary ? [p.value, p.value2] : [p.value]).filter(v => v != null);
+  const primaryValues = points.map(p => p.value).filter(v => v != null);
+  const values = points.flatMap(p => (secondary && !dualAxis) ? [p.value, p.value2] : [p.value]).filter(v => v != null);
   const rawMin = Math.min(...values), rawMax = Math.max(...values);
   const { min: yMin, max: yMax, ticks: gridYs } = niceTicks(rawMin, rawMax, 4);
+
+  let y2 = null, yMin2, yMax2, gridYs2;
+  if (dualAxis) {
+    const secValues = points.map(p => p.value2).filter(v => v != null);
+    if (secValues.length) {
+      const secRawMin = Math.min(...secValues), secRawMax = Math.max(...secValues);
+      ({ min: yMin2, max: yMax2, ticks: gridYs2 } = niceTicks(secRawMin, secRawMax, 4));
+    }
+  }
 
   const singlePoint = points.length === 1;
   const xDomain = singlePoint ? [dates[0] - DAY * 3, dates[0] + DAY * 3] : [Math.min(...dates), Math.max(...dates)];
   const x = scale(xDomain, [M.l, M.l + plotW]);
   const y = scale([yMin, yMax], [M.t + plotH, M.t]);
+  if (dualAxis && yMin2 != null) y2 = scale([yMin2, yMax2], [M.t + plotH, M.t]);
 
   let svg = `<svg class="chart" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet">`;
   gridYs.forEach(gy => {
     const isEdge = gy <= yMin + 1e-9 || gy >= yMax - 1e-9;
     if (!isEdge) svg += `<line class="grid-line" x1="${M.l}" x2="${M.l + plotW}" y1="${y(gy)}" y2="${y(gy)}" />`;
-    svg += `<text class="axis-label" x="${M.l - 8}" y="${y(gy) + 3}" text-anchor="end">${fmt(gy, decimals)}</text>`;
+    svg += `<text class="axis-label" x="${M.l - 8}" y="${y(gy) + 3}" text-anchor="end" fill="${dualAxis ? color : 'var(--ink-muted)'}">${fmt(gy, decimals)}</text>`;
   });
+  if (dualAxis && y2) {
+    const secDecimals = secondary.decimals != null ? secondary.decimals : decimals;
+    gridYs2.forEach(gy => {
+      svg += `<text class="axis-label" x="${M.l + plotW + 8}" y="${y2(gy) + 3}" text-anchor="start" fill="${secondary.color}">${fmt(gy, secDecimals)}</text>`;
+    });
+  }
 
-  function seriesPath(key, col, dashed) {
+  function seriesPath(key, col, dashed, scaleFn) {
+    const sf = scaleFn || y;
     const pts = points.filter(p => p[key] != null);
     if (!pts.length) return '';
     let path = '';
     if (pts.length === 1) {
-      const px = x(parseD(pts[0].date).getTime()), py = y(pts[0][key]);
+      const px = x(parseD(pts[0].date).getTime()), py = sf(pts[0][key]);
       return `<line class="zero-line" x1="${M.l}" x2="${M.l+plotW}" y1="${py}" y2="${py}" stroke="${col}" opacity="0.35" />`;
     }
     pts.forEach((p, i) => {
-      const px = x(parseD(p.date).getTime()), py = y(p[key]);
+      const px = x(parseD(p.date).getTime()), py = sf(p[key]);
       path += (i === 0 ? 'M' : 'L') + px + ',' + py + ' ';
     });
     return `<path d="${path}" fill="none" stroke="${col}" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ${dashed ? 'stroke-dasharray="4 3"' : ''}/>`;
@@ -706,22 +726,23 @@ function drawSeriesChart({ title, points, color, softColor, unit, decimals = 1, 
     svg += seriesPath('value', color, false);
   } else {
     svg += seriesPath('value', color, false);
-    svg += seriesPath('value2', secondary.color, false);
+    svg += seriesPath('value2', secondary.color, dualAxis, dualAxis ? y2 : null);
   }
 
   // markers
-  function markers(key, col) {
+  function markers(key, col, scaleFn) {
+    const sf = scaleFn || y;
     let out = '';
     points.forEach((p, i) => {
       if (p[key] == null) return;
-      const px = x(parseD(p.date).getTime()), py = y(p[key]);
+      const px = x(parseD(p.date).getTime()), py = sf(p[key]);
       const isLast = i === points.length - 1;
       out += `<circle data-idx="${i}" data-key="${key}" cx="${px}" cy="${py}" r="${isLast ? 4.5 : 3}" fill="${col}" stroke="var(--surface)" stroke-width="1.5" class="pt" style="cursor:pointer" />`;
     });
     return out;
   }
   svg += markers('value', color);
-  if (secondary) svg += markers('value2', secondary.color);
+  if (secondary) svg += markers('value2', secondary.color, dualAxis ? y2 : null);
 
   // x-axis labels (first/last)
   const firstP = points[0], lastP = points[points.length - 1];
@@ -749,7 +770,9 @@ function drawSeriesChart({ title, points, color, softColor, unit, decimals = 1, 
       const p = points[idx];
       const label = key === 'value2' ? secondary.label : (legend ? legend[0].label : unit);
       const val = p[key];
-      tooltipEl.innerHTML = `${fmtDateShort(parseD(p.date))} · ${label}: <strong>${fmt(val, decimals)}${unit ? ' ' + unit : ''}</strong>`;
+      const tDecimals = key === 'value2' && secondary && secondary.decimals != null ? secondary.decimals : decimals;
+      const tUnit = key === 'value2' && secondary && secondary.unit != null ? secondary.unit : unit;
+      tooltipEl.innerHTML = `${fmtDateShort(parseD(p.date))} · ${label}: <strong>${fmt(val, tDecimals)}${tUnit ? ' ' + tUnit : ''}</strong>`;
       tooltipEl.classList.add('visible');
       positionTooltip(e);
     });
@@ -809,14 +832,11 @@ chartGrid.appendChild(drawSeriesChart({
   unit: '', decimals: 0
 }));
 chartGrid.appendChild(drawSeriesChart({
-  title: 'Cardio semanal (h)',
-  points: checkins.map(r => ({ date: r.date, value: r.horas_cardio })),
-  color: COLOR.accent, softColor: COLOR.accentSoft, unit: 'h', decimals: 1
-}));
-chartGrid.appendChild(drawSeriesChart({
-  title: 'Força semanal (h)',
-  points: checkins.map(r => ({ date: r.date, value: r.horas_forca })),
-  color: COLOR.cat2, softColor: COLOR.cat2Soft, unit: 'h', decimals: 2
+  title: 'Atividade física semanal',
+  points: checkins.map(r => ({ date: r.date, value: r.horas_cardio, value2: r.horas_forca })),
+  color: COLOR.accent, softColor: COLOR.accentSoft, unit: 'h', decimals: 1,
+  secondary: { color: COLOR.cat2, label: 'Força', dualAxis: true, decimals: 2, unit: 'h' },
+  legend: [{ color: COLOR.accent, label: 'Cardio (eixo esq.)' }, { color: COLOR.cat2, label: 'Força (eixo dir.)' }]
 }));
 chartGrid.appendChild(drawSeriesChart({
   title: 'Episódios de descontrole alimentar',
