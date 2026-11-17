@@ -899,19 +899,22 @@ document.getElementById('chart-sub').textContent = `${bio.length} registro(s) de
 // ---------- Leitura integrada (texto) ----------
 const readingCard = document.getElementById('reading-card');
 readingCard.innerHTML = `
-  <span class="card-label">Check-in de 17/11 — troca de medicação</span>
+  <span class="card-label">Check-in de 17/11 — quadro completo, com os novos dados</span>
   <p><strong>O aripiprazol saiu do tratamento.</strong> O relato de inquietação/ansiedade da véspera se confirmou
   como efeito da medicação, e a psiquiatra trocou por <strong>lamotrigina</strong>. Medicação atual: lítio +
   lamotrigina (humor), lisdexanfetamina (TDAH), B12 e ácido fólico. Início de medicação nova pede o mesmo cuidado de
   observação que já foi útil antes — sem alarme, só atenção nos próximos check-ins.</p>
-  <p><strong>Humor 0, estável.</strong> Bastante coisa em espera ao mesmo tempo: resposta de agências sobre o ano de
+  <p><strong>Sono 7/10 e álcool dentro do padrão que ele mesmo definiu como saudável</strong> (2 doses sociais, 0
+  sozinho) — dois pontos bons logo na primeira semana em que passaram a ser acompanhados. Massa muscular em 69,9%,
+  estável na faixa de sempre (69-70%). <strong>Quarta semana seguida de treino de força (1h, a maior desde que
+  voltou)</strong> — ele mesmo nomeou isso como vitória, "esforço danado se organizar e sair pra fazer exercício",
+  mesmo com volume bem menor que na temporada de trabalho.</p>
+  <p><strong>Humor 0, estável.</strong> Peso subiu pra 89,8kg (+1,9kg) depois da queda bonita da semana passada —
+  flutuação normal, não reversão. Bastante coisa em espera ao mesmo tempo: resposta de agências sobre o ano de
   trabalho em 2027, data da mudança pra Itália (já decidida, falta só definir quando) e o resultado da prova da
-  esposa (23/12) que também depende dessa mudança. "Cabeça ainda muito ativa e criativa" é a frase dele — vale notar
-  sem alarme, mas sem deixar de observar, dado o histórico recente.</p>
-  <p><strong>Peso subiu pra 89,8kg (+1,9kg)</strong> e gordura visceral voltou a 15,5 — depois da queda bonita da
-  semana passada, isso é flutuação normal, não motivo de preocupação. O que importa mais: <strong>quarta semana
-  seguida de treino de força (1h, a maior desde que voltou)</strong>, e ele mesmo nomeou isso como vitória — "esforço
-  danado se organizar e sair pra fazer exercício" mesmo com volume bem menor que na temporada de trabalho.</p>
+  esposa (23/12). "Cabeça ainda muito ativa e criativa" é a frase dele — com sono bom, humor estável e sem relato de
+  irritabilidade essa semana, lê como traço (altas habilidades) mais do que sinal de alerta, mas vale seguir
+  observando dado o histórico recente.</p>
 `;
 
 // ---------- Tendência de longo prazo ----------
@@ -955,13 +958,13 @@ const priorities = [
     tag: 'Pilar: acompanhamento médico'
   },
   {
-    title: 'Celebrar a quarta semana seguida de força',
-    desc: '1h é a maior desde que voltou a treinar, mesmo bem abaixo do volume da temporada. Ele mesmo nomeou isso como esforço e vitória — vale manter esse reconhecimento.',
-    tag: 'Pilar: exercício físico'
+    title: 'Reconhecer um check-in com vários pontos bons',
+    desc: 'Sono 7/10, álcool no padrão social que você definiu como saudável, quarta semana seguida de força, massa muscular estável. Vale notar isso como conjunto, não só item por item.',
+    tag: 'Reconhecimento, sem ação corretiva'
   },
   {
     title: 'Não reagir à alta de peso desta semana',
-    desc: 'Depois da queda bonita da semana passada, 89,8kg e visceral 15,5 é flutuação normal, não reversão. Comparar de novo daqui a 2-3 semanas antes de tirar conclusão.',
+    desc: 'Depois da queda da semana passada, 89,8kg é flutuação normal, não reversão. Comparar de novo daqui a 2-3 semanas antes de tirar conclusão.',
     tag: 'Observação, sem ação corretiva'
   },
   {
