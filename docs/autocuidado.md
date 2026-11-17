@@ -39,10 +39,20 @@ habilidades e bipolaridade — e formas de apoiar sem ser genérico.
 - Apoio: ao notar aumento de episódios, perguntar sobre contexto (estresse,
   sono, humor da semana) em vez de focar só na comida.
 
-## 6. Evitar álcool
+## 6. Álcool — social sim, sozinho não
 - Álcool interage mal com humor instável (pode piorar episódios depressivos e
   atrapalhar sono) e reduz ainda mais o controle de impulsos já desafiado pelo
   TDAH.
+- **Distinção que o próprio usuário adotou** (não é prescrição médica, é
+  filosofia pessoal de redução de danos): consumo social moderado (ele estima
+  ~2-3 doses/semana) é aceitável — álcool funciona como lubrificante social, e
+  isso tem valor pros pilares 3 e 4 (vida social). O padrão de atenção real é
+  **consumo sozinho**, que tende a sinalizar uso como automedicação/fuga em
+  vez de conexão social.
+- Dados em `checkins-semanais.csv`: `alcool_doses_sociais` e
+  `alcool_doses_sozinho`, separados de propósito. Ao apoiar, não tratar os
+  dois como a mesma coisa — perguntar/comentar sobre eles separadamente, e
+  reservar atenção mais próxima para o consumo sozinho, não para o total.
 
 ## 7. Evitar açúcar
 - Picos/quedas de glicose pioram sintomas de desatenção e irritabilidade no

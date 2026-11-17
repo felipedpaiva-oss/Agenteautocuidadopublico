@@ -64,7 +64,8 @@ agendada) saiba como se comportar e onde ler/escrever o histórico.
    texto.
 2. **Histórico semanal** (`data/checkins-semanais.csv`): circunferência
    abdominal, horas de cardio, horas de força, episódios de descontrole
-   alimentar e humor. Ver `data/README.md` para o schema completo.
+   alimentar, doses de álcool (sociais e sozinho, separadamente) e humor.
+   Ver `data/README.md` para o schema completo.
 3. **Check-in guiado por chat**: quando o usuário disser que quer registrar a
    semana (ou quando a rotina semanal disparar), primeiro pedir o relatório de
    bioimpedância em anexo (se ainda não tiver vindo na mensagem), processar e

@@ -58,6 +58,8 @@ serve de chave para juntar os dois CSVs).
 | `horas_cardio` | número | Total de horas de exercício cardio na semana. |
 | `horas_forca` | número | Total de horas de exercício de força na semana. |
 | `episodios_descontrole_alimentar` | inteiro | Número de episódios de descontrole alimentar na semana. |
+| `alcool_doses_sociais` | inteiro | Doses de álcool consumidas em ocasiões sociais na semana. Distinção proposital: o usuário trata consumo social (aceitável em moderação, ~2-3 doses/semana) e consumo sozinho (pilar a evitar/observar) como padrões diferentes — ver `docs/autocuidado.md`, pilar 6. |
+| `alcool_doses_sozinho` | inteiro | Doses de álcool consumidas sozinho na semana. |
 | `humor` | inteiro, -3 a 3 | Humor médio/predominante da semana. `-3` = muito para baixo/depressivo, `0` = estável, `3` = muito para cima/acelerado/eufórico. Escala simétrica de propósito: quedas e picos importam (relevante para investigação de bipolaridade). |
 | `observacoes` | texto livre | Contexto relevante da semana (eventos, mudanças, gatilhos). Opcional. |
 

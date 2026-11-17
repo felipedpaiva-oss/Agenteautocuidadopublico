@@ -383,8 +383,6 @@
     <span class="hero-meta" id="hero-meta"></span>
   </header>
 
-  <section class="stat-grid" id="stat-grid"></section>
-
   <section>
     <div class="section-head">
       <h2 class="section-title">Evolução dos indicadores</h2>
@@ -578,7 +576,7 @@ const checkins = [
     episodios_descontrole_alimentar: 1, humor: 1,
     observacoes: 'Falou com a psiquiatra: ela manteve o tratamento como estava. Entrou com a dose final do aripiprazol. Se sentindo "simplesmente bem", avançando nos projetos apesar da incerteza financeira. Orgulhoso de ter quebrado o ciclo de várias semanas ganhando peso. Episódios de grito/irritabilidade com as filhas diminuíram bastante; mais conversas com a esposa, que entende melhor e está ajudando mais.' },
   { date: '2026-11-17', circunferencia_abdominal_cm: 96, horas_cardio: 3.5, horas_forca: 1,
-    episodios_descontrole_alimentar: 3, humor: 0,
+    episodios_descontrole_alimentar: 3, humor: 0, alcool_doses_sozinho: 2,
     observacoes: 'Mudança de medicação: saiu o aripiprazol (identificado como fonte da inquietação/ansiedade relatada na véspera) e entrou a lamotrigina. Ansiedade financeira e profissional seguem presentes (aguardando resposta de agências sobre 2027), mas sendo administradas. Ansiedade de espera: mudança pra Itália já definida mas sem data, resultado da prova da esposa só em 23/12. Cabeça ainda muito ativa e criativa. Orgulhoso da constância no exercício físico mesmo bem abaixo do volume da temporada.' }
 ];
 
@@ -632,38 +630,9 @@ function deltaChip(curr, prevV, decimals, lowerIsBetter = true) {
   return { text: `${dir} ${fmt(Math.abs(d), decimals)} vs. última medição`, cls: better ? 'down' : 'up' };
 }
 
-// ---------- Stat tiles ----------
-const statGrid = document.getElementById('stat-grid');
+// ---------- Dados mais recentes (usados nas leituras de texto) ----------
 const b = last(bio), bp = prev(bio);
 const c = last(checkins), cp = prev(checkins);
-
-function statTile(label, value, unit, delta, chipHtml) {
-  const el = document.createElement('div');
-  el.className = 'stat-tile';
-  el.innerHTML = `
-    <div class="stat-label"><span>${label}</span>${chipHtml || ''}</div>
-    <div class="stat-value">${value}<span class="unit">${unit}</span></div>
-    <div class="stat-delta ${delta.cls}">${delta.text}</div>
-  `;
-  return el;
-}
-
-if (b) {
-  const visceralChip = b.gordura_visceral >= 15 ? '<span class="chip critical">visceral alta</span>'
-    : b.gordura_visceral >= 10 ? '<span class="chip warning">visceral atenção</span>'
-    : '<span class="chip good">visceral ok</span>';
-  statGrid.appendChild(statTile('Peso', fmt(b.peso_kg), 'kg', deltaChip(b.peso_kg, bp && bp.peso_kg, 1, true)));
-  statGrid.appendChild(statTile('Gordura visceral', fmt(b.gordura_visceral), '', deltaChip(b.gordura_visceral, bp && bp.gordura_visceral, 1, true), visceralChip));
-  statGrid.appendChild(statTile('IMC', fmt(b.imc), '', deltaChip(b.imc, bp && bp.imc, 1, true)));
-}
-if (c) {
-  const humorLabel = c.humor > 0 ? `+${c.humor}` : `${c.humor}`;
-  const humorChip = c.humor >= 2 ? '<span class="chip warning">bem para cima</span>'
-    : c.humor <= -2 ? '<span class="chip critical">bem para baixo</span>'
-    : '<span class="chip neutral">dentro da faixa</span>';
-  statGrid.appendChild(statTile('Circunferência abdominal', fmt(c.circunferencia_abdominal_cm, 0), 'cm', deltaChip(c.circunferencia_abdominal_cm, cp && cp.circunferencia_abdominal_cm, 0, true)));
-  statGrid.appendChild(statTile('Humor da semana', humorLabel, '/ ±3', deltaChip(c.humor, cp && cp.humor, 0, true), humorChip));
-}
 
 document.getElementById('hero-meta').textContent = b
   ? `Último registro: ${fmtDateFull(parseD(b.date))}`
@@ -840,16 +809,26 @@ chartGrid.appendChild(drawSeriesChart({
   unit: '', decimals: 0
 }));
 chartGrid.appendChild(drawSeriesChart({
-  title: 'Atividade física semanal (h)',
-  points: checkins.map(r => ({ date: r.date, value: r.horas_cardio, value2: r.horas_forca })),
-  color: COLOR.accent, softColor: COLOR.accentSoft, unit: 'h', decimals: 1,
-  secondary: { color: COLOR.cat2, label: 'Força' },
-  legend: [{ color: COLOR.accent, label: 'Cardio' }, { color: COLOR.cat2, label: 'Força' }]
+  title: 'Cardio semanal (h)',
+  points: checkins.map(r => ({ date: r.date, value: r.horas_cardio })),
+  color: COLOR.accent, softColor: COLOR.accentSoft, unit: 'h', decimals: 1
+}));
+chartGrid.appendChild(drawSeriesChart({
+  title: 'Força semanal (h)',
+  points: checkins.map(r => ({ date: r.date, value: r.horas_forca })),
+  color: COLOR.cat2, softColor: COLOR.cat2Soft, unit: 'h', decimals: 2
 }));
 chartGrid.appendChild(drawSeriesChart({
   title: 'Episódios de descontrole alimentar',
   points: checkins.map(r => ({ date: r.date, value: r.episodios_descontrole_alimentar })),
   color: COLOR.critical, softColor: COLOR.criticalSoft, unit: '', decimals: 0
+}));
+chartGrid.appendChild(drawSeriesChart({
+  title: 'Consumo de álcool (doses/semana)',
+  points: checkins.map(r => ({ date: r.date, value: r.alcool_doses_sociais, value2: r.alcool_doses_sozinho })),
+  color: COLOR.accent, softColor: COLOR.accentSoft, unit: 'doses', decimals: 0,
+  secondary: { color: COLOR.warning, label: 'Sozinho' },
+  legend: [{ color: COLOR.accent, label: 'Em ocasiões sociais' }, { color: COLOR.warning, label: 'Sozinho' }]
 }));
 
 document.getElementById('chart-sub').textContent = `${bio.length} registro(s) de bioimpedância · ${checkins.length} check-in(s) semanal(is)`;
@@ -958,6 +937,6 @@ document.getElementById('tables-container').innerHTML = `
   <p style="font-size:12px;color:var(--ink-muted);margin:12px 0 0">Bioimpedância</p>
   ${buildTable(bio, ['date','peso_kg','imc','gordura_pct','massa_muscular_pct','gordura_visceral','idade_metabolica'])}
   <p style="font-size:12px;color:var(--ink-muted);margin:14px 0 0">Check-ins semanais</p>
-  ${buildTable(checkins, ['date','circunferencia_abdominal_cm','horas_cardio','horas_forca','episodios_descontrole_alimentar','humor','observacoes'])}
+  ${buildTable(checkins, ['date','circunferencia_abdominal_cm','horas_cardio','horas_forca','episodios_descontrole_alimentar','alcool_doses_sociais','alcool_doses_sozinho','humor','observacoes'])}
 `;
 </script>
