@@ -514,7 +514,12 @@ const bio = [
     massa_muscular_esqueletica_pct: 38.1, massa_muscular_esqueletica_kg: 34.2,
     massa_muscular_pct: 69.9, massa_muscular_kg: 62.7, agua_pct: 52.1, agua_kg: 46.8,
     gordura_visceral: 15.5, ossos_kg: 3.57, metabolismo_kcal: 1872, proteina_pct: 17.8,
-    obesidade_pct: 24.6, idade_metabolica: 46, lbm_kg: 66.31, idade_real: 37, altura_cm: 183 }
+    obesidade_pct: 24.6, idade_metabolica: 46, lbm_kg: 66.31, idade_real: 37, altura_cm: 183 },
+  { date: '2026-11-24', peso_kg: 92.65, imc: 27.7, gordura_pct: 27.3, peso_gordura_kg: 25.3,
+    massa_muscular_esqueletica_pct: 37.4, massa_muscular_esqueletica_kg: 34.7,
+    massa_muscular_pct: 68.9, massa_muscular_kg: 63.9, agua_pct: 51.6, agua_kg: 47.8,
+    gordura_visceral: 16.5, ossos_kg: 3.48, metabolismo_kcal: 1910, proteina_pct: 17.3,
+    obesidade_pct: 28.5, idade_metabolica: 47, lbm_kg: 67.39, idade_real: 37, altura_cm: 183 }
 ];
 
 const checkins = [
@@ -579,7 +584,10 @@ const checkins = [
     observacoes: 'Falou com a psiquiatra: ela manteve o tratamento como estava. Entrou com a dose final do aripiprazol. Se sentindo "simplesmente bem", avançando nos projetos apesar da incerteza financeira. Orgulhoso de ter quebrado o ciclo de várias semanas ganhando peso. Episódios de grito/irritabilidade com as filhas diminuíram bastante; mais conversas com a esposa, que entende melhor e está ajudando mais.' },
   { date: '2026-11-17', circunferencia_abdominal_cm: 96, horas_cardio: 3.5, horas_forca: 1,
     episodios_descontrole_alimentar: 3, humor: 0, alcool_doses_sociais: 2, sono_qualidade: 7,
-    observacoes: 'Mudança de medicação: saiu o aripiprazol (identificado como fonte da inquietação/ansiedade relatada na véspera) e entrou a lamotrigina. Ansiedade financeira e profissional seguem presentes (aguardando resposta de agências sobre 2027), mas sendo administradas. Ansiedade de espera: mudança pra Itália já definida mas sem data, resultado da prova da esposa só em 23/12. Cabeça ainda muito ativa e criativa. Orgulhoso da constância no exercício físico mesmo bem abaixo do volume da temporada.' }
+    observacoes: 'Mudança de medicação: saiu o aripiprazol (identificado como fonte da inquietação/ansiedade relatada na véspera) e entrou a lamotrigina. Ansiedade financeira e profissional seguem presentes (aguardando resposta de agências sobre 2027), mas sendo administradas. Ansiedade de espera: mudança pra Itália já definida mas sem data, resultado da prova da esposa só em 23/12. Cabeça ainda muito ativa e criativa. Orgulhoso da constância no exercício físico mesmo bem abaixo do volume da temporada.' },
+  { date: '2026-11-24', circunferencia_abdominal_cm: 98, horas_cardio: 3, horas_forca: 1,
+    episodios_descontrole_alimentar: 2, humor: 1.5, alcool_doses_sociais: 7, alcool_doses_sozinho: 0, sono_qualidade: 5,
+    observacoes: '7 doses sociais em 4 ocasiões (uma com 3 doses só) — mais do que gostaria, só percebeu a soma ao contar agora; pretende diminuir essa semana. Lamotrigina sendo introduzida no ritmo aconselhado, sem reações negativas até agora. Sedentário por causa de trabalho intenso e sentado o dia todo; quer se dedicar mais aos esportes. Sono: vários episódios de acordar às 4h/5h e não voltar a dormir, mas acordou satisfeito nesses dias; em outras noites (comeu muito ou tarde demais) dormiu muito mal, com apneia aparentemente mais presente — padrão a observar.' }
 ];
 
 // ---------- Helpers ----------
@@ -899,22 +907,21 @@ document.getElementById('chart-sub').textContent = `${bio.length} registro(s) de
 // ---------- Leitura integrada (texto) ----------
 const readingCard = document.getElementById('reading-card');
 readingCard.innerHTML = `
-  <span class="card-label">Check-in de 17/11 — quadro completo, com os novos dados</span>
-  <p><strong>O aripiprazol saiu do tratamento.</strong> O relato de inquietação/ansiedade da véspera se confirmou
-  como efeito da medicação, e a psiquiatra trocou por <strong>lamotrigina</strong>. Medicação atual: lítio +
-  lamotrigina (humor), lisdexanfetamina (TDAH), B12 e ácido fólico. Início de medicação nova pede o mesmo cuidado de
-  observação que já foi útil antes — sem alarme, só atenção nos próximos check-ins.</p>
-  <p><strong>Sono 7/10 e álcool dentro do padrão que ele mesmo definiu como saudável</strong> (2 doses sociais, 0
-  sozinho) — dois pontos bons logo na primeira semana em que passaram a ser acompanhados. Massa muscular em 69,9%,
-  estável na faixa de sempre (69-70%). <strong>Quarta semana seguida de treino de força (1h, a maior desde que
-  voltou)</strong> — ele mesmo nomeou isso como vitória, "esforço danado se organizar e sair pra fazer exercício",
-  mesmo com volume bem menor que na temporada de trabalho.</p>
-  <p><strong>Humor 0, estável.</strong> Peso subiu pra 89,8kg (+1,9kg) depois da queda bonita da semana passada —
-  flutuação normal, não reversão. Bastante coisa em espera ao mesmo tempo: resposta de agências sobre o ano de
-  trabalho em 2027, data da mudança pra Itália (já decidida, falta só definir quando) e o resultado da prova da
-  esposa (23/12). "Cabeça ainda muito ativa e criativa" é a frase dele — com sono bom, humor estável e sem relato de
-  irritabilidade essa semana, lê como traço (altas habilidades) mais do que sinal de alerta, mas vale seguir
-  observando dado o histórico recente.</p>
+  <span class="card-label">Check-in de 24/11 — segunda semana seguida de alta</span>
+  <p><strong>Peso subiu de novo, e desta vez é tendência, não flutuação isolada</strong>: 87,9kg → 89,8kg → 92,65kg
+  nas últimas três medições (+4,75kg em 2 semanas). Gordura corporal foi a 27,3% e massa muscular caiu um pouco pra
+  68,9% — ainda bom, mas primeira queda desde que estava estável em 69-70%. Bate com o que ele mesmo notou:
+  <strong>"tô meio sedentário", trabalho intenso e sentado o dia todo</strong>. Força seguiu presente (1h, quinta
+  semana seguida) — isso não caiu, o que caiu foi o resto do movimento do dia a dia.</p>
+  <p><strong>Álcool: 7 doses sociais</strong>, acima do que ele mesmo definiu como ideal (2-3/semana) — percebeu a
+  soma só ao contar agora, não durante a semana, e já decidiu reduzir. Não teve consumo sozinho, o que segue
+  alinhado com o padrão que ele quer manter.</p>
+  <p><strong>Sono caiu pra 5/10</strong> (era 7 semana passada), com um detalhe valioso que ele mesmo reparou: noites
+  em que comeu muito ou tarde demais vieram com apneia mais presente e sono pior, enquanto despertares de madrugada
+  (4h-5h) às vezes ainda deixaram ele satisfeito. Esse é exatamente o tipo de observação que vale levar pro
+  acompanhamento do sono — conecta direto com o achado da polissonografia (peso como fator mais modificável da
+  apneia).</p>
+  <p>Humor +1,5, segue positivo. Lamotrigina sendo introduzida no ritmo certo, sem reações negativas até agora.</p>
 `;
 
 // ---------- Tendência de longo prazo ----------
@@ -941,10 +948,11 @@ trendCard.innerHTML = `
   <p>${trendText(bio.map(r => ({ date: r.date, value: r.peso_kg })), 'Peso', 'kg', 1)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.circunferencia_abdominal_cm })), 'Circunferência abdominal', 'cm', 0)}</p>
   <p>${trendText(checkins.map(r => ({ date: r.date, value: r.humor })), 'Humor', ' pontos', 1)}</p>
-  <p style="color:var(--good)"><strong>Acompanhamento em curso:</strong> o sinal de 03/11 foi resolvido, e agora o
-  aripiprazol — identificado como fonte da ansiedade/inquietação — saiu do tratamento, entrando lamotrigina no lugar.
-  Humor voltou a estável (0) nesta semana. Vale observar os próximos check-ins com a troca de medicação em mente,
-  mas sem alarme — é ajuste terapêutico normal, acompanhado de perto pela psiquiatra.</p>
+  <p style="color:var(--warning)"><strong>Acompanhamento em curso:</strong> peso em alta por duas semanas seguidas
+  (+4,75kg desde 10/11), junto com sedentarismo relatado e sono em queda (7 → 5). Nada que peça ação médica — é
+  um padrão de rotina (trabalho sentado, álcool acima da meta própria, comer tarde) que o próprio usuário já
+  identificou e pretende ajustar. Vale comparar de novo em 2-3 semanas pra ver se a tendência se confirma ou
+  reverte.</p>
   <p style="font-size:12.5px;color:var(--ink-muted)">Referência de base (${b ? b.idade_real : '—'} anos, ${b ? b.altura_cm : '—'}cm):
   idade metabólica ${b ? b.idade_metabolica : '—'} vs. idade real ${b ? b.idade_real : '—'} — vale acompanhar se essa
   diferença fecha ao longo do tempo.</p>
@@ -953,24 +961,24 @@ trendCard.innerHTML = `
 // ---------- Prioridades da semana ----------
 const priorities = [
   {
-    title: 'Observar a lamotrigina nas próximas semanas',
-    desc: 'Início de medicação nova — vale notar qualquer coisa incomum (humor, sono, pele, energia) nos próximos check-ins, do mesmo jeito que ajudou a identificar o problema com o aripiprazol.',
-    tag: 'Pilar: acompanhamento médico'
+    title: 'Mais movimento no dia a dia, não só o treino',
+    desc: 'Força continua firme (5ª semana seguida), mas o sedentarismo do trabalho sentado parece ser o que está pesando na balança. Uma pausa pra caminhar durante o dia de trabalho pode valer mais que aumentar o treino.',
+    tag: 'Pilar: exercício físico'
   },
   {
-    title: 'Reconhecer um check-in com vários pontos bons',
-    desc: 'Sono 7/10, álcool no padrão social que você definiu como saudável, quarta semana seguida de força, massa muscular estável. Vale notar isso como conjunto, não só item por item.',
-    tag: 'Reconhecimento, sem ação corretiva'
+    title: 'Reduzir o álcool essa semana, como você já decidiu',
+    desc: '7 doses sociais é mais do que você mesmo queria — e você já percebeu isso sozinho antes de eu comentar. Não precisa de mais nada da minha parte aqui, só registrar se a redução aconteceu.',
+    tag: 'Pilar: evitar álcool'
   },
   {
-    title: 'Não reagir à alta de peso desta semana',
-    desc: 'Depois da queda da semana passada, 89,8kg é flutuação normal, não reversão. Comparar de novo daqui a 2-3 semanas antes de tirar conclusão.',
-    tag: 'Observação, sem ação corretiva'
+    title: 'Testar a relação comida tarde/pesada → sono pior',
+    desc: 'Você mesmo notou essa conexão. Vale prestar atenção de propósito nas próximas semanas: nas noites que comer mais cedo/leve, o sono melhora de fato?',
+    tag: 'Pilar: sono · alimentação'
   },
   {
-    title: 'Esperas múltiplas ao mesmo tempo (agências, Itália, prova da esposa)',
-    desc: 'Três decisões grandes em espera simultânea é bastante carga mental, mesmo com humor estável agora. Vale nomear isso como peso real, não só como ansiedade a mais.',
-    tag: 'Pilar: foco em metas pessoais'
+    title: 'Observar se a alta de peso é tendência ou um pico',
+    desc: 'Duas semanas seguidas de alta já é mais que flutuação pontual. Sem alarme — mas vale confirmar na próxima medição antes de decidir se é hora de ajustar alguma coisa.',
+    tag: 'Observação, sem ação corretiva ainda'
   }
 ];
 const priorityList = document.getElementById('priority-list');
