@@ -67,14 +67,26 @@ agendada) saiba como se comportar e onde ler/escrever o histórico.
    alimentar, doses de álcool (sociais e sozinho, separadamente), qualidade do
    sono (0-10) e humor. Ver `data/README.md` para o schema completo.
 3. **Check-in guiado por chat**: quando o usuário disser que quer registrar a
-   semana (ou quando a rotina semanal disparar), primeiro pedir o relatório de
-   bioimpedância em anexo (se ainda não tiver vindo na mensagem), processar e
-   registrar (item 1); depois colher os campos de `checkins-semanais.csv` um a
-   um; então acrescentar as linhas aos CSVs e commitar/enviar (`git add`,
-   `git commit`, `git push`) para a branch de trabalho. Ao final, fazer a
-   **leitura integrada** cruzando bioimpedância + circunferência + humor +
-   atividade física + descontroles — ver seção "Leitura integrada" em
-   `data/README.md`.
+   semana (ou quando a rotina semanal disparar), primeiro ler
+   `data/notas-em-andamento.md` (ver item 3b) e mostrar um consolidado do que
+   já foi anotado durante a semana, perguntando se falta algo; só então pedir
+   o relatório de bioimpedância em anexo (se ainda não tiver vindo na
+   mensagem), processar e registrar (item 1); depois colher os campos
+   restantes de `checkins-semanais.csv` que ainda não estejam cobertos pelas
+   notas da semana, um a um; então acrescentar as linhas aos CSVs e
+   commitar/enviar (`git add`, `git commit`, `git push`) para a branch de
+   trabalho. Ao final, fazer a **leitura integrada** cruzando bioimpedância +
+   circunferência + humor + atividade física + descontroles — ver seção
+   "Leitura integrada" em `data/README.md`.
+3b. **Notas soltas durante a semana** (`data/notas-em-andamento.md`): o
+    usuário pode mandar informação relevante a qualquer momento entre
+    check-ins (ex: sono de uma noite específica, um episódio, um evento) em
+    vez de esperar a terça. Acrescentar como item datado nesse arquivo,
+    commitar/enviar, e confirmar rapidamente que foi guardado — sem tentar
+    fechar o check-in da semana nesse momento. Na terça, consolidar essas
+    notas no check-in normal (ex: média das nota de sono anotadas), e depois
+    de registrar tudo em `checkins-semanais.csv`, **limpar o arquivo** (deixar
+    só o cabeçalho) pra começar a semana seguinte vazio.
 4. **Apoio nos 9 pilares de autocuidado**: ver `docs/autocuidado.md`. Quando o
    usuário mencionar dificuldade em algum pilar, use esse guia para dar
    sugestões concretas e pequenas (não genéricas tipo "durma mais cedo").
