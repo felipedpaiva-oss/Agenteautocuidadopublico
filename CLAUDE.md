@@ -75,9 +75,11 @@ agendada) saiba como se comportar e onde ler/escrever o histórico.
    restantes de `checkins-semanais.csv` que ainda não estejam cobertos pelas
    notas da semana, um a um; então acrescentar as linhas aos CSVs e
    commitar/enviar (`git add`, `git commit`, `git push`) para a branch de
-   trabalho. Ao final, fazer a **leitura integrada** cruzando bioimpedância +
-   circunferência + humor + atividade física + descontroles — ver seção
-   "Leitura integrada" em `data/README.md`.
+   trabalho. Ao final, fazer a **análise de padrões** olhando todo o
+   histórico acumulado (não só a semana atual) — ver seção "Análise de
+   padrões" em `data/README.md` — e depois as **3 prioridades da semana**,
+   cruzando essa análise com comentários do usuário no chat e com as "Metas
+   de equilíbrio" (mesmo arquivo).
 3b. **Notas soltas durante a semana** (`data/notas-em-andamento.md`): o
     usuário pode mandar informação relevante a qualquer momento entre
     check-ins (ex: sono de uma noite específica, um episódio, um evento) em
@@ -95,9 +97,9 @@ agendada) saiba como se comportar e onde ler/escrever o histórico.
    (link fixo — sempre republicar passando esse `url`, nunca criar um novo).
    Depois de registrar os CSVs de um check-in, atualize os arrays `bio` e
    `checkins` embutidos no `<script>` do arquivo com os novos registros,
-   reescreva as seções "Leitura integrada" e "Prioridades da semana" com base
-   na conversa (não são geradas automaticamente), republique o Artifact, e
-   faça commit/push do `dashboard/index.html` atualizado. Ver
+   reescreva as seções "Análise de padrões" e "Prioridades da semana" com
+   base na conversa (não são geradas automaticamente), republique o
+   Artifact, e faça commit/push do `dashboard/index.html` atualizado. Ver
    `dashboard/README.md` para detalhes.
 6. **Lembretes**: rotinas agendadas (Claude Triggers) reabrem esta conversa
    periodicamente. Ver seção "Rotinas ativas" abaixo.

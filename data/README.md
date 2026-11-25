@@ -66,24 +66,57 @@ serve de chave para juntar os dois CSVs).
 
 Campos sem dado na semana devem ficar em branco — nunca estimados.
 
-## Leitura integrada ao final do check-in
+## Análise de padrões ao final do check-in
 
 Depois de registrar os dois CSVs (bioimpedância + check-in semanal), fechar o
-check-in com uma leitura integrada curta, cruzando:
+check-in com **uma única análise** olhando todo o histórico acumulado — não é
+mais "leitura do dia" separada de "tendência de longo prazo", virou uma coisa
+só. Objetivo: achar padrões, tendências e relações de causa e efeito entre os
+indicadores ao longo do tempo, e sinalizar sinais de alerta. Exemplos
+(fictícios, só pra ilustrar o tipo de leitura esperada, não são regras fixas):
+- "Nas semanas em que o consumo de álcool subiu, o peso também subiu na
+  semana seguinte."
+- "Oscilações grandes de humor parecem antecipar aumento de episódios de
+  descontrole alimentar, que por sua vez pesam no peso."
 
-- Tendência de peso/gordura corporal/registro de massa muscular (`bioimpedancia.csv`,
-  comparando com a medição anterior). Gordura visceral não é mais acompanhada
-  por pedido do usuário (17/11/2026) — ainda é lida e guardada no CSV se
-  aparecer no relatório, só não entra na análise nem no dashboard.
-- Circunferência abdominal (`checkins-semanais.csv`) — confirma ou destoa da
-  tendência de peso/gordura?
-- Cardio/força da semana — hipótese plausível para a tendência observada?
-- Descontroles alimentares e humor — algum dos dois ajuda a explicar variação
-  de peso/água/gordura? (ex: mais descontroles + humor baixo numa semana com
-  peso subindo é diferente de peso subindo com tudo estável — pode ser
-  retenção de água, ganho de massa muscular, etc.)
+Como fazer:
+- Olhar a série completa de `bioimpedancia.csv` e `checkins-semanais.csv`
+  (todo o histórico, não só o último ponto vs. o anterior) — peso, gordura
+  corporal, massa muscular, circunferência, cardio/força, descontroles,
+  álcool (social x sozinho), sono, humor.
+- Procurar correlações temporais plausíveis entre indicadores (ex: humor vs.
+  descontroles, álcool vs. peso, sono vs. humor, atividade física vs.
+  peso/humor), não só comparar a semana atual com a anterior.
+- Sinalizar extremos e sinais de alerta (humor muito alto ou muito baixo,
+  vários check-ins seguidos fora da meta de algum indicador — ver "Metas de
+  equilíbrio" abaixo) sem alarmismo e sem diagnosticar.
+- Gordura visceral não é mais acompanhada por pedido do usuário (17/11/2026)
+  — ainda é lida e guardada no CSV se aparecer no relatório, só não entra na
+  análise nem no dashboard.
 - Ligar com `docs/autocuidado.md` quando fizer sentido.
 
-Regra: é leitura de padrão, não diagnóstico nem prescrição médica. 2-4 frases,
-direto ao ponto (ver `CLAUDE.md` sobre tom). Se não houver dado suficiente pra
-uma leitura (ex: primeira medição, sem histórico prévio), dizer isso e seguir.
+Regra: é leitura de padrão, não diagnóstico nem prescrição médica. Direto ao
+ponto (ver `CLAUDE.md` sobre tom) — sem limite rígido de frases, mas sem
+enrolação; o tamanho certo é o que o padrão encontrado pedir. Se o histórico
+ainda for curto pra uma leitura confiável, dizer isso e seguir.
+
+## Metas de equilíbrio (referência para as prioridades da semana)
+
+Valores que o próprio usuário definiu como equilibrados. Usados para decidir
+as **3 prioridades da semana** (ver `dashboard/README.md`): a análise de
+padrões acima, somada a qualquer comentário do usuário no chat, é comparada
+contra estas metas para escolher o que priorizar — não é só "qual número está
+pior", é também "qual tem mais sinal de causa na análise de padrões".
+
+| Indicador | Meta |
+|---|---|
+| Humor | 0 (estável) |
+| Peso | 83 kg |
+| Qualidade do sono | 8/10 |
+| Circunferência abdominal | 92 cm |
+| Atividade física (cardio + força) | 5 a 10 horas/semana |
+| Episódios de descontrole alimentar | 2 ou menos por semana |
+| Álcool (total na semana) | 2 doses ou menos; 3-4 numa semana isolada é tolerável |
+
+Os demais indicadores (gordura %, massa muscular %, água, gordura visceral
+etc.) não têm meta — entram na análise de padrões, mas não nas prioridades.

@@ -14,7 +14,8 @@ diretamente no `<script>`** — não lê os CSVs em tempo real.
 2. Publique de novo com a ferramenta Artifact, usando `url` igual à URL já
    publicada (guardada em `CLAUDE.md`) para atualizar no mesmo link em vez de
    criar um novo.
-3. As seções de texto ("Leitura integrada", "Tendência de longo prazo" é
-   parcialmente automática, "Prioridades da semana") precisam ser reescritas
-   à mão a cada semana com base na conversa do check-in — só os números/
-   gráficos são recalculados automaticamente a partir dos arrays.
+3. As seções de texto ("Análise de padrões" — olha todo o histórico, não só a
+   semana atual — e "Prioridades da semana" — compara a análise + comentários
+   do chat contra as metas de `data/README.md`) precisam ser reescritas à mão
+   a cada semana com base na conversa do check-in — só os números/gráficos
+   são recalculados automaticamente a partir dos arrays.
