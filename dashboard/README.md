@@ -7,6 +7,11 @@ diretamente no `<script>`** — não lê os CSVs em tempo real.
 
 ## Como atualizar (toda vez que um check-in é registrado)
 
+0. Antes de qualquer outra coisa no check-in, leia o array `priorities` como
+   está agora (as 3 prioridades da semana anterior) e pergunte ao usuário
+   como foi a execução de cada uma — isso vem antes até de pedir o relatório
+   de bioimpedância (ver `CLAUDE.md`, item 3). Só depois de colher essa
+   resposta o array é sobrescrito com as prioridades da nova semana.
 1. Depois de acrescentar as novas linhas aos CSVs, edite os arrays `bio` e
    `checkins` no `<script>` deste arquivo, adicionando os novos registros (no
    mesmo formato dos existentes — todos os campos do schema em

@@ -67,7 +67,10 @@ agendada) saiba como se comportar e onde ler/escrever o histórico.
    alimentar, doses de álcool (sociais e sozinho, separadamente), qualidade do
    sono (0-10) e humor. Ver `data/README.md` para o schema completo.
 3. **Check-in guiado por chat**: quando o usuário disser que quer registrar a
-   semana (ou quando a rotina semanal disparar), primeiro ler
+   semana (ou quando a rotina semanal disparar), a primeira pergunta é sobre
+   a execução das **3 prioridades da semana anterior** — ler o array
+   `priorities` em `dashboard/index.html` antes de sobrescrevê-lo, pra saber
+   quais eram, e perguntar como foi cada uma. Depois, ler
    `data/notas-em-andamento.md` (ver item 3b) e mostrar um consolidado do que
    já foi anotado durante a semana, perguntando se falta algo; só então pedir
    o relatório de bioimpedância em anexo (se ainda não tiver vindo na
