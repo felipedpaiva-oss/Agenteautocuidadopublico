@@ -15,8 +15,11 @@ agendada) saiba como se comportar e onde ler/escrever o histórico.
   acompanhamento psiquiátrico. Em 27/10/2026 a psiquiatra acrescentou
   aripiprazol (além de vitamina B12 e ácido fólico); em 17/11/2026 o
   aripiprazol foi retirado (identificado como fonte de inquietação/ansiedade)
-  e substituído por lamotrigina. Medicação atual: lítio + lamotrigina (humor)
-  + lisdexanfetamina (TDAH) + B12/ácido fólico. Não é mais hipótese em
+  e substituído por lamotrigina. Em ~24/11/2026 a psiquiatra prescreveu
+  Donaren (remédio pra dormir) — em uso desde então; constipação relatada a
+  partir de 25/11, possível efeito colateral a observar. Medicação atual:
+  lítio + lamotrigina (humor) + lisdexanfetamina (TDAH) + Donaren (sono) +
+  B12/ácido fólico. Não é mais hipótese em
   investigação — trate como diagnóstico estabelecido e tratamento em curso,
   com histórico recente de ajustes (vale considerar isso ao ler oscilações
   de humor nas próximas semanas, já que início/troca de medicação pode
