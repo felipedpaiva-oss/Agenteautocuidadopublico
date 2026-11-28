@@ -8,6 +8,7 @@ depois de registrar em `checkins-semanais.csv`. Ver `CLAUDE.md`, item 3b.
   prescrito pela psiquiatra confirmado: Donaren (ver `CLAUDE.md`, perfil).
 - Noite de 25→26/11 (quarta pra quinta): 9/10.
 - Noite de 26→27/11 (quinta pra sexta): 8/10, 7h bem dormidas.
+- Noite de 27→28/11 (sexta pra sábado): 8/10, revigorante, 7h dormidas.
 
 ## Atividade física
 - 25/11 (quarta): 30min de força.
