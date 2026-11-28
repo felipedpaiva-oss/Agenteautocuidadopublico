@@ -13,6 +13,7 @@ depois de registrar em `checkins-semanais.csv`. Ver `CLAUDE.md`, item 3b.
 ## Atividade física
 - 25/11 (quarta): 30min de força.
 - 26/11 (quinta): 30min de cardio.
+- 28/11 (sábado): 1h de cardio.
 
 ## Outros
 - 27/11: entrando no 3º dia de constipação, suspeita do Donaren como causa.
